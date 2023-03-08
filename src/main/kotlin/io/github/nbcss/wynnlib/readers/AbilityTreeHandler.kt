@@ -21,7 +21,7 @@ object AbilityTreeHandler: EventHandler<InventoryUpdateEvent> {
     private var mutableAbilities: Set<Ability> = emptySet()
     private var character: CharacterClass? = null
     override fun handle(event: InventoryUpdateEvent) {
-        val matcher = titlePattern.matcher(event.title.asString())
+        val matcher = titlePattern.matcher(event.title.toString())
         if (matcher.find()) {
             CharacterClass.fromId(matcher.group(1))?.let {
                 setAbilities(it, event.stacks)
@@ -44,8 +44,8 @@ object AbilityTreeHandler: EventHandler<InventoryUpdateEvent> {
         this.lastPage = null
         val values: MutableList<Pair<ItemStack, List<Ability>>> = mutableListOf()
         stacks.take(54).forEachIndexed { index, stack ->
-            if (!stack.isEmpty && stack.name.asString() != " "){
-                var name = clearFormatting(stack.name.asString())
+            if (!stack.isEmpty && stack.name.toString() != " "){
+                var name = clearFormatting(stack.name.toString())
                 val unlockMatcher = unlockPattern.matcher(name)
                 if (unlockMatcher.find()) {
                     name = unlockMatcher.group(1)
@@ -64,9 +64,9 @@ object AbilityTreeHandler: EventHandler<InventoryUpdateEvent> {
             val abilityList: MutableList<Pair<Ability, Int>> = mutableListOf()
             for (pair in values) {
                 val ability = pair.second.firstOrNull { it.getPage() == page } ?: continue
-                val tooltip = pair.first.getTooltip(player, TooltipContext.Default.NORMAL)
-                for (s in tooltip.filter { it.asString() == "" && it.siblings.isNotEmpty() }
-                    .map { it.siblings[0].asString() }) {
+                val tooltip = pair.first.getTooltip(player, TooltipContext.Default.BASIC)
+                for (s in tooltip.filter { it.toString() == "" && it.siblings.isNotEmpty() }
+                    .map { it.siblings[0].toString() }) {
                     if (s == "You already unlocked this ability") {
                         abilityList.add(ability to 1)
                         break

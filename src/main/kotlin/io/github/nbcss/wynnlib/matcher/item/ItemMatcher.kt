@@ -32,9 +32,9 @@ interface ItemMatcher {
             if (itemCacheMap.containsKey(key)) {
                 return itemCacheMap[key]
             }
-            val tooltip = item.getTooltip(MinecraftClient.getInstance().player, TooltipContext.Default.NORMAL)
+            val tooltip = item.getTooltip(MinecraftClient.getInstance().player, TooltipContext.Default.BASIC)
             //market item
-            var name = item.name.asString()
+            var name = item.name.toString()
             var inMarket = false
             if (name.endsWith("\u00C0")) {
                 name = name.substring(0, name.length - 1)

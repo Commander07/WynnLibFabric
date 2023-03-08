@@ -13,7 +13,6 @@ import io.github.nbcss.wynnlib.i18n.Translations
 import io.github.nbcss.wynnlib.utils.Symbol
 import io.github.nbcss.wynnlib.utils.colorOf
 import io.github.nbcss.wynnlib.utils.signed
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -31,7 +30,7 @@ class MaxFocusProperty(ability: Ability,
 
     override fun getOverviewTip(): Text {
         return Symbol.CHARGE.asText().append(" ").append(
-            LiteralText("$maxFocus").formatted(Formatting.WHITE)
+            Text.literal("$maxFocus").formatted(Formatting.WHITE)
         )
     }
 
@@ -47,7 +46,7 @@ class MaxFocusProperty(ability: Ability,
         val focus = Translations.TOOLTIP_ABILITY_ARCHER_FOCUS.translate().string
         return listOf(Symbol.CHARGE.asText().append(" ")
             .append(Translations.TOOLTIP_ABILITY_MAX.formatted(Formatting.GRAY).append(" (${focus}): "))
-            .append(LiteralText(getMaxFocus().toString()).formatted(Formatting.WHITE)))
+            .append(Text.literal(getMaxFocus().toString()).formatted(Formatting.WHITE)))
     }
 
     class Modifier(ability: Ability, private val modifier: Int):
@@ -76,7 +75,7 @@ class MaxFocusProperty(ability: Ability,
             val focus = Translations.TOOLTIP_ABILITY_ARCHER_FOCUS.translate().string
             return listOf(Symbol.CHARGE.asText().append(" ")
                 .append(Translations.TOOLTIP_ABILITY_MAX.formatted(Formatting.GRAY).append(" (${focus}): "))
-                .append(LiteralText(signed(modifier)).formatted(colorOf(modifier))))
+                .append(Text.literal(signed(modifier)).formatted(colorOf(modifier))))
         }
     }
 }

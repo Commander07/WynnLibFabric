@@ -7,7 +7,7 @@ import io.github.nbcss.wynnlib.render.RenderKit
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder
 import net.minecraft.client.gui.widget.PressableWidget
 import net.minecraft.client.util.math.MatrixStack
-import net.minecraft.text.LiteralText
+import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 import java.util.function.Consumer
 
@@ -15,11 +15,11 @@ class ConfirmButtonWidget(private val handler: Consumer<ConfirmButtonWidget>,
                           private val tooltipProvider: TooltipProvider? = null,
                           private val screen: TooltipScreen,
                           x: Int, y: Int):
-    PressableWidget(x, y, 10, 10, LiteralText.EMPTY) {
+    PressableWidget(x, y, 10, 10, Text.empty()) {
     private val texture: Identifier = Identifier("wynnlib", "textures/gui/check_button.png")
-    override fun appendNarrations(builder: NarrationMessageBuilder?) {
-        appendDefaultNarrations(builder)
-    }
+    //override fun appendNarrations(builder: NarrationMessageBuilder?) {
+    //    appendDefaultNarrations(builder)
+    //}
 
     override fun onPress() {
         handler.accept(this)
@@ -35,5 +35,9 @@ class ConfirmButtonWidget(private val handler: Consumer<ConfirmButtonWidget>,
             val tooltip = tooltipProvider.getTooltip()
             screen.drawTooltip(matrices, tooltip, mouseX, mouseY)
         }
+    }
+
+    override fun appendClickableNarrations(builder: NarrationMessageBuilder?) {
+        TODO("Not yet implemented")
     }
 }

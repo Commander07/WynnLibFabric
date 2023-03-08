@@ -19,7 +19,6 @@ import io.github.nbcss.wynnlib.utils.range.IRange
 import io.github.nbcss.wynnlib.utils.range.BaseIRange
 import io.github.nbcss.wynnlib.utils.range.SimpleIRange
 import net.minecraft.item.ItemStack
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 
 class RegularEquipment(json: JsonObject) : GearEquipment, TransformableItem, ConfigurableItem, MatchableItem {
@@ -111,7 +110,7 @@ class RegularEquipment(json: JsonObject) : GearEquipment, TransformableItem, Con
     override fun getDisplayName(): String = displayName
 
     override fun getDisplayText(): Text {
-        return LiteralText(displayName).formatted(getTier().formatting)
+        return Text.literal(displayName).formatted(getTier().formatting)
     }
 
     override fun getIcon(): ItemStack = category?.getIcon() ?: ERROR_ITEM

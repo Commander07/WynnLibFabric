@@ -16,7 +16,6 @@ import io.github.nbcss.wynnlib.registry.Registry
 import io.github.nbcss.wynnlib.utils.Keyed
 import io.github.nbcss.wynnlib.utils.removeDecimal
 import io.github.nbcss.wynnlib.utils.tierOf
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -42,7 +41,7 @@ abstract class PowderSpecial(private val tier: Int): Keyed {
     fun getTooltip(): List<Text> {
         val tooltip: MutableList<Text> = mutableListOf()
         val color = getType().getElement().color
-        val title = LiteralText(getType().getElement().icon).formatted(color)
+        val title = Text.literal(getType().getElement().icon).formatted(color)
             .append(" ").append(getType().formatted(color))
         //val title = getType().formatted(color)
         if (getTier() > 0) {
@@ -50,7 +49,7 @@ abstract class PowderSpecial(private val tier: Int): Keyed {
         }
         tooltip.add(title)
         for (text in getPropertyTooltip()) {
-            tooltip.add(LiteralText("- ").formatted(color).append(text))
+            tooltip.add(Text.literal("- ").formatted(color).append(text))
         }
         return tooltip
     }
@@ -80,9 +79,9 @@ abstract class PowderSpecial(private val tier: Int): Keyed {
 
         override fun getPropertyTooltip(): List<Text> {
             val tooltip: MutableList<Text> = mutableListOf()
-            tooltip.add(LiteralText("${TOOLTIP_POWDER_SPEC_DAMAGE.translate().string}: ${damage}%")
-                .formatted(Formatting.GRAY).append(LiteralText(" ✤").formatted(Formatting.DARK_GREEN)))
-            tooltip.add((LiteralText("${TOOLTIP_POWDER_SPEC_RADIUS.translate().string}: ")
+            tooltip.add(Text.literal("${TOOLTIP_POWDER_SPEC_DAMAGE.translate().string}: ${damage}%")
+                .formatted(Formatting.GRAY).append(Text.literal(" ✤").formatted(Formatting.DARK_GREEN)))
+            tooltip.add((Text.literal("${TOOLTIP_POWDER_SPEC_RADIUS.translate().string}: ")
                 .formatted(Formatting.GRAY))
                 .append(SUFFIX_POWDER_SPEC_BLOCKS.formatted(Formatting.GRAY, label = null, removeDecimal(radius))))
             return tooltip
@@ -106,10 +105,10 @@ abstract class PowderSpecial(private val tier: Int): Keyed {
 
         override fun getPropertyTooltip(): List<Text> {
             val tooltip: MutableList<Text> = mutableListOf()
-            tooltip.add(LiteralText("${TOOLTIP_POWDER_SPEC_DAMAGE_BOOST.translate().string}: " +
+            tooltip.add(Text.literal("${TOOLTIP_POWDER_SPEC_DAMAGE_BOOST.translate().string}: " +
                     "+${removeDecimal(damage)}%").formatted(Formatting.GRAY)
-                .append(LiteralText(" ✤").formatted(Formatting.DARK_GREEN)))
-            tooltip.add(LiteralText("${TOOLTIP_POWDER_SPEC_HP_LOST_MIN.translate().string}: " +
+                .append(Text.literal(" ✤").formatted(Formatting.DARK_GREEN)))
+            tooltip.add(Text.literal("${TOOLTIP_POWDER_SPEC_HP_LOST_MIN.translate().string}: " +
                     "${removeDecimal(minHealthLost)}%").formatted(Formatting.GRAY))
             return tooltip
         }
@@ -132,10 +131,10 @@ abstract class PowderSpecial(private val tier: Int): Keyed {
 
         override fun getPropertyTooltip(): List<Text> {
             val tooltip: MutableList<Text> = mutableListOf()
-            tooltip.add(LiteralText("${TOOLTIP_POWDER_SPEC_DAMAGE.translate().string}: ${damage}%")
+            tooltip.add(Text.literal("${TOOLTIP_POWDER_SPEC_DAMAGE.translate().string}: ${damage}%")
                     .formatted(Formatting.GRAY)
-                .append(LiteralText(" ✦").formatted(Formatting.YELLOW)))
-            tooltip.add(LiteralText("${TOOLTIP_POWDER_SPEC_CHAINS.translate().string}: $chains")
+                .append(Text.literal(" ✦").formatted(Formatting.YELLOW)))
+            tooltip.add(Text.literal("${TOOLTIP_POWDER_SPEC_CHAINS.translate().string}: $chains")
                 .formatted(Formatting.GRAY))
             return tooltip
         }
@@ -158,10 +157,10 @@ abstract class PowderSpecial(private val tier: Int): Keyed {
 
         override fun getPropertyTooltip(): List<Text> {
             val tooltip: MutableList<Text> = mutableListOf()
-            tooltip.add(LiteralText("${TOOLTIP_POWDER_SPEC_DAMAGE_BOOST.translate().string}: " +
+            tooltip.add(Text.literal("${TOOLTIP_POWDER_SPEC_DAMAGE_BOOST.translate().string}: " +
                         "+${removeDecimal(damage)}%").formatted(Formatting.GRAY)
-                .append(LiteralText(" ✦").formatted(Formatting.YELLOW)))
-            tooltip.add(LiteralText("${TOOLTIP_POWDER_SPEC_DURATION.translate().string}: ")
+                .append(Text.literal(" ✦").formatted(Formatting.YELLOW)))
+            tooltip.add(Text.literal("${TOOLTIP_POWDER_SPEC_DURATION.translate().string}: ")
                 .formatted(Formatting.GRAY)
                 .append(SUFFIX_POWDER_SPEC_SEC.formatted(Formatting.GRAY, label = null, removeDecimal(duration))))
             return tooltip
@@ -187,13 +186,13 @@ abstract class PowderSpecial(private val tier: Int): Keyed {
 
         override fun getPropertyTooltip(): List<Text> {
             val tooltip: MutableList<Text> = mutableListOf()
-            tooltip.add(LiteralText("${TOOLTIP_POWDER_SPEC_DAMAGE.translate().string}: " +
+            tooltip.add(Text.literal("${TOOLTIP_POWDER_SPEC_DAMAGE.translate().string}: " +
                     "${removeDecimal(damage)}%").formatted(Formatting.GRAY)
-                .append(LiteralText(" ✹").formatted(Formatting.RED)))
-            tooltip.add(LiteralText("${TOOLTIP_POWDER_SPEC_DAMAGE_BOOST.translate().string}: " +
+                .append(Text.literal(" ✹").formatted(Formatting.RED)))
+            tooltip.add(Text.literal("${TOOLTIP_POWDER_SPEC_DAMAGE_BOOST.translate().string}: " +
                         "+${removeDecimal(boost)}%")
                     .formatted(Formatting.GRAY))
-            tooltip.add(LiteralText("${TOOLTIP_POWDER_SPEC_DURATION.translate().string}: ")
+            tooltip.add(Text.literal("${TOOLTIP_POWDER_SPEC_DURATION.translate().string}: ")
                 .formatted(Formatting.GRAY)
                 .append(SUFFIX_POWDER_SPEC_SEC.formatted(Formatting.GRAY, label = null, removeDecimal(duration))))
             return tooltip
@@ -217,10 +216,10 @@ abstract class PowderSpecial(private val tier: Int): Keyed {
 
         override fun getPropertyTooltip(): List<Text> {
             val tooltip: MutableList<Text> = mutableListOf()
-            tooltip.add(LiteralText("${TOOLTIP_POWDER_SPEC_DAMAGE_BOOST.translate().string}: " +
+            tooltip.add(Text.literal("${TOOLTIP_POWDER_SPEC_DAMAGE_BOOST.translate().string}: " +
                         "+${removeDecimal(damage)}%").formatted(Formatting.GRAY)
-                .append(LiteralText(" ✹").formatted(Formatting.RED)))
-            tooltip.add(LiteralText("${TOOLTIP_POWDER_SPEC_DURATION.translate().string}: ")
+                .append(Text.literal(" ✹").formatted(Formatting.RED)))
+            tooltip.add(Text.literal("${TOOLTIP_POWDER_SPEC_DURATION.translate().string}: ")
                     .formatted(Formatting.GRAY)
                 .append(SUFFIX_POWDER_SPEC_SEC.formatted(Formatting.GRAY, label = null, removeDecimal(duration))))
             return tooltip
@@ -246,12 +245,12 @@ abstract class PowderSpecial(private val tier: Int): Keyed {
 
         override fun getPropertyTooltip(): List<Text> {
             val tooltip: MutableList<Text> = mutableListOf()
-            tooltip.add(LiteralText("${TOOLTIP_POWDER_SPEC_DAMAGE_BOOST.translate().string}: " +
+            tooltip.add(Text.literal("${TOOLTIP_POWDER_SPEC_DAMAGE_BOOST.translate().string}: " +
                         "+${removeDecimal(boost)}%").formatted(Formatting.GRAY))
-            tooltip.add((LiteralText("${TOOLTIP_POWDER_SPEC_RADIUS.translate().string}: ")
+            tooltip.add((Text.literal("${TOOLTIP_POWDER_SPEC_RADIUS.translate().string}: ")
                 .formatted(Formatting.GRAY))
                 .append(SUFFIX_POWDER_SPEC_BLOCKS.formatted(Formatting.GRAY, label = null, removeDecimal(radius))))
-            tooltip.add(LiteralText("${TOOLTIP_POWDER_SPEC_DURATION.translate().string}: ")
+            tooltip.add(Text.literal("${TOOLTIP_POWDER_SPEC_DURATION.translate().string}: ")
                 .formatted(Formatting.GRAY)
                 .append(SUFFIX_POWDER_SPEC_SEC.formatted(Formatting.GRAY, label = null, removeDecimal(duration))))
             return tooltip
@@ -275,10 +274,10 @@ abstract class PowderSpecial(private val tier: Int): Keyed {
 
         override fun getPropertyTooltip(): List<Text> {
             val tooltip: MutableList<Text> = mutableListOf()
-            tooltip.add(LiteralText("${TOOLTIP_POWDER_SPEC_DAMAGE_BOOST.translate().string}: " +
+            tooltip.add(Text.literal("${TOOLTIP_POWDER_SPEC_DAMAGE_BOOST.translate().string}: " +
                     "+${removeDecimal(damage)}%").formatted(Formatting.GRAY)
-                .append(LiteralText(" ❉").formatted(Formatting.AQUA)))
-            tooltip.add(LiteralText("${TOOLTIP_POWDER_SPEC_DURATION.translate().string}: ")
+                .append(Text.literal(" ❉").formatted(Formatting.AQUA)))
+            tooltip.add(Text.literal("${TOOLTIP_POWDER_SPEC_DURATION.translate().string}: ")
                     .formatted(Formatting.GRAY)
                 .append(SUFFIX_POWDER_SPEC_SEC.formatted(Formatting.GRAY, label = null,
                     removeDecimal(duration))))
@@ -303,10 +302,10 @@ abstract class PowderSpecial(private val tier: Int): Keyed {
 
         override fun getPropertyTooltip(): List<Text> {
             val tooltip: MutableList<Text> = mutableListOf()
-            tooltip.add(LiteralText("${TOOLTIP_POWDER_SPEC_DAMAGE_BOOST.translate().string}: " +
+            tooltip.add(Text.literal("${TOOLTIP_POWDER_SPEC_DAMAGE_BOOST.translate().string}: " +
                         "+${removeDecimal(boost)}%").formatted(Formatting.GRAY))
             //fixme max duration
-            tooltip.add(LiteralText("${TOOLTIP_POWDER_SPEC_DURATION.translate().string}: ")
+            tooltip.add(Text.literal("${TOOLTIP_POWDER_SPEC_DURATION.translate().string}: ")
                 .formatted(Formatting.GRAY)
                 .append(SUFFIX_POWDER_SPEC_SEC.formatted(Formatting.GRAY, label = null, removeDecimal(duration))))
             return tooltip
@@ -330,10 +329,10 @@ abstract class PowderSpecial(private val tier: Int): Keyed {
 
         override fun getPropertyTooltip(): List<Text> {
             val tooltip: MutableList<Text> = mutableListOf()
-            tooltip.add(LiteralText("${TOOLTIP_POWDER_SPEC_DAMAGE_BOOST.translate().string}: " +
+            tooltip.add(Text.literal("${TOOLTIP_POWDER_SPEC_DAMAGE_BOOST.translate().string}: " +
                         "+${removeDecimal(damage)}%").formatted(Formatting.GRAY)
-                .append(LiteralText(" ❋").formatted(Formatting.WHITE)))
-            tooltip.add(LiteralText("${TOOLTIP_POWDER_SPEC_DURATION.translate().string}: ")
+                .append(Text.literal(" ❋").formatted(Formatting.WHITE)))
+            tooltip.add(Text.literal("${TOOLTIP_POWDER_SPEC_DURATION.translate().string}: ")
                     .formatted(Formatting.GRAY)
                 .append(SUFFIX_POWDER_SPEC_SEC.formatted(Formatting.GRAY, label = null, removeDecimal(duration))))
             return tooltip

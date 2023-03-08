@@ -11,7 +11,6 @@ import io.github.nbcss.wynnlib.i18n.Translations
 import io.github.nbcss.wynnlib.i18n.Translations.TOOLTIP_ABILITY_MAX
 import io.github.nbcss.wynnlib.utils.Symbol
 import io.github.nbcss.wynnlib.utils.signed
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -45,7 +44,7 @@ class TimeDilationProperty(ability: Ability,
         text.append(Translations.TOOLTIP_SUFFIX_PER_S.formatted(Formatting.WHITE,
             null, "${signed(modifier)}%")).append(" ")
             .append(SPEED_EFFECT.formatted(Formatting.GRAY))
-        return listOf(text, LiteralText("   (").formatted(Formatting.DARK_GRAY)
+        return listOf(text, Text.literal("   (").formatted(Formatting.DARK_GRAY)
             .append(Symbol.MAX.asText()).append(" ")
             .append(TOOLTIP_ABILITY_MAX.formatted(Formatting.DARK_GRAY))
             .append(": ${signed(max)}%)"))

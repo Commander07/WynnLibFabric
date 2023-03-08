@@ -11,7 +11,6 @@ import io.github.nbcss.wynnlib.abilities.properties.SetupProperty
 import io.github.nbcss.wynnlib.i18n.Translations
 import io.github.nbcss.wynnlib.utils.Symbol
 import io.github.nbcss.wynnlib.utils.removeDecimal
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -34,7 +33,7 @@ class MainAttackRangeProperty(ability: Ability,
 
     override fun getOverviewTip(): Text {
         return Symbol.RANGE.asText().append(" ").append(
-            LiteralText((if (variant) "±" else "") + removeDecimal(range)).formatted(Formatting.WHITE)
+            Text.literal((if (variant) "±" else "") + removeDecimal(range)).formatted(Formatting.WHITE)
         )
     }
 
@@ -47,7 +46,7 @@ class MainAttackRangeProperty(ability: Ability,
             .formatted(Formatting.WHITE, null, removeDecimal(range))
         return listOf(Symbol.RANGE.asText().append(" ")
             .append(Translations.TOOLTIP_ABILITY_MAIN_ATTACK_RANGE.formatted(Formatting.GRAY).append(": "))
-            .append(LiteralText(if (variant) "±" else "").formatted(Formatting.WHITE)).append(value))
+            .append(Text.literal(if (variant) "±" else "").formatted(Formatting.WHITE)).append(value))
     }
 
     class Modifier(ability: Ability, data: JsonElement):

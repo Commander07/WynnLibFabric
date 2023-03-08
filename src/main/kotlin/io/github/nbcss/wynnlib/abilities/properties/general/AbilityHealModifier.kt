@@ -10,7 +10,6 @@ import io.github.nbcss.wynnlib.i18n.Translations
 import io.github.nbcss.wynnlib.registry.AbilityRegistry
 import io.github.nbcss.wynnlib.utils.Symbol
 import io.github.nbcss.wynnlib.utils.removeDecimal
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -56,11 +55,11 @@ class AbilityHealModifier(ability: Ability,
                 val total = Symbol.HEART.asText().append(" ")
                     .append(Translations.TOOLTIP_ABILITY_TOTAL_HEAL.formatted(Formatting.GRAY))
                 if (ability != null) {
-                    total.append(LiteralText(" ($ability)").formatted(Formatting.GRAY))
+                    total.append(Text.literal(" ($ability)").formatted(Formatting.GRAY))
                 }
                 val value = (if (modifier.second > 0) "+" else "") + "${removeDecimal(modifier.second)}%"
-                total.append(LiteralText(": ").formatted(Formatting.GRAY))
-                    .append(LiteralText(value).formatted(color))
+                total.append(Text.literal(": ").formatted(Formatting.GRAY))
+                    .append(Text.literal(value).formatted(color))
                 tooltip.add(total)
             }
         }

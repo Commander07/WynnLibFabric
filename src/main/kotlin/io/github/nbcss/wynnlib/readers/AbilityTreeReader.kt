@@ -47,13 +47,13 @@ class AbilityTreeReader(private val character: CharacterClass,
             clickSlot(slotId, 0, SlotActionType.PICKUP)
         }else{
             val pointStack = lastStacks[58]
-            val tooltip = pointStack.getTooltip(MinecraftClient.getInstance().player, TooltipContext.Default.NORMAL)
+            val tooltip = pointStack.getTooltip(MinecraftClient.getInstance().player, TooltipContext.Default.BASIC)
             maxPoints = tooltip.asSequence()
                 .filter { it.siblings.isNotEmpty() }
                 .map { it.siblings[0] }
                 .filter { it.siblings.isNotEmpty() }
-                .filter { it.siblings[0].asString() == "✦ Available Points: " }
-                .map { it.siblings.last().asString() }
+                .filter { it.siblings[0].toString() == "✦ Available Points: " }
+                .map { it.siblings.last().toString() }
                 .filter { it.isNotEmpty() }.toList()
                 .firstNotNullOfOrNull { it.substring(1).toIntOrNull() }
             dead = true

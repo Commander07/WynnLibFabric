@@ -9,7 +9,6 @@ import io.github.nbcss.wynnlib.abilities.properties.AbilityProperty
 import io.github.nbcss.wynnlib.abilities.properties.ModifiableProperty
 import io.github.nbcss.wynnlib.i18n.Translations
 import io.github.nbcss.wynnlib.utils.Symbol
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -40,7 +39,7 @@ class PulseHealProperty(ability: Ability,
     override fun getTooltip(provider: PropertyProvider): List<Text> {
         return listOf(Symbol.HEART.asText().append(" ")
             .append(Translations.TOOLTIP_ABILITY_PULSE_HEAL.formatted(Formatting.GRAY).append(": "))
-            .append(LiteralText("$heal%").formatted(Formatting.WHITE))
-            .append(LiteralText(" (x$trigger)").formatted(Formatting.DARK_GRAY)))
+            .append(Text.literal("$heal%").formatted(Formatting.WHITE))
+            .append(Text.literal(" (x$trigger)").formatted(Formatting.DARK_GRAY)))
     }
 }

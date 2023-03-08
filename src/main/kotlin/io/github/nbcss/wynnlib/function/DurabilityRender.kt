@@ -17,11 +17,11 @@ object DurabilityRender: EventHandler<RenderItemOverrideEvent> {
     private const val key = "crafted_durability"
     object LoadListener: EventHandler<ItemLoadEvent> {
         override fun handle(event: ItemLoadEvent) {
-            val tooltip = event.item.getTooltip(client.player, TooltipContext.Default.NORMAL)
-            val durability = tooltip.asSequence().filter { it.asString() == "" && it.siblings.isNotEmpty() }
-                .map { it.siblings[0] }.filter { it.asString() == "" && it.siblings.size >= 2 }
-                .filter { it.siblings[0].asString().contains("Crafted ") }
-                .map { it.siblings[1].asString() }.firstNotNullOfOrNull {
+            val tooltip = event.item.getTooltip(client.player, TooltipContext.Default.BASIC)
+            val durability = tooltip.asSequence().filter { it.toString() == "" && it.siblings.isNotEmpty() }
+                .map { it.siblings[0] }.filter { it.toString() == "" && it.siblings.size >= 2 }
+                .filter { it.siblings[0].toString().contains("Crafted ") }
+                .map { it.siblings[1].toString() }.firstNotNullOfOrNull {
                     val matcher = pattern.matcher(it)
                     var value: Double? = null
                     if (matcher.find()) {

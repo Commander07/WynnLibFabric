@@ -4,7 +4,6 @@ import io.github.nbcss.wynnlib.i18n.Translatable
 import io.github.nbcss.wynnlib.utils.Color
 import io.github.nbcss.wynnlib.utils.ItemFactory
 import net.minecraft.item.ItemStack
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -22,11 +21,11 @@ class Emerald(private val tier: Tier) : BaseItem, Translatable {
         return listOf(
             getDisplayText(),
             formatted(Formatting.GRAY, "desc"),
-            LiteralText.EMPTY,
-            LiteralText("----[ ").formatted(Formatting.DARK_GREEN).append(
-                LiteralText("${tier.value}²").formatted(Formatting.GREEN)
+            Text.empty(),
+            Text.literal("----[ ").formatted(Formatting.DARK_GREEN).append(
+                Text.literal("${tier.value}²").formatted(Formatting.GREEN)
             ).append(
-                LiteralText(" ]----").formatted(Formatting.DARK_GREEN)
+                Text.literal(" ]----").formatted(Formatting.DARK_GREEN)
             )
         )
     }

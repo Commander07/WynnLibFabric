@@ -9,7 +9,6 @@ import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder
 import net.minecraft.client.gui.widget.ClickableWidget
 import net.minecraft.client.util.math.MatrixStack
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
@@ -64,6 +63,10 @@ class CheckboxWidget(private val posX: Int,
         return super.isHovered() && interactable
     }
 
+    override fun appendClickableNarrations(builder: NarrationMessageBuilder?) {
+        TODO("Not yet implemented")
+    }
+
     override fun renderButton(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
         var v = if (isChecked()) 0 else 36
         if (isHovered) v += 18
@@ -75,7 +78,7 @@ class CheckboxWidget(private val posX: Int,
             description?.getTooltip()?.let {
                 tooltip.addAll(it)
             }
-            tooltip.add(LiteralText.EMPTY)
+            tooltip.add(Text.empty())
             tooltip.add(LEFT_CLICK.formatted(Formatting.AQUA))
             if (group != null) {
                 tooltip.add(RIGHT_CLICK.formatted(Formatting.LIGHT_PURPLE))
@@ -102,9 +105,9 @@ class CheckboxWidget(private val posX: Int,
         return false
     }
 
-    override fun appendNarrations(builder: NarrationMessageBuilder?) {
-        appendDefaultNarrations(builder)
-    }
+    //override fun appendNarrations(builder: NarrationMessageBuilder?) {
+    //    appendDefaultNarrations(builder)
+    //}
 
     class Group(val widgets: Set<CheckboxWidget>,
                 private var callback: Consumer<Group>? = null) {

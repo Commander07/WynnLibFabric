@@ -54,7 +54,7 @@ object ItemProtector {
         override fun handle(event: InventoryPressEvent) {
             if (event.screen !is GenericContainerScreen)
                 return
-            val title = event.screen.title.asString()
+            val title = event.screen.title.toString()
             if (isLootInventory(title)){
                 if (event.keyCode == 256 || client.options.inventoryKey.matchesKey(event.keyCode, event.scanCode)) {
                     val size = max(0, event.screen.screenHandler.slots.size - 36)
@@ -79,7 +79,7 @@ object ItemProtector {
                 return
             if (event.screen !is GenericContainerScreen)
                 return
-            val title = event.screen.title.asString()
+            val title = event.screen.title.toString()
             if (isLootInventory(title)){
                 if (45 + event.slot.id - event.screen.screenHandler.slots.size == 13) {
                     val size = max(0, event.screen.screenHandler.slots.size - 36)
@@ -100,7 +100,7 @@ object ItemProtector {
         override fun handle(event: DrawSlotEvent) {
             if (event.screen !is GenericContainerScreen)
                 return
-            val title = event.screen.title.asString()
+            val title = event.screen.title.toString()
             if (isLootInventory(title)){
                 if (event.slot.id < event.screen.screenHandler.slots.size - 36){
                     if (isSlotProtected(event.slot)) {

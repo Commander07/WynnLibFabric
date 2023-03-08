@@ -13,7 +13,6 @@ import io.github.nbcss.wynnlib.i18n.Translations
 import io.github.nbcss.wynnlib.utils.Symbol
 import io.github.nbcss.wynnlib.utils.colorOf
 import io.github.nbcss.wynnlib.utils.signed
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -33,7 +32,7 @@ class ShurikensBounceProperty(ability: Ability,
         if (bounce <= 0)
             return null
         return Symbol.ALTER_HITS.asText().append(" ").append(
-            LiteralText("$bounce").formatted(Formatting.WHITE)
+            Text.literal("$bounce").formatted(Formatting.WHITE)
         )
     }
 
@@ -50,7 +49,7 @@ class ShurikensBounceProperty(ability: Ability,
             return emptyList()
         return listOf(Symbol.ALTER_HITS.asText().append(" ")
             .append(Translations.TOOLTIP_ABILITY_ASSASSIN_SHURIKENS_BOUNCE.formatted(Formatting.GRAY).append(": "))
-            .append(LiteralText(bounce.toString()).formatted(Formatting.WHITE)))
+            .append(Text.literal(bounce.toString()).formatted(Formatting.WHITE)))
     }
 
     class Modifier(ability: Ability,
@@ -79,7 +78,7 @@ class ShurikensBounceProperty(ability: Ability,
         override fun getTooltip(provider: PropertyProvider): List<Text> {
             return listOf(Symbol.ALTER_HITS.asText().append(" ")
                 .append(Translations.TOOLTIP_ABILITY_ASSASSIN_SHURIKENS_BOUNCE.formatted(Formatting.GRAY).append(": "))
-                .append(LiteralText(signed(modifier)).formatted(colorOf(modifier))))
+                .append(Text.literal(signed(modifier)).formatted(colorOf(modifier))))
         }
     }
 }

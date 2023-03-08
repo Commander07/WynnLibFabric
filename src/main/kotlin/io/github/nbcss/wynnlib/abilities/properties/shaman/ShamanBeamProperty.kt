@@ -15,7 +15,6 @@ import io.github.nbcss.wynnlib.i18n.Translations.TOOLTIP_ABILITY_SHAMAN_BEAMS_DA
 import io.github.nbcss.wynnlib.utils.Symbol
 import io.github.nbcss.wynnlib.utils.colorOf
 import io.github.nbcss.wynnlib.utils.signed
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -46,7 +45,7 @@ class ShamanBeamProperty(ability: Ability,
 
     override fun getOverviewTip(): Text? {
         return Symbol.ALTER_HITS.asText().append(" ").append(
-            LiteralText("$beams").formatted(Formatting.WHITE)
+            Text.literal("$beams").formatted(Formatting.WHITE)
         )
     }
 
@@ -54,8 +53,8 @@ class ShamanBeamProperty(ability: Ability,
         val damage = TOOLTIP_ABILITY_SHAMAN_BEAMS_DAMAGE.translate(label = null, getBeamDamage(provider)).string
         return listOf(Symbol.ALTER_HITS.asText().append(" ")
             .append(Translations.TOOLTIP_ABILITY_SHAMAN_BEAMS.formatted(Formatting.GRAY).append(": "))
-            .append(LiteralText("$beams").formatted(Formatting.WHITE))
-            .append(LiteralText(" ($damage)").formatted(Formatting.DARK_GRAY)))
+            .append(Text.literal("$beams").formatted(Formatting.WHITE))
+            .append(Text.literal(" ($damage)").formatted(Formatting.DARK_GRAY)))
     }
 
     class Modifier(ability: Ability, private val modifier: Int):
@@ -81,7 +80,7 @@ class ShamanBeamProperty(ability: Ability,
         override fun getTooltip(provider: PropertyProvider): List<Text> {
             return listOf(Symbol.ALTER_HITS.asText().append(" ")
                 .append(Translations.TOOLTIP_ABILITY_SHAMAN_BEAMS.formatted(Formatting.GRAY).append(": "))
-                .append(LiteralText(signed(modifier)).formatted(colorOf(modifier))))
+                .append(Text.literal(signed(modifier)).formatted(colorOf(modifier))))
         }
     }
 }

@@ -10,7 +10,6 @@ import io.github.nbcss.wynnlib.abilities.properties.SetupProperty
 import io.github.nbcss.wynnlib.registry.AbilityRegistry
 import io.github.nbcss.wynnlib.utils.Symbol
 import io.github.nbcss.wynnlib.utils.signed
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -32,7 +31,7 @@ class AbilityDamageBonusProperty(ability: Ability,
 
     override fun getOverviewTip(): Text {
         return Symbol.DAMAGE.asText().append(" ").append(
-            LiteralText("${signed(bonus)}%").formatted(Formatting.WHITE)
+            Text.literal("${signed(bonus)}%").formatted(Formatting.WHITE)
         )
     }
 
@@ -47,7 +46,7 @@ class AbilityDamageBonusProperty(ability: Ability,
             return null
         val name = AbilityRegistry.get(target)?.translate()?.string
         return if (name != null) {
-            LiteralText(" ($name)").formatted(Formatting.DARK_GRAY)
+            Text.literal(" ($name)").formatted(Formatting.DARK_GRAY)
         }else{
             null
         }

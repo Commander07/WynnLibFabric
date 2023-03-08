@@ -31,7 +31,6 @@ import net.minecraft.client.gui.widget.TextFieldWidget
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
 import net.minecraft.sound.SoundEvents
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
@@ -198,7 +197,7 @@ open class AbilityTreeBuilderScreen(parent: Screen?,
             entryNames[i] = RollingTextWidget(posX, posY, 95, name)
             entryValues[i] = RollingTextWidget(posX, posY + 9, 95, info)
         }
-        nameField = TextFieldWidget(textRenderer, windowX - 115, windowY + 16, 105, 12, LiteralText.EMPTY)
+        nameField = TextFieldWidget(textRenderer, windowX - 115, windowY + 16, 105, 12, Text.empty())
         nameField?.text = build.getData().getCustomName()
         nameField?.setDrawsBackground(false)
         nameField?.setChangedListener {
@@ -315,7 +314,7 @@ open class AbilityTreeBuilderScreen(parent: Screen?,
         nameField?.let {
             if (!it.isFocused && it.text.isEmpty()) {
                 val s = textRenderer.trimToWidth(getBuild().getEncoding(), 106) + ".."
-                textRenderer.draw(matrices, LiteralText(s).formatted(Formatting.ITALIC).formatted(Formatting.DARK_GRAY),
+                textRenderer.draw(matrices, Text.literal(s).formatted(Formatting.ITALIC).formatted(Formatting.DARK_GRAY),
                     windowX - 115.0f, windowY + 16.0f, 0xFFFFFF)
             }
         }
@@ -456,7 +455,7 @@ open class AbilityTreeBuilderScreen(parent: Screen?,
                     val disabled = container.isAbilityDisabled(ability)
                     val locked = ability in fixedAbilities
                     if (disabled || locked) {
-                        tooltip.add(LiteralText.EMPTY)
+                        tooltip.add(Text.empty())
                         if (locked) {
                             tooltip.add(
                                 Symbol.WARNING.asText().append(" ")

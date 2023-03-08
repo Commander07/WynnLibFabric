@@ -7,10 +7,11 @@
   "authors": [
     "nbcss",
     "Silentmaxx",
-    "FYWind"
+    "FYWind",
+    "Commander07"
   ],
   "contact": {
-    "sources": "https://github.com/nbcss/WynnLibFabric"
+    "sources": "https://github.com/commander07/WynnLibFabric_1.19.3"
   },
   "license": "The Unlicense",
   "icon": "assets/wynnlib/icon.png",
@@ -27,10 +28,10 @@
     "wynnlib.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.13.3",
+    "fabricloader": ">=0.14.14",
     "fabric": "*",
-    "fabric-language-kotlin": ">=1.7.4+kotlin.1.6.21",
-    "minecraft": "1.18.x",
+    "fabric-language-kotlin": ">=1.9.1+kotlin.1.8.10",
+    "minecraft": "1.19.3",
     "java": ">=17"
   }
 }

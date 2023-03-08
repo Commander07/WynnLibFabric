@@ -14,12 +14,13 @@ import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtList
 import net.minecraft.nbt.StringNbtReader
+import net.minecraft.registry.Registries
+import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
 import java.util.*
 
 object ItemFactory {
-    val ERROR_ITEM: ItemStack = ItemStack(Registry.ITEM.get(Identifier("barrier")))
+    val ERROR_ITEM: ItemStack = ItemStack(Registries.ITEM.get(Identifier("barrier")))
 
     /**
      * Get skull item from given skin string.
@@ -55,7 +56,7 @@ object ItemFactory {
      */
     fun fromEncoding(encoding: String): ItemStack {
         val array = encoding.split("#").toTypedArray()
-        val item: Item = Registry.ITEM.get(Identifier(array[0]))
+        val item: Item = Registries.ITEM.get(Identifier(array[0]))
         try {
             if (item != Items.AIR) {
                 val meta = if (array.size > 1) array[1].toInt() else 0

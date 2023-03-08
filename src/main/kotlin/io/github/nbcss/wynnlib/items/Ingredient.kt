@@ -18,7 +18,6 @@ import io.github.nbcss.wynnlib.utils.*
 import io.github.nbcss.wynnlib.utils.range.IRange
 import io.github.nbcss.wynnlib.utils.range.IngredientIRange
 import net.minecraft.item.ItemStack
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.math.MathHelper
@@ -127,7 +126,7 @@ class Ingredient(json: JsonObject) : Keyed, BaseItem, IdentificationHolder, Conf
         PositionModifier.values().forEach {
             val modifier = getPositionModifier(it)
             if (modifier != 0){
-                tooltip.add(LiteralText("${signed(modifier)}% ").formatted(colorOf(modifier))
+                tooltip.add(Text.literal("${signed(modifier)}% ").formatted(colorOf(modifier))
                     .append(TOOLTIP_ING_EFFECTIVENESS.translate().formatted(Formatting.GRAY)))
                 tooltip.add(it.translate("tooltip").formatted(Formatting.GRAY))
             }
@@ -139,18 +138,18 @@ class Ingredient(json: JsonObject) : Keyed, BaseItem, IdentificationHolder, Conf
         val lastSize = tooltip.size
         //durability & duration
         var added = false
-        val text = LiteralText("")
+        val text = Text.literal("")
         if (durability != 0){
             val color = colorOf(durability)
-            text.append(LiteralText(signed(durability)).formatted(color)).append(" ")
+            text.append(Text.literal(signed(durability)).formatted(color)).append(" ")
                 .append(TOOLTIP_ING_DURABILITY.translate().formatted(color))
             added = true
         }
         if (duration != 0){
             if (added) text.append(TOOLTIP_OR.translate().formatted(Formatting.GRAY))
             val color = colorOf(duration)
-            text.append(LiteralText(signed(duration)).formatted(color))
-                .append(LiteralText("s ").formatted(color))
+            text.append(Text.literal(signed(duration)).formatted(color))
+                .append(Text.literal("s ").formatted(color))
                 .append(TOOLTIP_ING_DURATION.translate().formatted(color))
             added = true
         }
@@ -158,7 +157,7 @@ class Ingredient(json: JsonObject) : Keyed, BaseItem, IdentificationHolder, Conf
         //charges
         if (charges != 0) {
             val color = colorOf(charges)
-            tooltip.add(LiteralText(signed(charges)).formatted(color).append(" ")
+            tooltip.add(Text.literal(signed(charges)).formatted(color).append(" ")
                 .append(TOOLTIP_ING_CHARGES.translate().formatted(color)))
         }
         //skill req modifiers
@@ -166,7 +165,7 @@ class Ingredient(json: JsonObject) : Keyed, BaseItem, IdentificationHolder, Conf
             val req = getSkillReqModifier(it)
             if(req != 0){
                 val color = colorOf(-req)
-                tooltip.add(LiteralText("${signed(req)} ").formatted(color)
+                tooltip.add(Text.literal("${signed(req)} ").formatted(color)
                     .append(TOOLTIP_SKILL_MODIFIER.translate(null, it.translate().string).formatted(color)))
             }
         }
@@ -174,7 +173,7 @@ class Ingredient(json: JsonObject) : Keyed, BaseItem, IdentificationHolder, Conf
     }
 
     override fun getDisplayText(): Text {
-        return LiteralText(displayName).formatted(Formatting.GRAY).append(LiteralText(tier.suffix))
+        return Text.literal(displayName).formatted(Formatting.GRAY).append(Text.literal(tier.suffix))
     }
 
     override fun getDisplayName(): String = displayName
@@ -193,18 +192,18 @@ class Ingredient(json: JsonObject) : Keyed, BaseItem, IdentificationHolder, Conf
         val tooltip: MutableList<Text> = ArrayList()
         tooltip.add(getDisplayText())
         tooltip.add(TOOLTIP_CRAFTING_ING.translate().formatted(Formatting.DARK_GRAY))
-        tooltip.add(LiteralText.EMPTY)
+        tooltip.add(Text.empty())
         //append empty line if success add any id into the tooltip
         if (addIdentifications(this, tooltip))
-            tooltip.add(LiteralText.EMPTY)
+            tooltip.add(Text.empty())
         if(addPosModifierTooltip(tooltip))
-            tooltip.add(LiteralText.EMPTY)
+            tooltip.add(Text.empty())
         if(addItemModifierTooltip(tooltip))
-            tooltip.add(LiteralText.EMPTY)
+            tooltip.add(Text.empty())
         tooltip.add(TOOLTIP_CRAFTING_LV_REQ.translate().formatted(Formatting.GRAY)
-            .append(LiteralText(": $level").formatted(Formatting.GRAY)))
+            .append(Text.literal(": $level").formatted(Formatting.GRAY)))
         professions.forEach {
-            tooltip.add(LiteralText(" - ").formatted(Formatting.DARK_GRAY).append(it.getDisplayText()))
+            tooltip.add(Text.literal(" - ").formatted(Formatting.DARK_GRAY).append(it.getDisplayText()))
         }
         if(isUntradable())
             tooltip.add(Restriction.UNTRADABLE.translate().formatted(Formatting.RED))

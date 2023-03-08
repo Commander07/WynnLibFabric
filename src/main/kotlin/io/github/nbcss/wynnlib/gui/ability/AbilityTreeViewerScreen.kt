@@ -15,7 +15,6 @@ import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -78,7 +77,7 @@ class AbilityTreeViewerScreen(parent: Screen?,
                 override fun getClickSound(): SoundEvent? = SoundEvents.ENTITY_ITEM_PICKUP
                 override fun drawTooltip(matrices: MatrixStack, mouseX: Int, mouseY: Int, index: Int) {
                     val name = Translations.UI_TREE_BUILDS.translate().string
-                    drawTooltip(matrices, listOf(LiteralText("[+] $name").formatted(Formatting.GREEN),
+                    drawTooltip(matrices, listOf(Text.literal("[+] $name").formatted(Formatting.GREEN),
                         tree.character.formatted(Formatting.GRAY)), mouseX, mouseY)
                 }
             }))

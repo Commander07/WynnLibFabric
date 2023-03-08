@@ -7,7 +7,6 @@ import io.github.nbcss.wynnlib.abilities.properties.AbilityProperty
 import io.github.nbcss.wynnlib.i18n.Translations
 import io.github.nbcss.wynnlib.registry.AbilityRegistry
 import io.github.nbcss.wynnlib.utils.Symbol
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -39,7 +38,7 @@ class ReplaceAbilityProperty(ability: Ability,
         getReplaceAbility()?.let {
             return listOf(Symbol.REPLACE.asText().append(" ")
                 .append(Translations.TOOLTIP_ABILITY_REPLACING.formatted(Formatting.GRAY))
-                .append(LiteralText(": ").formatted(Formatting.GRAY))
+                .append(Text.literal(": ").formatted(Formatting.GRAY))
                 .append(it.formatted(Formatting.WHITE)))
         }
         return emptyList()

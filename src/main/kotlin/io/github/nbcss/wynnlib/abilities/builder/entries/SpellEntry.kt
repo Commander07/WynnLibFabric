@@ -6,7 +6,6 @@ import io.github.nbcss.wynnlib.abilities.properties.general.ManaCostProperty
 import io.github.nbcss.wynnlib.abilities.properties.info.BoundSpellProperty
 import io.github.nbcss.wynnlib.data.SpellSlot
 import io.github.nbcss.wynnlib.utils.Symbol
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
@@ -36,17 +35,17 @@ open class SpellEntry(private val spell: SpellSlot,
         val tooltip: MutableList<Text> = ArrayList()
         tooltip.add(getDisplayNameText().append(" ${getTierText()}").formatted(Formatting.BOLD))
         tooltip.add(spell.getComboText(getAbility().getCharacter()))
-        tooltip.add(LiteralText.EMPTY)
+        tooltip.add(Text.empty())
         tooltip.addAll(getAbilityDescriptionTooltip(getAbility()))
         //Add effect tooltip
         val propertyTooltip = getPropertiesTooltip()
         if (propertyTooltip.isNotEmpty()){
-            tooltip.add(LiteralText.EMPTY)
+            tooltip.add(Text.empty())
             tooltip.addAll(propertyTooltip)
         }
         val upgradeTooltip = getUpgradeTooltip()
         if (upgradeTooltip.isNotEmpty()){
-            tooltip.add(LiteralText.EMPTY)
+            tooltip.add(Text.empty())
             tooltip.addAll(upgradeTooltip)
         }
         return tooltip

@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack
 import net.minecraft.network.packet.c2s.play.ClickSlotC2SPacket
 import net.minecraft.screen.slot.SlotActionType
 import net.minecraft.sound.SoundEvent
-import net.minecraft.text.LiteralText
 import net.minecraft.text.StringVisitable
 import net.minecraft.text.Style
 import net.minecraft.text.Text
@@ -137,9 +136,9 @@ fun formattingLines(text: String, prefix: String, length: Int = 200): List<Text>
     val lines: MutableList<Text> = ArrayList()
     text.split("//").forEach {
         if(it == "") {
-            lines.add(LiteralText.EMPTY)
+            lines.add(Text.empty())
         }else{
-            wrapLines(LiteralText(parseStyle(it, prefix)), length).forEach { line -> lines.add(line) }
+            wrapLines(Text.literal(parseStyle(it, prefix)), length).forEach { line -> lines.add(line) }
         }
     }
     return lines
@@ -174,7 +173,7 @@ fun replaceProperty(text: String, prefix: Char, provider: Function<String, Strin
 
 fun wrapLines(text: Text, length: Int = 200): List<Text> {
     val visitor = StringVisitable.StyledVisitor<Text>{ style, asString ->
-        Optional.of(LiteralText(asString).setStyle(style))
+        Optional.of(Text.literal(asString).setStyle(style))
     }
     return client.textRenderer.textHandler
         .wrapLines(text, length, Style.EMPTY)

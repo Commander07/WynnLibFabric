@@ -16,7 +16,6 @@ import io.github.nbcss.wynnlib.utils.range.DRange
 import io.github.nbcss.wynnlib.utils.range.SimpleDRange
 import io.github.nbcss.wynnlib.utils.removeDecimal
 import io.github.nbcss.wynnlib.utils.round
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -59,7 +58,7 @@ class AreaOfEffectProperty(ability: Ability,
         if(!range.isConstant()){
             value = "$value-${removeDecimal(range.upper())}"
         }
-        return Symbol.AOE.asText().append(" ").append(LiteralText(value).formatted(Formatting.WHITE))
+        return Symbol.AOE.asText().append(" ").append(Text.literal(value).formatted(Formatting.WHITE))
     }
 
     override fun getTooltip(provider: PropertyProvider): List<Text> {
@@ -76,9 +75,9 @@ class AreaOfEffectProperty(ability: Ability,
             .append(Translations.TOOLTIP_ABILITY_AREA_OF_EFFECT.formatted(Formatting.GRAY).append(": "))
             .append(suffix.formatted(Formatting.WHITE, null, value))
         aoe.getShape()?.let {
-            text.append(LiteralText(" (").formatted(Formatting.GRAY))
+            text.append(Text.literal(" (").formatted(Formatting.GRAY))
                 .append(it.formatted(Formatting.GRAY))
-                .append(LiteralText(")").formatted(Formatting.GRAY))
+                .append(Text.literal(")").formatted(Formatting.GRAY))
         }
         return listOf(text)
     }
@@ -116,9 +115,9 @@ class AreaOfEffectProperty(ability: Ability,
                 .append(Translations.TOOLTIP_ABILITY_AREA_OF_EFFECT.formatted(Formatting.GRAY).append(": "))
                 .append(suffix.formatted(color, null, value))
             modifier.getShape()?.let {
-                text.append(LiteralText(" (").formatted(Formatting.GRAY))
+                text.append(Text.literal(" (").formatted(Formatting.GRAY))
                     .append(it.translate().formatted(Formatting.GRAY))
-                    .append(LiteralText(")").formatted(Formatting.GRAY))
+                    .append(Text.literal(")").formatted(Formatting.GRAY))
             }
             return listOf(text)
         }

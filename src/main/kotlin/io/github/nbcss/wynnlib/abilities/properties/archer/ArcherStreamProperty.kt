@@ -11,7 +11,6 @@ import io.github.nbcss.wynnlib.abilities.properties.SetupProperty
 import io.github.nbcss.wynnlib.i18n.Translations
 import io.github.nbcss.wynnlib.utils.Symbol
 import io.github.nbcss.wynnlib.utils.signed
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -38,7 +37,7 @@ class ArcherStreamProperty(ability: Ability,
     override fun getTooltip(provider: PropertyProvider): List<Text> {
         return listOf(Symbol.ALTER_HITS.asText().append(" ")
             .append(Translations.TOOLTIP_ABILITY_ARCHER_STREAM.formatted(Formatting.GRAY).append(": "))
-            .append(LiteralText(streams.toString()).formatted(Formatting.WHITE)))
+            .append(Text.literal(streams.toString()).formatted(Formatting.WHITE)))
     }
 
     class Modifier(ability: Ability, data: JsonElement):
@@ -66,7 +65,7 @@ class ArcherStreamProperty(ability: Ability,
         override fun getTooltip(provider: PropertyProvider): List<Text> {
             return listOf(Symbol.ALTER_HITS.asText().append(" ")
                 .append(Translations.TOOLTIP_ABILITY_ARCHER_STREAM.formatted(Formatting.GRAY).append(": "))
-                .append(LiteralText(signed(modifier)).formatted(Formatting.WHITE)))
+                .append(Text.literal(signed(modifier)).formatted(Formatting.WHITE)))
         }
     }
 }

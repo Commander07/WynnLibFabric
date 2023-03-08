@@ -9,7 +9,6 @@ import io.github.nbcss.wynnlib.abilities.properties.AbilityProperty
 import io.github.nbcss.wynnlib.abilities.properties.ModifiableProperty
 import io.github.nbcss.wynnlib.i18n.Translations
 import io.github.nbcss.wynnlib.utils.Symbol
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -36,6 +35,6 @@ class TeleportSuccessionProperty(ability: Ability,
     override fun getTooltip(provider: PropertyProvider): List<Text> {
         return listOf(Symbol.ALTER_HITS.asText().append(" ")
             .append(Translations.TOOLTIP_ABILITY_MAGE_BLINKS.formatted(Formatting.GRAY).append(": "))
-            .append(LiteralText("$succession").formatted(Formatting.WHITE)))
+            .append(Text.literal("$succession").formatted(Formatting.WHITE)))
     }
 }

@@ -22,7 +22,6 @@ import io.github.nbcss.wynnlib.utils.range.SimpleIRange
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.item.ItemStack
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 
 class EquipmentTransformer(private val parent: RegularEquipment,
@@ -61,7 +60,7 @@ class EquipmentTransformer(private val parent: RegularEquipment,
     }
 
     override fun init() {
-        val tooltip: List<Text> = stack.getTooltip(MinecraftClient.getInstance().player, TooltipContext.Default.NORMAL)
+        val tooltip: List<Text> = stack.getTooltip(MinecraftClient.getInstance().player, TooltipContext.Default.BASIC)
         var line = 0
         outer@ while (line < tooltip.size) {
             for (property in propertyMap.values) {
@@ -78,10 +77,10 @@ class EquipmentTransformer(private val parent: RegularEquipment,
     override fun getTooltip(): List<Text> {
         val category = propertyMap["CATEGORY"]
         val tooltip = if (category is TooltipProvider) category.getTooltip() else
-            stack.getTooltip(MinecraftClient.getInstance().player, TooltipContext.Default.NORMAL)
+            stack.getTooltip(MinecraftClient.getInstance().player, TooltipContext.Default.BASIC)
         getPriceTooltip()?.let {
             val mutableTooltip = tooltip.toMutableList()
-            mutableTooltip.add(LiteralText.EMPTY)
+            mutableTooltip.add(Text.empty())
             mutableTooltip.addAll(it)
             return mutableTooltip
         }

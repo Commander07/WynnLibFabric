@@ -13,7 +13,6 @@ import io.github.nbcss.wynnlib.i18n.Translations
 import io.github.nbcss.wynnlib.utils.Symbol
 import io.github.nbcss.wynnlib.utils.colorOf
 import io.github.nbcss.wynnlib.utils.signed
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -31,7 +30,7 @@ class MaxTrapProperty(ability: Ability,
 
     override fun getOverviewTip(): Text {
         return Symbol.CHARGE.asText().append(" ").append(
-            LiteralText("$maxTrap").formatted(Formatting.WHITE)
+            Text.literal("$maxTrap").formatted(Formatting.WHITE)
         )
     }
 
@@ -47,7 +46,7 @@ class MaxTrapProperty(ability: Ability,
         val trap = Translations.TOOLTIP_ABILITY_ARCHER_TRAPS.translate().string
         return listOf(Symbol.CHARGE.asText().append(" ")
             .append(Translations.TOOLTIP_ABILITY_MAX.formatted(Formatting.GRAY).append(" (${trap}): "))
-            .append(LiteralText(getMaxTraps().toString()).formatted(Formatting.WHITE)))
+            .append(Text.literal(getMaxTraps().toString()).formatted(Formatting.WHITE)))
     }
 
     class Modifier(ability: Ability, private val modifier: Int):
@@ -76,7 +75,7 @@ class MaxTrapProperty(ability: Ability,
             val trap = Translations.TOOLTIP_ABILITY_ARCHER_TRAPS.translate().string
             return listOf(Symbol.CHARGE.asText().append(" ")
                 .append(Translations.TOOLTIP_ABILITY_MAX.formatted(Formatting.GRAY).append(" (${trap}): "))
-                .append(LiteralText(signed(modifier)).formatted(colorOf(modifier))))
+                .append(Text.literal(signed(modifier)).formatted(colorOf(modifier))))
         }
     }
 }

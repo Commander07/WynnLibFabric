@@ -63,7 +63,7 @@ public class InventoryUpdateMixin {
             return stack;
         ItemLoadEvent event = new ItemLoadEvent(stack);
         ItemLoadEvent.Companion.handleEvent(event);
-        String name = stack.getName().asString();
+        String name = stack.getName().toString();
         Matcher matcher = SPELL_PATTERN.matcher(name);
         if (matcher.find()) {
             Collection<Ability> abilities = AbilityRegistry.INSTANCE.fromDisplayName(matcher.group(1));

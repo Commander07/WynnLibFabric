@@ -17,7 +17,6 @@ import io.github.nbcss.wynnlib.items.equipments.RolledEquipment
 import io.github.nbcss.wynnlib.items.identity.IdentificationHolder
 import io.github.nbcss.wynnlib.utils.*
 import io.github.nbcss.wynnlib.utils.range.BaseIRange
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -26,23 +25,23 @@ fun addRequirements(item: Equipment, tooltip: MutableList<Text>) {
     if (item.getClassReq() != null){
         val classReq = item.getClassReq()!!.translate().formatted(Formatting.GRAY)
         val prefix = TOOLTIP_CLASS_REQ.formatted(Formatting.GRAY)
-        tooltip.add(prefix.append(LiteralText(": ").formatted(Formatting.GRAY)).append(classReq))
+        tooltip.add(prefix.append(Text.literal(": ").formatted(Formatting.GRAY)).append(classReq))
     }
     if (item.getQuestReq() != null){
-        val quest = LiteralText(": ${item.getQuestReq()}").formatted(Formatting.GRAY)
+        val quest = Text.literal(": ${item.getQuestReq()}").formatted(Formatting.GRAY)
         val prefix = TOOLTIP_QUEST_REQ.formatted(Formatting.GRAY)
         tooltip.add(prefix.append(quest))
     }
     //append level req
     val level = item.getLevel()
-    val levelText = LiteralText(": " + if (level.isConstant()) level.lower().toString()
+    val levelText = Text.literal(": " + if (level.isConstant()) level.lower().toString()
         else level.lower().toString() + "-" + level.upper().toString()).formatted(Formatting.GRAY)
     tooltip.add(TOOLTIP_COMBAT_LV_REQ.formatted(Formatting.GRAY).append(levelText))
     //append skill point req
     Skill.values().forEach{
         val point = item.getRequirement(it)
         if(point != 0){
-            val text = LiteralText(": $point").formatted(Formatting.GRAY)
+            val text = Text.literal(": $point").formatted(Formatting.GRAY)
             val prefix = TOOLTIP_SKILL_REQ.translate(null, it.translate().string)
             tooltip.add(prefix.formatted(Formatting.GRAY).append(text))
         }
@@ -58,7 +57,7 @@ fun addRolledRequirements(item: RolledEquipment, tooltip: MutableList<Text>) {
         tooltip.add(prefix.append(" ").append(name.append(": ").append(classReq)))
     }
     if (item.getQuestReq() != null){
-        val quest = LiteralText(": ${item.getQuestReq()}").formatted(Formatting.GRAY)
+        val quest = Text.literal(": ${item.getQuestReq()}").formatted(Formatting.GRAY)
         val name = TOOLTIP_QUEST_REQ.formatted(Formatting.GRAY)
         val prefix = if (item.meetQuestReq()) Symbol.TICK.asText() else Symbol.CROSS.asText()
         tooltip.add(prefix.append(" ").append(name.append(quest)))
@@ -66,7 +65,7 @@ fun addRolledRequirements(item: RolledEquipment, tooltip: MutableList<Text>) {
     //append level req
     run {
         val level = item.getLevel()
-        val levelText = LiteralText(": " + if (level.isConstant()) level.lower().toString()
+        val levelText = Text.literal(": " + if (level.isConstant()) level.lower().toString()
         else level.lower().toString() + "-" + level.upper().toString()).formatted(Formatting.GRAY)
         val prefix = if (item.meetLevelReq()) Symbol.TICK.asText() else Symbol.CROSS.asText()
         tooltip.add(prefix.append(" ").append(TOOLTIP_COMBAT_LV_REQ.formatted(Formatting.GRAY).append(levelText)))
@@ -75,7 +74,7 @@ fun addRolledRequirements(item: RolledEquipment, tooltip: MutableList<Text>) {
     Skill.values().forEach{
         val point = item.getRequirement(it)
         if(point != 0){
-            val text = LiteralText(": $point").formatted(Formatting.GRAY)
+            val text = Text.literal(": $point").formatted(Formatting.GRAY)
             val name = TOOLTIP_SKILL_REQ.translate(null, it.translate().string)
             val prefix = if (item.meetSkillReq(it)) Symbol.TICK.asText() else Symbol.CROSS.asText()
             tooltip.add(prefix.append(" ").append(name.formatted(Formatting.GRAY).append(text)))
@@ -92,7 +91,7 @@ fun addIdentifications(item: IdentificationHolder,
         val idTooltip = it.formatting(item, range)
         if (idTooltip.isNotEmpty()){
             if (lastGroup != null && lastGroup != it.group)
-                tooltip.add(LiteralText.EMPTY)
+                tooltip.add(Text.empty())
             lastGroup = it.group
             tooltip.addAll(idTooltip)
         }
@@ -112,7 +111,7 @@ fun addMajorIds(item: IdentificationHolder,
 
 fun addPowderSpecial(item: RolledEquipment, tooltip: MutableList<Text>) {
     item.getPowderSpecial()?.let {
-        tooltip.addAll(it.getTooltip().map { line -> LiteralText("   ").append(line) })
+        tooltip.addAll(it.getTooltip().map { line -> Text.literal("   ").append(line) })
     }
 }
 
@@ -127,11 +126,11 @@ fun addRolledIdentifications(item: RolledEquipment,
             val text = SuffixTranslation.withSuffix(value, it.suffix).formatted(color)
             val stars = item.getIdentificationStars(it)
             if (stars > 0) {
-                text.append(LiteralText(MutableList(stars){ "*" }.reduce { x, y -> x + y})
+                text.append(Text.literal(MutableList(stars){ "*" }.reduce { x, y -> x + y})
                     .formatted(Formatting.DARK_GREEN))
             }
             if (lastGroup != null && lastGroup != it.group)
-                tooltip.add(LiteralText.EMPTY)
+                tooltip.add(Text.empty())
             lastGroup = it.group
             text.append(" ").append(it.getDisplayText(Formatting.GRAY, item))
             val range = item.getIdentificationRange(it) as BaseIRange
@@ -147,32 +146,32 @@ fun addRolledPowderSlots(item: RolledEquipment, tooltip: MutableList<Text>) {
     if (item.getPowderSlot() == 0)
         return
     val powders = item.getPowders()
-    val text = LiteralText("[${powders.size}/${item.getPowderSlot()}] ").formatted(Formatting.GRAY)
+    val text = Text.literal("[${powders.size}/${item.getPowderSlot()}] ").formatted(Formatting.GRAY)
         .append(TOOLTIP_POWDER_SLOTS.formatted(Formatting.GRAY))
     if (powders.isNotEmpty()) {
-        text.append(LiteralText(" [").formatted(Formatting.GRAY))
-            .append(LiteralText(powders[0].icon).formatted(powders[0].color))
+        text.append(Text.literal(" [").formatted(Formatting.GRAY))
+            .append(Text.literal(powders[0].icon).formatted(powders[0].color))
         for (i in (1 until powders.size)) {
-            text.append(" ").append(LiteralText(powders[i].icon).formatted(powders[i].color))
+            text.append(" ").append(Text.literal(powders[i].icon).formatted(powders[i].color))
         }
-        text.append(LiteralText("]").formatted(Formatting.GRAY))
+        text.append(Text.literal("]").formatted(Formatting.GRAY))
     }
     tooltip.add(text)
 }
 
 fun addPowderSlots(item: GearEquipment, tooltip: MutableList<Text>) {
-    val slots = LiteralText(item.getPowderSlot().toString()).formatted(
+    val slots = Text.literal(item.getPowderSlot().toString()).formatted(
         if (item.getPowderSlot() >= 2) Formatting.GREEN else if
                 (item.getPowderSlot() > 0) Formatting.YELLOW else Formatting.RED)
-    tooltip.add(LiteralText("[").formatted(Formatting.GRAY)
-        .append(slots).append(LiteralText("] ").formatted(Formatting.GRAY))
+    tooltip.add(Text.literal("[").formatted(Formatting.GRAY)
+        .append(slots).append(Text.literal("] ").formatted(Formatting.GRAY))
         .append(TOOLTIP_POWDER_SLOTS.translate().formatted(Formatting.GRAY)))
 }
 
 fun addItemSuffix(item: Equipment, tooltip: MutableList<Text>, roll: Int = 0) {
     val tier = item.getTier().translate().formatted(item.getTier().formatting)
     val type = item.getType().translate().formatted(item.getTier().formatting)
-    val text = tier.append(LiteralText(" ").append(type))
+    val text = tier.append(Text.literal(" ").append(type))
     if(item.isIdentifiable()){
         var cost = item.getTier().getIdentifyPrice(item.getLevel().lower())
         for (i in (0 until roll)){
@@ -181,7 +180,7 @@ fun addItemSuffix(item: Equipment, tooltip: MutableList<Text>, roll: Int = 0) {
         if (roll > 1) {
             text.append(" [$roll]")
         }
-        text.append(LiteralText(" [" + formatNumbers(cost) + "\u00B2]").formatted(Formatting.GREEN))
+        text.append(Text.literal(" [" + formatNumbers(cost) + "\u00B2]").formatted(Formatting.GREEN))
     }
     tooltip.add(text)
 }

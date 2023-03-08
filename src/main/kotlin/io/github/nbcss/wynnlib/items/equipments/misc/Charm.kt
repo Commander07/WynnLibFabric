@@ -18,7 +18,6 @@ import io.github.nbcss.wynnlib.utils.range.BaseIRange
 import io.github.nbcss.wynnlib.utils.range.IRange
 import io.github.nbcss.wynnlib.utils.range.SimpleIRange
 import net.minecraft.item.ItemStack
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 
 class Charm(json: JsonObject) : Equipment, EquipmentCategory, ConfigurableItem {
@@ -76,7 +75,7 @@ class Charm(json: JsonObject) : Equipment, EquipmentCategory, ConfigurableItem {
     override fun getKey(): String = name
 
     override fun getDisplayText(): Text {
-        return LiteralText(name).formatted(getTier().formatting)
+        return Text.literal(name).formatted(getTier().formatting)
     }
 
     override fun getDisplayName(): String = name
@@ -88,11 +87,11 @@ class Charm(json: JsonObject) : Equipment, EquipmentCategory, ConfigurableItem {
     override fun getTooltip(): List<Text> {
         val tooltip: MutableList<Text> = ArrayList()
         tooltip.add(getDisplayText())
-        tooltip.add(LiteralText.EMPTY)
+        tooltip.add(Text.empty())
         addRequirements(this, tooltip)
-        tooltip.add(LiteralText.EMPTY)
+        tooltip.add(Text.empty())
         if (addIdentifications(this, tooltip))
-            tooltip.add(LiteralText.EMPTY)
+            tooltip.add(Text.empty())
         addItemSuffix(this, tooltip)
         addRestriction(this, tooltip)
         return tooltip

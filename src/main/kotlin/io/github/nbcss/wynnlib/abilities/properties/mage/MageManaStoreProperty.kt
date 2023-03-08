@@ -13,7 +13,6 @@ import io.github.nbcss.wynnlib.i18n.Translations.TOOLTIP_ABILITY_MAGE_MANA_STORE
 import io.github.nbcss.wynnlib.utils.Symbol
 import io.github.nbcss.wynnlib.utils.colorOf
 import io.github.nbcss.wynnlib.utils.signed
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -39,7 +38,7 @@ class MageManaStoreProperty(ability: Ability,
     override fun getTooltip(provider: PropertyProvider): List<Text> {
         return listOf(Symbol.MANA.asText().append(" ")
             .append(TOOLTIP_ABILITY_MAGE_MANA_STORE.formatted(Formatting.GRAY).append(": "))
-            .append(LiteralText("+$store").formatted(Formatting.WHITE)))
+            .append(Text.literal("+$store").formatted(Formatting.WHITE)))
     }
 
     class Modifier(ability: Ability, private val modifier: Int):
@@ -67,7 +66,7 @@ class MageManaStoreProperty(ability: Ability,
         override fun getTooltip(provider: PropertyProvider): List<Text> {
             return listOf(Symbol.MANA.asText().append(" ")
                 .append(TOOLTIP_ABILITY_MAGE_MANA_STORE.formatted(Formatting.GRAY).append(": "))
-                .append(LiteralText(signed(modifier)).formatted(colorOf(modifier))))
+                .append(Text.literal(signed(modifier)).formatted(colorOf(modifier))))
         }
     }
 }

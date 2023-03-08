@@ -52,8 +52,12 @@ class AdvanceSearchPaneWidget<T: BaseItem>(private val screen: DictionaryScreen<
 
     fun getCriteriaList(): List<CriteriaGroup<T>> = criteriaList
 
-    override fun appendNarrations(builder: NarrationMessageBuilder?) {
-        appendDefaultNarrations(builder)
+    //override fun appendNarrations(builder: NarrationMessageBuilder?) {
+    //    appendDefaultNarrations(builder)
+    //}
+
+    override fun appendClickableNarrations(builder: NarrationMessageBuilder?) {
+        TODO("Not yet implemented")
     }
 
     override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean {

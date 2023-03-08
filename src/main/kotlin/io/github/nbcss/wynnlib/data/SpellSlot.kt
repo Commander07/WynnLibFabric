@@ -2,7 +2,6 @@ package io.github.nbcss.wynnlib.data
 
 import io.github.nbcss.wynnlib.i18n.Translatable
 import io.github.nbcss.wynnlib.i18n.Translations
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -34,9 +33,9 @@ enum class SpellSlot(val key: String,
             return Translations.TOOLTIP_ABILITY_CLICK_COMBO.translate().formatted(Formatting.GOLD)
                 .append(": ")
                 .append(combo[0].translate().formatted(Formatting.LIGHT_PURPLE).formatted(Formatting.BOLD))
-                .append(LiteralText("-").formatted(Formatting.WHITE))
+                .append(Text.literal("-").formatted(Formatting.WHITE))
                 .append(combo[1].translate().formatted(Formatting.LIGHT_PURPLE).formatted(Formatting.BOLD))
-                .append(LiteralText("-").formatted(Formatting.WHITE))
+                .append(Text.literal("-").formatted(Formatting.WHITE))
                 .append(combo[2].translate().formatted(Formatting.LIGHT_PURPLE).formatted(Formatting.BOLD))
         }
     }

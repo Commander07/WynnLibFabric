@@ -18,7 +18,6 @@ import io.github.nbcss.wynnlib.utils.Keyed
 import io.github.nbcss.wynnlib.utils.range.IRange
 import io.github.nbcss.wynnlib.utils.range.SimpleIRange
 import net.minecraft.item.ItemStack
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import kotlin.math.max
@@ -48,7 +47,7 @@ class Material(json: JsonObject) : Keyed, BaseItem, MatchableItem, ConfigurableI
     fun getItemName(): String = "${Formatting.WHITE}" + displayName + tier.suffix
 
     override fun getDisplayText(): Text {
-        return LiteralText(displayName).formatted(Formatting.WHITE).append(tier.suffix)
+        return Text.literal(displayName).formatted(Formatting.WHITE).append(tier.suffix)
     }
 
     override fun getDisplayName(): String = displayName
@@ -67,13 +66,13 @@ class Material(json: JsonObject) : Keyed, BaseItem, MatchableItem, ConfigurableI
         val tooltip: MutableList<Text> = ArrayList()
         tooltip.add(getDisplayText())
         tooltip.add(TOOLTIP_CRAFTING_MAT.translate().formatted(Formatting.GRAY))
-        tooltip.add(LiteralText.EMPTY)
+        tooltip.add(Text.empty())
         val profession = getType().getProfession().translate().string
-        tooltip.add(LiteralText("${getType().getProfession().getIconSymbol()} ").formatted(Formatting.WHITE)
+        tooltip.add(Text.literal("${getType().getProfession().getIconSymbol()} ").formatted(Formatting.WHITE)
             .append(TOOLTIP_GATHERING_LV_REQ.translate(null, profession).formatted(Formatting.GRAY))
-            .append(LiteralText(": ").formatted(Formatting.GRAY))
-            .append(LiteralText("$level").formatted(Formatting.WHITE)))
-        tooltip.add(LiteralText.EMPTY)
+            .append(Text.literal(": ").formatted(Formatting.GRAY))
+            .append(Text.literal("$level").formatted(Formatting.WHITE)))
+        tooltip.add(Text.empty())
         tooltip.add(TOOLTIP_MATERIAL_RECIPES.translate().formatted(Formatting.GRAY))
         val recipes: MutableMap<CraftedType, IRange> = linkedMapOf()
         RecipeRegistry.fromMaterial(this).forEach {
@@ -83,10 +82,10 @@ class Material(json: JsonObject) : Keyed, BaseItem, MatchableItem, ConfigurableI
             recipes[it.getType()] = SimpleIRange(lower, upper)
         }
         recipes.forEach { (type, level) ->
-            tooltip.add(LiteralText(" - ").formatted(Formatting.DARK_GRAY)
+            tooltip.add(Text.literal(" - ").formatted(Formatting.DARK_GRAY)
                 .append(type.getProfession().getIconText()).append(" ")
                 .append(type.formatted(Formatting.WHITE))
-                .append(LiteralText(" [${level.lower()}-${level.upper()}]").formatted(Formatting.DARK_GRAY)))
+                .append(Text.literal(" [${level.lower()}-${level.upper()}]").formatted(Formatting.DARK_GRAY)))
         }
         return tooltip
     }

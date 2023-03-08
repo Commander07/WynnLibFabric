@@ -11,7 +11,6 @@ import io.github.nbcss.wynnlib.i18n.Translations
 import io.github.nbcss.wynnlib.i18n.Translations.TOOLTIP_ABILITY_ASSASSIN_BLOOM_TIP
 import io.github.nbcss.wynnlib.utils.Symbol
 import io.github.nbcss.wynnlib.utils.removeDecimal
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -46,9 +45,9 @@ class BloomAoEProperty(ability: Ability,
         return listOf(Symbol.AOE.asText().append(" ")
             .append(Translations.TOOLTIP_ABILITY_AREA_OF_EFFECT.formatted(Formatting.GRAY).append(": "))
             .append(suffix.formatted(Formatting.WHITE, null, "+${removeDecimal(range)}"))
-            .append(LiteralText(" (${TOOLTIP_ABILITY_ASSASSIN_BLOOM_TIP.translate().string})")
+            .append(Text.literal(" (${TOOLTIP_ABILITY_ASSASSIN_BLOOM_TIP.translate().string})")
                 .formatted(Formatting.DARK_GRAY)),
-            LiteralText("   (").formatted(Formatting.DARK_GRAY)
+            Text.literal("   (").formatted(Formatting.DARK_GRAY)
             .append(Symbol.MAX.asText()).append(" ")
             .append(Translations.TOOLTIP_ABILITY_MAX.formatted(Formatting.DARK_GRAY))
             .append(": ").append(suffix.formatted(Formatting.DARK_GRAY, null, removeDecimal(maxRange)))

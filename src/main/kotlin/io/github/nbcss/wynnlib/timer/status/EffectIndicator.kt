@@ -8,7 +8,6 @@ import io.github.nbcss.wynnlib.render.RenderKit.renderTextureWithColor
 import io.github.nbcss.wynnlib.utils.Color
 import net.minecraft.client.font.TextRenderer
 import net.minecraft.client.util.math.MatrixStack
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier

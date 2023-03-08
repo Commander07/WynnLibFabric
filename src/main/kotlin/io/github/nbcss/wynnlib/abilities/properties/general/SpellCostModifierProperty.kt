@@ -11,7 +11,6 @@ import io.github.nbcss.wynnlib.i18n.Translations
 import io.github.nbcss.wynnlib.registry.AbilityRegistry
 import io.github.nbcss.wynnlib.utils.Symbol
 import io.github.nbcss.wynnlib.utils.signed
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -43,9 +42,9 @@ class SpellCostModifierProperty(ability: Ability,
             val formatting = if (modifier > 0) Formatting.RED else Formatting.WHITE
             val text = Symbol.MANA.asText().append(" ")
                 .append(Translations.TOOLTIP_ABILITY_MANA_COST.formatted(Formatting.GRAY).append(": "))
-                .append(LiteralText("${signed(modifier)}%").formatted(formatting))
+                .append(Text.literal("${signed(modifier)}%").formatted(formatting))
             AbilityRegistry.fromCharacter(getAbility().getCharacter()).getSpellAbility(entry.key)?.let {
-                text.append(LiteralText(" (").formatted(Formatting.GRAY)
+                text.append(Text.literal(" (").formatted(Formatting.GRAY)
                     .append(it.formatted(Formatting.GRAY)).append(")"))
             }
             tooltip.add(text)

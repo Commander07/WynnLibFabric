@@ -21,11 +21,11 @@ class PowderProperty: AnalysisProperty {
         if (tooltip[line].siblings.isEmpty())
             return 0
         val base = tooltip[line].siblings[0]
-        val baseString = base.asString()
+        val baseString = base.toString()
         val matcher = if (baseString != "") {
             POWDER_PATTERN.matcher(baseString)
         }else if(base.siblings.isNotEmpty()){
-            POWDER_PATTERN.matcher(base.siblings[0].asString())
+            POWDER_PATTERN.matcher(base.siblings[0].toString())
         }else{
             return 0
         }
@@ -33,7 +33,7 @@ class PowderProperty: AnalysisProperty {
             powderSlots = matcher.group(1).toInt()
             powders.clear()
             for (i in (1 until base.siblings.size - 1)){
-                Element.fromIcon(base.siblings[i].asString().trim())?.let {
+                Element.fromIcon(base.siblings[i].toString().trim())?.let {
                     powders.add(it)
                 }
             }

@@ -13,7 +13,6 @@ import io.github.nbcss.wynnlib.utils.Symbol
 import io.github.nbcss.wynnlib.utils.removeDecimal
 import io.github.nbcss.wynnlib.utils.round
 import io.github.nbcss.wynnlib.abilities.properties.HealProperty
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -59,12 +58,12 @@ class RegenerationProperty(ability: Ability,
         val suffix = Translations.TOOLTIP_ABILITY_PER_SEC.translate(label = null, removeDecimal(interval)).string
         val healText = Symbol.HEART.asText().append(" ")
             .append(Translations.TOOLTIP_ABILITY_SHAMAN_REGENERATION.formatted(Formatting.GRAY))
-            .append(LiteralText(": ").formatted(Formatting.GRAY))
-            .append(LiteralText("+${removeDecimal(heal)}%").formatted(Formatting.WHITE))
-            .append(LiteralText(" ($suffix)").formatted(Formatting.DARK_GRAY))
+            .append(Text.literal(": ").formatted(Formatting.GRAY))
+            .append(Text.literal("+${removeDecimal(heal)}%").formatted(Formatting.WHITE))
+            .append(Text.literal(" ($suffix)").formatted(Formatting.DARK_GRAY))
         val healPerSec = Translations.TOOLTIP_SUFFIX_PER_S.formatted(Formatting.WHITE,
             null, "+${getHealPerSec()}%")
-        val healPerSecText = LiteralText("   (").formatted(Formatting.GRAY)
+        val healPerSecText = Text.literal("   (").formatted(Formatting.GRAY)
             .append(healPerSec).append(" ").append(Symbol.HEART.asText()).append(")")
         return listOf(healText, healPerSecText)
     }

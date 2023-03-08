@@ -11,7 +11,6 @@ import io.github.nbcss.wynnlib.i18n.Translations
 import io.github.nbcss.wynnlib.registry.AbilityRegistry
 import io.github.nbcss.wynnlib.utils.Symbol
 import io.github.nbcss.wynnlib.utils.signed
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -54,19 +53,19 @@ class AbilityDamageModifierProperty(ability: Ability,
                 val total = Symbol.DAMAGE.asText().append(" ")
                     .append(Translations.TOOLTIP_ABILITY_TOTAL_DAMAGE.formatted(Formatting.GRAY))
                 if (ability != null) {
-                    total.append(LiteralText(" ($ability)").formatted(Formatting.GRAY))
+                    total.append(Text.literal(" ($ability)").formatted(Formatting.GRAY))
                 }
-                total.append(LiteralText(": ").formatted(Formatting.GRAY))
-                    .append(LiteralText("${signed(modifier.getTotalDamage())}%").formatted(color))
+                total.append(Text.literal(": ").formatted(Formatting.GRAY))
+                    .append(Text.literal("${signed(modifier.getTotalDamage())}%").formatted(color))
                 modifier.getDamageLabel()?.let {
-                    total.append(LiteralText(" (").formatted(Formatting.DARK_GRAY))
+                    total.append(Text.literal(" (").formatted(Formatting.DARK_GRAY))
                         .append(it.formatted(Formatting.DARK_GRAY))
-                        .append(LiteralText(")").formatted(Formatting.DARK_GRAY))
+                        .append(Text.literal(")").formatted(Formatting.DARK_GRAY))
                 }
                 tooltip.add(total)
                 //add neutral damage
                 if (modifier.getNeutralDamage() != 0){
-                    tooltip.add(LiteralText("   (").formatted(Formatting.DARK_GRAY)
+                    tooltip.add(Text.literal("   (").formatted(Formatting.DARK_GRAY)
                             .append(Translations.TOOLTIP_NEUTRAL_DAMAGE.formatted(Formatting.GOLD))
                             .append(": ${signed(modifier.getNeutralDamage())}%)"))
                 }
@@ -74,7 +73,7 @@ class AbilityDamageModifierProperty(ability: Ability,
                 Element.values().forEach {
                     val value = modifier.getElementalDamage(it)
                     if (value != 0){
-                        tooltip.add(LiteralText("   (").formatted(Formatting.DARK_GRAY)
+                        tooltip.add(Text.literal("   (").formatted(Formatting.DARK_GRAY)
                                 .append(it.formatted(Formatting.DARK_GRAY, "tooltip.damage"))
                                 .append(": ${signed(value)}%)"))
                     }
@@ -84,7 +83,7 @@ class AbilityDamageModifierProperty(ability: Ability,
                 val hitsColor = if (modifier.getHits() > 0) Formatting.WHITE else Formatting.RED
                 tooltip.add(Symbol.HITS.asText().append(" ")
                         .append(Translations.TOOLTIP_ABILITY_HITS.formatted(Formatting.GRAY).append(": "))
-                        .append(LiteralText(signed(modifier.getHits())).formatted(hitsColor)))
+                        .append(Text.literal(signed(modifier.getHits())).formatted(hitsColor)))
             }
         }
         return tooltip

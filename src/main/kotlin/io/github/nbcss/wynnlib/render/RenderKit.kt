@@ -10,7 +10,6 @@ import net.minecraft.client.gui.DrawableHelper
 import net.minecraft.client.render.*
 import net.minecraft.client.render.VertexConsumerProvider.Immediate
 import net.minecraft.client.util.math.MatrixStack
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
@@ -43,7 +42,7 @@ object RenderKit {
                       height: Int,
                       texWidth: Int,
                       texHeight: Int) {
-        RenderSystem.setShader { GameRenderer.getPositionTexShader() }
+        RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
         RenderSystem.setShaderTexture(0, texture)
         matrices.push()
@@ -62,7 +61,7 @@ object RenderKit {
                       height: Int,
                       texWidth: Int,
                       texHeight: Int) {
-        RenderSystem.setShader { GameRenderer.getPositionTexShader() }
+        RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
         RenderSystem.setShaderTexture(0, texture)
         DrawableHelper.drawTexture(matrices, x, y, u.toFloat(), v.toFloat(), width, height, texWidth, texHeight)
@@ -81,7 +80,7 @@ object RenderKit {
         val time = System.currentTimeMillis() % duration
         val index = min((time / intervalTime).toInt(), frames - 1)
         val v = (index * height).toFloat()
-        RenderSystem.setShader { GameRenderer.getPositionTexShader() }
+        RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
         RenderSystem.setShaderTexture(0, texture)
         DrawableHelper.drawTexture(matrices, x, y, 0.0f, v, width, height, width, frames * height)
@@ -103,7 +102,7 @@ object RenderKit {
         RenderSystem.enableBlend()
         RenderSystem.setShaderColor(color.floatRed(), color.floatGreen(), color.floatBlue(), color.floatAlpha())
         RenderSystem.setShaderTexture(0, texture)
-        RenderSystem.setShader { GameRenderer.getPositionTexShader() }
+        RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
         DrawableHelper.drawTexture(matrices, x, y, u.toFloat(), v.toFloat(), width, height, texWidth, texHeight)
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
     }
@@ -111,7 +110,7 @@ object RenderKit {
     fun renderOutlineText(matrices: MatrixStack, text: String, x: Float, y: Float,
                           color: Color = Color.WHITE,
                           outlineColor: Color = Color.BLACK){
-        renderOutlineText(matrices, LiteralText(text), x, y, color, outlineColor)
+        renderOutlineText(matrices, Text.literal(text), x, y, color, outlineColor)
     }
 
     fun renderDefaultOutlineText(matrices: MatrixStack, text: Text, x: Float, y: Float) {
@@ -154,14 +153,14 @@ object RenderKit {
         val green = color shr 8 and 255
         val blue = color and 255
         val alpha = 255
-        RenderSystem.setShader { GameRenderer.getPositionColorShader() }
+        RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
         buffer.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR)
         buffer.vertex((x + 0).toDouble(), (y + 0).toDouble(), 0.0).color(red, green, blue, alpha).next()
         buffer.vertex((x + 0).toDouble(), (y + height).toDouble(), 0.0).color(red, green, blue, alpha).next()
         buffer.vertex((x + width).toDouble(), (y + height).toDouble(), 0.0).color(red, green, blue, alpha).next()
         buffer.vertex((x + width).toDouble(), (y + 0).toDouble(), 0.0).color(red, green, blue, alpha).next()
-        buffer.end()
-        BufferRenderer.draw(buffer)
+        // buffer.end()
+        BufferRenderer.draw(buffer.end())
     }
 
     fun renderWayPointText(
@@ -208,7 +207,7 @@ object RenderKit {
         }
         if (showDistance){
             RenderSystem.disableDepthTest()
-            val distText = LiteralText("${distance.roundToInt()}m")
+            val distText = Text.literal("${distance.roundToInt()}m")
             val distX = (-textRender.getWidth(distText) / 2).toFloat()
             /*textRender.drawWithOutline(distText.asOrderedText(), distX, textY, 0xFFFFFF, 0,
                     matrix4f, consumerProvider, 255)*/

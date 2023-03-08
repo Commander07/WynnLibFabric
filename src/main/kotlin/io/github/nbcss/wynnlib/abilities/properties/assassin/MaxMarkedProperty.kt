@@ -13,7 +13,6 @@ import io.github.nbcss.wynnlib.i18n.Translations
 import io.github.nbcss.wynnlib.utils.Symbol
 import io.github.nbcss.wynnlib.utils.colorOf
 import io.github.nbcss.wynnlib.utils.signed
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -31,7 +30,7 @@ class MaxMarkedProperty(ability: Ability,
 
     override fun getOverviewTip(): Text {
         return Symbol.CHARGE.asText().append(" ").append(
-            LiteralText("$maxMarked").formatted(Formatting.WHITE)
+            Text.literal("$maxMarked").formatted(Formatting.WHITE)
         )
     }
 
@@ -47,7 +46,7 @@ class MaxMarkedProperty(ability: Ability,
         val marked = Translations.TOOLTIP_ABILITY_ASSASSIN_MARKED.translate().string
         return listOf(Symbol.CHARGE.asText().append(" ")
             .append(Translations.TOOLTIP_ABILITY_MAX.formatted(Formatting.GRAY).append(" (${marked}): "))
-            .append(LiteralText(getMaxMarked().toString()).formatted(Formatting.WHITE)))
+            .append(Text.literal(getMaxMarked().toString()).formatted(Formatting.WHITE)))
     }
 
     class Modifier(ability: Ability, private val modifier: Int):
@@ -76,7 +75,7 @@ class MaxMarkedProperty(ability: Ability,
             val value = Translations.TOOLTIP_ABILITY_ASSASSIN_MARKED.translate().string
             return listOf(Symbol.CHARGE.asText().append(" ")
                 .append(Translations.TOOLTIP_ABILITY_MAX.formatted(Formatting.GRAY).append(" (${value}): "))
-                .append(LiteralText(signed(modifier)).formatted(colorOf(modifier))))
+                .append(Text.literal(signed(modifier)).formatted(colorOf(modifier))))
         }
     }
 }

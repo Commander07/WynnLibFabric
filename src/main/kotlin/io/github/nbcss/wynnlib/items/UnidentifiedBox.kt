@@ -18,7 +18,6 @@ import io.github.nbcss.wynnlib.registry.TomeRegistry
 import io.github.nbcss.wynnlib.utils.*
 import io.github.nbcss.wynnlib.utils.range.IRange
 import net.minecraft.item.ItemStack
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -83,7 +82,7 @@ class UnidentifiedBox(private val type: EquipmentType,
     }
 
     override fun getDisplayText(): Text {
-        return LiteralText(getDisplayName()).formatted(tier.formatting)
+        return Text.literal(getDisplayName()).formatted(tier.formatting)
     }
 
     override fun getDisplayName(): String {
@@ -98,37 +97,37 @@ class UnidentifiedBox(private val type: EquipmentType,
         val tooltip: MutableList<Text> = mutableListOf()
         tooltip.add(getDisplayText())
         tooltip.addAll(formattingLines(DESCRIPTION.translate().string, "${Formatting.GRAY}", 200))
-        tooltip.add(LiteralText.EMPTY)
+        tooltip.add(Text.empty())
         tooltip.add(INFO.formatted(Formatting.GREEN).append(":"))
-        tooltip.add(LiteralText("- ").formatted(Formatting.GREEN)
+        tooltip.add(Text.literal("- ").formatted(Formatting.GREEN)
             .append(LV_RANGE.formatted(Formatting.GRAY).append(": "))
-            .append(LiteralText("$minLevel-$maxLevel").formatted(Formatting.WHITE))
+            .append(Text.literal("$minLevel-$maxLevel").formatted(Formatting.WHITE))
         )
-        tooltip.add(LiteralText("- ").formatted(Formatting.GREEN)
+        tooltip.add(Text.literal("- ").formatted(Formatting.GREEN)
             .append(TIER.formatted(Formatting.GRAY).append(": "))
             .append(tier.getDisplayText())
         )
-        tooltip.add(LiteralText("- ").formatted(Formatting.GREEN)
+        tooltip.add(Text.literal("- ").formatted(Formatting.GREEN)
             .append(TYPE.formatted(Formatting.GRAY).append(": "))
             .append(type.formatted(Formatting.WHITE))
         )
         if (potentialItems.isNotEmpty()) {
             val title = if (potentialItems.size == 1) ITEM_LIST else ITEM_LIST_MULTI
-            tooltip.add(LiteralText("- ").formatted(Formatting.GREEN)
+            tooltip.add(Text.literal("- ").formatted(Formatting.GREEN)
                 .append(title.formatted(Formatting.GRAY)))
             if (potentialItems.size == 1) {
                 tooltip.addAll(potentialItems[0].getTooltip())
             } else {
                 for (item in potentialItems) {
                     val price = formatNumbers(tier.getIdentifyPrice(item.getLevel().lower()))
-                    val name = LiteralText(item.getDisplayName()).formatted(item.getTier().formatting)
+                    val name = Text.literal(item.getDisplayName()).formatted(item.getTier().formatting)
                     if (item is ConfigurableItem && ItemStarProperty.hasStar(item)) {
                         name.formatted(Formatting.UNDERLINE)
                     }
-                    tooltip.add(LiteralText("- ").formatted(Formatting.GRAY)
-                        .append(LiteralText("[$price²] ").formatted(Formatting.GREEN))
+                    tooltip.add(Text.literal("- ").formatted(Formatting.GRAY)
+                        .append(Text.literal("[$price²] ").formatted(Formatting.GREEN))
                         .append(name)
-                        .append(LiteralText(" (${item.getLevel().lower()})").formatted(Formatting.GOLD)))
+                        .append(Text.literal(" (${item.getLevel().lower()})").formatted(Formatting.GOLD)))
                 }
             }
         }

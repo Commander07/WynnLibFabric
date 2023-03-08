@@ -16,7 +16,6 @@ import io.github.nbcss.wynnlib.utils.playSound
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.sound.SoundEvents
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
@@ -140,7 +139,7 @@ abstract class DictionaryScreen<T: BaseItem>(parent: Screen?, title: Text) : Han
     }
 
     override fun getTitle(): Text {
-        return title.copy().append(LiteralText(" [${items.size}]"))
+        return title.copy().append(Text.literal(" [${items.size}]"))
     }
 
     override fun drawBackgroundPre(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
@@ -240,7 +239,7 @@ abstract class DictionaryScreen<T: BaseItem>(parent: Screen?, title: Text) : Han
             it.render(matrices, mouseX, mouseY, delta)
             it.getItem()?.takeIf { x -> x is ConfigurableItem && ItemStarProperty.hasStar(x)}?.let { _ ->
                 RenderKit.renderOutlineText(matrices!!,
-                    LiteralText("✫").formatted(Formatting.YELLOW),
+                    Text.literal("✫").formatted(Formatting.YELLOW),
                     it.x.toFloat(), it.y.toFloat())
             }
         }

@@ -15,7 +15,6 @@ import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.gui.tooltip.TooltipComponent
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
@@ -61,8 +60,8 @@ abstract class AbstractAbilityTreeScreen(parent: Screen?) : HandbookTabScreen(pa
             }
         }
         if (icon != null){
-            tooltip[0] = LiteralText("     ").append(tooltip[0])
-            tooltip[1] = LiteralText("     ").append(tooltip[1])
+            tooltip[0] = Text.literal("     ").append(tooltip[0])
+            tooltip[1] = Text.literal("     ").append(tooltip[1])
         }
         renderTooltip(matrices, tooltip, mouseX, mouseY + 20)
         if (icon != null) {
@@ -102,7 +101,7 @@ abstract class AbstractAbilityTreeScreen(parent: Screen?) : HandbookTabScreen(pa
 
     fun renderArchetypeIcon(matrices: MatrixStack, archetype: Archetype, x: Int, y: Int) {
         val icon = archetype.getTexture()
-        val iconText = LiteralText(archetype.getIconText())
+        val iconText = Text.literal(archetype.getIconText())
             .formatted(Formatting.BOLD).formatted(archetype.getFormatting())
         itemRenderer.renderInGuiWithOverrides(icon, x, y)
         matrices.push()

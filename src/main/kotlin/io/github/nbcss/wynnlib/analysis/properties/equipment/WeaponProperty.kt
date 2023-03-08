@@ -12,7 +12,6 @@ import io.github.nbcss.wynnlib.items.equipments.RolledEquipment
 import io.github.nbcss.wynnlib.items.identity.TooltipProvider
 import io.github.nbcss.wynnlib.utils.range.IRange
 import io.github.nbcss.wynnlib.utils.range.SimpleIRange
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import java.util.regex.Pattern
 
@@ -30,13 +29,13 @@ class WeaponProperty(private val equipment: RolledEquipment):
         tooltip.add(equipment.getDisplayText())
         tooltip.addAll(getDamageTooltip())
         addPowderSpecial(equipment, tooltip)
-        tooltip.add(LiteralText.EMPTY)
+        tooltip.add(Text.empty())
         addRolledRequirements(equipment, tooltip)
-        tooltip.add(LiteralText.EMPTY)
+        tooltip.add(Text.empty())
         val lastSize = tooltip.size
         val quality = addRolledIdentifications(equipment, tooltip)
         if (tooltip.size > lastSize)
-            tooltip.add(LiteralText.EMPTY)
+            tooltip.add(Text.empty())
         if (equipment is MajorIdContainer.Holder && equipment.getMajorIdContainers().isNotEmpty()) {
             if (Settings.getOption(Settings.SettingOption.MAJOR_ID_ANALYZE)) {
                 for (majorId in equipment.getMajorIdContainers()) {
@@ -47,10 +46,10 @@ class WeaponProperty(private val equipment: RolledEquipment):
                     tooltip.addAll(majorId.tooltip)
                 }
             }
-            tooltip.add(LiteralText.EMPTY)
+            tooltip.add(Text.empty())
         }
         if (quality != null)
-            tooltip[0] = LiteralText("")
+            tooltip[0] = Text.literal("")
                 .append(tooltip[0]).append(" ")
                 .append(formattingQuality(quality))
         addRolledPowderSlots(equipment, tooltip)
@@ -76,13 +75,13 @@ class WeaponProperty(private val equipment: RolledEquipment):
             return 0
         val base = tooltip[line].siblings[0]
         if (attackSpeed == null && base.siblings.isEmpty()) {
-            AttackSpeed.fromDisplayName(base.asString())?.let {
+            AttackSpeed.fromDisplayName(base.toString())?.let {
                 attackSpeed = it
                 return 1
             }
         }
         run {
-            val matcher = DAMAGE_PATTERN.matcher(base.asString())
+            val matcher = DAMAGE_PATTERN.matcher(base.toString())
             if (matcher.find()) {
                 val lower = matcher.group(1).toInt()
                 val upper = matcher.group(2).toInt()
@@ -92,8 +91,8 @@ class WeaponProperty(private val equipment: RolledEquipment):
         }
         if (base.siblings.size == 2){
             //matches elem damage
-            Element.fromDisplayName(base.siblings[0].asString())?.let { elem ->
-                val matcher = ELEM_DAMAGE_PATTERN.matcher(base.siblings[1].asString())
+            Element.fromDisplayName(base.siblings[0].toString())?.let { elem ->
+                val matcher = ELEM_DAMAGE_PATTERN.matcher(base.siblings[1].toString())
                 if (matcher.find()) {
                     val lower = matcher.group(1).toInt()
                     val upper = matcher.group(2).toInt()

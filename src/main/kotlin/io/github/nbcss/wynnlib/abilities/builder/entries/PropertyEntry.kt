@@ -14,7 +14,6 @@ import io.github.nbcss.wynnlib.utils.keys.KeysKit
 import io.github.nbcss.wynnlib.utils.formattingLines
 import io.github.nbcss.wynnlib.utils.replaceProperty
 import io.github.nbcss.wynnlib.utils.tierOf
-import net.minecraft.text.LiteralText
 import net.minecraft.text.MutableText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
@@ -102,25 +101,25 @@ abstract class PropertyEntry(private val container: EntryContainer,
                     x.translate().string.compareTo(y.translate().string)
             }.forEach { upgrade ->
                 if (KeysKit.isShiftDown()){
-                    tooltip.add(LiteralText("+ ").formatted(Formatting.DARK_AQUA)
+                    tooltip.add(Text.literal("+ ").formatted(Formatting.DARK_AQUA)
                         .append(upgrade.formatted(upgrade.getTier().getFormatting())))
                     for (text in getAbilityDescriptionTooltip(upgrade)) {
-                        tooltip.add(LiteralText("- ").formatted(Formatting.BLACK).append(text))
+                        tooltip.add(Text.literal("- ").formatted(Formatting.BLACK).append(text))
                     }
                     upgrade.getProperties()
                         .filter { it is SetupProperty && it.inUpgrade() }
                         .map { it.getTooltip() }
                         .flatten()
                         .forEach {
-                            tooltip.add(LiteralText("- ").formatted(Formatting.DARK_GRAY).append(it))
+                            tooltip.add(Text.literal("- ").formatted(Formatting.DARK_GRAY).append(it))
                         }
                 }else{
-                    tooltip.add(LiteralText("- ").formatted(Formatting.DARK_AQUA)
+                    tooltip.add(Text.literal("- ").formatted(Formatting.DARK_AQUA)
                         .append(upgrade.formatted(upgrade.getTier().getFormatting())))
                 }
             }
             if(!KeysKit.isShiftDown()){
-                tooltip.add(LiteralText.EMPTY)
+                tooltip.add(Text.empty())
                 tooltip.add(TOOLTIP_SHIFT_UPGRADE.formatted(Formatting.GREEN))
             }
         }
@@ -130,17 +129,17 @@ abstract class PropertyEntry(private val container: EntryContainer,
     open fun getTooltip(): List<Text> {
         val tooltip: MutableList<Text> = ArrayList()
         tooltip.add(getDisplayNameText().append(" ${getTierText()}").formatted(Formatting.BOLD))
-        tooltip.add(LiteralText.EMPTY)
+        tooltip.add(Text.empty())
         tooltip.addAll(getAbilityDescriptionTooltip(ability))
         //Add effect tooltip
         val propertyTooltip = getPropertiesTooltip()
         if (propertyTooltip.isNotEmpty()){
-            tooltip.add(LiteralText.EMPTY)
+            tooltip.add(Text.empty())
             tooltip.addAll(propertyTooltip)
         }
         val upgradeTooltip = getUpgradeTooltip()
         if (upgradeTooltip.isNotEmpty()){
-            tooltip.add(LiteralText.EMPTY)
+            tooltip.add(Text.empty())
             tooltip.addAll(upgradeTooltip)
         }
         return tooltip
@@ -151,7 +150,7 @@ abstract class PropertyEntry(private val container: EntryContainer,
     open fun getSlotKey(): String? = null
 
     open fun getSideText(): Text {
-        val text = LiteralText("")
+        val text = Text.literal("")
         var noEmpty = false
         ability.getMetadata()?.getOverviewProperties()?.forEach {
             val property = it.from(this)
@@ -159,7 +158,7 @@ abstract class PropertyEntry(private val container: EntryContainer,
                 val tip = property.getOverviewTip()
                 if (tip != null) {
                     if (noEmpty) {
-                        text.append(LiteralText(" ").formatted(Formatting.GRAY))
+                        text.append(Text.literal(" ").formatted(Formatting.GRAY))
                     }
                     text.append(property.getOverviewTip())
                     noEmpty = true

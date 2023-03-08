@@ -12,7 +12,6 @@ import io.github.nbcss.wynnlib.utils.ItemFactory.fromLegacyId
 import io.github.nbcss.wynnlib.utils.range.IRange
 import io.github.nbcss.wynnlib.utils.asRange
 import net.minecraft.item.ItemStack
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 
 class RegularWeapon(private val parent: RegularEquipment, json: JsonObject)
@@ -57,14 +56,14 @@ class RegularWeapon(private val parent: RegularEquipment, json: JsonObject)
         val tooltip: MutableList<Text> = ArrayList()
         tooltip.add(parent.getDisplayText())
         tooltip.addAll(getDamageTooltip())
-        tooltip.add(LiteralText.EMPTY)
+        tooltip.add(Text.empty())
         addRequirements(parent, tooltip)
-        tooltip.add(LiteralText.EMPTY)
+        tooltip.add(Text.empty())
         //append empty line if success add any id into the tooltip
         if (addIdentifications(parent, tooltip))
-            tooltip.add(LiteralText.EMPTY)
+            tooltip.add(Text.empty())
         if (addMajorIds(parent, tooltip))
-            tooltip.add(LiteralText.EMPTY)
+            tooltip.add(Text.empty())
         addPowderSlots(parent, tooltip)
         addItemSuffix(parent, tooltip)
         addRestriction(parent, tooltip)

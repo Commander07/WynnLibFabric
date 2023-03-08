@@ -12,7 +12,6 @@ import io.github.nbcss.wynnlib.abilities.properties.SetupProperty
 import io.github.nbcss.wynnlib.i18n.Translations
 import io.github.nbcss.wynnlib.utils.Symbol
 import io.github.nbcss.wynnlib.utils.removeDecimal
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -29,7 +28,7 @@ class ChanceProperty(ability: Ability, private val chance: Double):
 
     override fun getOverviewTip(): Text? {
         return Symbol.CHANCE.asText().append(" ")
-            .append(LiteralText("${removeDecimal(chance)}%").formatted(Formatting.WHITE))
+            .append(Text.literal("${removeDecimal(chance)}%").formatted(Formatting.WHITE))
     }
 
     override fun writePlaceholder(container: PlaceholderContainer) {
@@ -43,7 +42,7 @@ class ChanceProperty(ability: Ability, private val chance: Double):
     override fun getTooltip(provider: PropertyProvider): List<Text> {
         return listOf(Symbol.CHANCE.asText().append(" ")
             .append(Translations.TOOLTIP_ABILITY_CHANCE.formatted(Formatting.GRAY).append(": "))
-            .append(LiteralText("${removeDecimal(chance)}%").formatted(Formatting.WHITE)))
+            .append(Text.literal("${removeDecimal(chance)}%").formatted(Formatting.WHITE)))
     }
 
     class Modifier(ability: Ability,
@@ -74,7 +73,7 @@ class ChanceProperty(ability: Ability, private val chance: Double):
             val text = (if (modifier > 0) "+" else "") + removeDecimal(modifier) + "%"
             return listOf(Symbol.CHANCE.asText().append(" ")
                 .append(Translations.TOOLTIP_ABILITY_CHANCE.formatted(Formatting.GRAY).append(": "))
-                .append(LiteralText(text).formatted(color)))
+                .append(Text.literal(text).formatted(color)))
         }
     }
 }

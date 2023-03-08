@@ -12,7 +12,6 @@ import io.github.nbcss.wynnlib.i18n.Translations.TOOLTIP_ABILITY_SHAMAN_BLOOD_TR
 import io.github.nbcss.wynnlib.utils.Symbol
 import io.github.nbcss.wynnlib.utils.removeDecimal
 import io.github.nbcss.wynnlib.utils.round
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -48,7 +47,7 @@ class BloodTransferProperty(ability: Ability,
         val modifier = removeDecimal(round(if (interval == 0.0) 0.0 else rate / interval))
         return listOf(Symbol.HEART.asText().append(" ")
             .append(TOOLTIP_ABILITY_SHAMAN_BLOOD_TRANSFER.formatted(Formatting.GRAY))
-            .append(LiteralText(": ").formatted(Formatting.GRAY))
+            .append(Text.literal(": ").formatted(Formatting.GRAY))
             .append(Translations.TOOLTIP_SUFFIX_PER_S.formatted(Formatting.WHITE,
                 null, "+${modifier}%")))
     }

@@ -6,7 +6,7 @@ import net.minecraft.client.gui.DrawableHelper
 import net.minecraft.client.gui.widget.ButtonWidget
 import net.minecraft.client.render.GameRenderer
 import net.minecraft.client.util.math.MatrixStack
-import net.minecraft.text.LiteralText
+import net.minecraft.text.Text
 import net.minecraft.util.math.MathHelper
 import java.util.function.Consumer
 import kotlin.math.abs
@@ -18,7 +18,7 @@ open class SmartSliderWidget(private val posX: Int,
                              private val maxValue: Int,
                              width: Int,
                              private val format: String?):
-    ButtonWidget(-1000, -1000, width, 20, LiteralText.EMPTY, null), ScrollElement {
+    ButtonWidget(-1000, -1000, width, 20, Text.empty(), null, NarrationSupplier { Text.empty() }), ScrollElement {
     protected var gap = if (minValue == maxValue) 1 else abs(maxValue - minValue)
     private var handler: Consumer<Int>? = null
     private var interactable: Boolean = true
@@ -51,7 +51,7 @@ open class SmartSliderWidget(private val posX: Int,
 
     override fun renderButton(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
         if (this.visible) {
-            RenderSystem.setShader { GameRenderer.getPositionTexShader() }
+            RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
             RenderSystem.setShaderTexture(0, WIDGETS_TEXTURE)
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, alpha)
             RenderSystem.enableBlend()

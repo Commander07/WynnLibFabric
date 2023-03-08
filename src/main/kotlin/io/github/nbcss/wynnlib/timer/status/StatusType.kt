@@ -14,7 +14,6 @@ import io.github.nbcss.wynnlib.utils.formatTimer
 import io.github.nbcss.wynnlib.utils.removeDecimal
 import net.minecraft.client.font.TextRenderer
 import net.minecraft.client.util.math.MatrixStack
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
@@ -47,7 +46,7 @@ abstract class StatusType(data: JsonObject): Keyed, Translatable {
                    timer: TypedStatusTimer,
                    displayText: Text,
                    posX: Int, posY: Int) {
-        val text = LiteralText("")
+        val text = Text.literal("")
         val duration: Double? = timer.getDuration()
         if (duration != null) {
             var color = Formatting.GREEN
@@ -56,7 +55,7 @@ abstract class StatusType(data: JsonObject): Keyed, Translatable {
             } else if (duration < 30) {
                 color = Formatting.GOLD
             }
-            text.append(LiteralText(formatTimer((duration * 1000).toLong())).formatted(color))
+            text.append(Text.literal(formatTimer((duration * 1000).toLong())).formatted(color))
                 .append(" ")
         }
         text.append(displayText)

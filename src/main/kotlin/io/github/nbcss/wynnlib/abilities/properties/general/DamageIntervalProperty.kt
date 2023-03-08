@@ -13,7 +13,6 @@ import io.github.nbcss.wynnlib.i18n.Translations.TOOLTIP_ABILITY_INTERVAL_HITS
 import io.github.nbcss.wynnlib.utils.Symbol
 import io.github.nbcss.wynnlib.utils.removeDecimal
 import io.github.nbcss.wynnlib.utils.round
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import kotlin.math.floor
@@ -44,7 +43,7 @@ class DamageIntervalProperty(ability: Ability,
             .append(Translations.TOOLTIP_SUFFIX_S.formatted(Formatting.WHITE, null, removeDecimal(interval)))
         DurationProperty.from(provider)?.let {
             val hits = floor((it.getDuration() / getInterval())).toInt()
-            text.append(LiteralText(" (").formatted(Formatting.DARK_GRAY)
+            text.append(Text.literal(" (").formatted(Formatting.DARK_GRAY)
                 .append(TOOLTIP_ABILITY_INTERVAL_HITS.formatted(Formatting.DARK_GRAY, label = null, "$hits"))
                 .append(")"))
         }

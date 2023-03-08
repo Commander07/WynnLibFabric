@@ -3,7 +3,6 @@ package io.github.nbcss.wynnlib.abilities.builder.entries
 import io.github.nbcss.wynnlib.abilities.Ability
 import io.github.nbcss.wynnlib.abilities.builder.EntryContainer
 import io.github.nbcss.wynnlib.i18n.Translations
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
@@ -32,17 +31,17 @@ class MainAttackEntry(container: EntryContainer,
         tooltip.add(Translations.TOOLTIP_ABILITY_CLICK_COMBO.translate().formatted(Formatting.GOLD)
             .append(": ").append(getAbility().getCharacter().getMainAttackKey().translate()
                 .formatted(Formatting.LIGHT_PURPLE).formatted(Formatting.BOLD)))
-        tooltip.add(LiteralText.EMPTY)
+        tooltip.add(Text.empty())
         tooltip.addAll(getAbilityDescriptionTooltip(getAbility()))
         //Add effect tooltip
         val propertyTooltip = getPropertiesTooltip()
         if (propertyTooltip.isNotEmpty()){
-            tooltip.add(LiteralText.EMPTY)
+            tooltip.add(Text.empty())
             tooltip.addAll(propertyTooltip)
         }
         val upgradeTooltip = getUpgradeTooltip()
         if (upgradeTooltip.isNotEmpty()){
-            tooltip.add(LiteralText.EMPTY)
+            tooltip.add(Text.empty())
             tooltip.addAll(upgradeTooltip)
         }
         return tooltip

@@ -12,7 +12,6 @@ import io.github.nbcss.wynnlib.items.identity.TooltipProvider
 import io.github.nbcss.wynnlib.readers.AbilityTreeModifier
 import io.github.nbcss.wynnlib.utils.signed
 import net.minecraft.client.gui.screen.Screen
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -54,24 +53,24 @@ class AbilityTreeEditorScreen(parent: Screen?,
             return tooltip
         }
         tooltip.add(TOOLTIP_ABILITY_CLICK_TO_MODIFY.formatted(Formatting.GREEN))
-        tooltip.add(LiteralText.EMPTY)
+        tooltip.add(Text.empty())
         val cost = initCost - getBuild().getTotalCost()
         tooltip.add(TOOLTIP_ABILITY_POINTS.formatted(Formatting.GRAY)
-            .append(LiteralText(": ").formatted(Formatting.GRAY))
-            .append(LiteralText(signed(cost)).formatted(Formatting.WHITE)))
+            .append(Text.literal(": ").formatted(Formatting.GRAY))
+            .append(Text.literal(signed(cost)).formatted(Formatting.WHITE)))
         if (orders.isNotEmpty()){
-            tooltip.add(LiteralText.EMPTY)
+            tooltip.add(Text.empty())
             tooltip.add(TOOLTIP_ABILITY_NEW_ABILITIES.formatted(Formatting.GRAY, label = null, orders.size))
             for (ability in orders) {
-                tooltip.add(LiteralText("- ").formatted(Formatting.GRAY)
+                tooltip.add(Text.literal("- ").formatted(Formatting.GRAY)
                     .append(ability.formatted(ability.getTier().getFormatting())))
             }
         }
         if (removed.isNotEmpty()) {
-            tooltip.add(LiteralText.EMPTY)
+            tooltip.add(Text.empty())
             tooltip.add(TOOLTIP_ABILITY_REMOVED_ABILITIES.formatted(Formatting.GRAY, label = null, removed.size))
             for (ability in removed) {
-                tooltip.add(LiteralText("- ").formatted(Formatting.GRAY)
+                tooltip.add(Text.literal("- ").formatted(Formatting.GRAY)
                     .append(ability.formatted(ability.getTier().getFormatting())))
             }
         }

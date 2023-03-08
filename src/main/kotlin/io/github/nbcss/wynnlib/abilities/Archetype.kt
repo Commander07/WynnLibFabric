@@ -11,7 +11,6 @@ import io.github.nbcss.wynnlib.utils.Keyed
 import io.github.nbcss.wynnlib.utils.Symbol
 import io.github.nbcss.wynnlib.utils.formattingLines
 import net.minecraft.item.ItemStack
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import kotlin.collections.LinkedHashMap
@@ -65,11 +64,11 @@ enum class Archetype(private val displayName: String,
         val tooltip: MutableList<Text> = ArrayList()
         val title = Translations.TOOLTIP_ARCHETYPE_TITLE.translate(null, translate().string)
         tooltip.add(title.formatted(getFormatting()).formatted(Formatting.BOLD))
-        tooltip.add(LiteralText.EMPTY)
+        tooltip.add(Text.empty())
         formattingLines(translate("desc").string, Formatting.GRAY.toString()).forEach { line ->
             tooltip.add(line)
         }
-        tooltip.add(LiteralText.EMPTY)
+        tooltip.add(Text.empty())
         tooltip.add(TOOLTIP_ARCHETYPE_ABILITIES.translate(null, tree.getArchetypePoint(this))
             .formatted(Formatting.GRAY))
         tree.getAbilities()
@@ -86,7 +85,7 @@ enum class Archetype(private val displayName: String,
             }
             .forEach {
                 val prefix = if (build == null){
-                    LiteralText("- ").formatted(Formatting.GRAY)
+                    Text.literal("- ").formatted(Formatting.GRAY)
                 }else if(build.hasAbility(it)){
                     //LiteralText("- ").formatted(Formatting.GREEN)
                     Symbol.TICK.asText().append(" ")

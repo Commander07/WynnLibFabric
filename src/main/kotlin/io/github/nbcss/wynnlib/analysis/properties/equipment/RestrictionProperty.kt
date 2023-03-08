@@ -19,7 +19,7 @@ class RestrictionProperty: AnalysisProperty {
             return 0
         val base = tooltip[line].siblings[0]
         if (base.style.color == TextColor.fromFormatting(Formatting.RED)) {
-            Restriction.fromDisplayName(base.asString())?.let {
+            Restriction.fromDisplayName(base.toString())?.let {
                 restriction = it
                 return 1
             }

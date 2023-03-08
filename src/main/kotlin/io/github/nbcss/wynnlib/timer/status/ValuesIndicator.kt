@@ -7,7 +7,7 @@ import io.github.nbcss.wynnlib.utils.parseStyle
 import io.github.nbcss.wynnlib.utils.removeDecimal
 import net.minecraft.client.font.TextRenderer
 import net.minecraft.client.util.math.MatrixStack
-import net.minecraft.text.LiteralText
+import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
@@ -88,7 +88,7 @@ class ValuesIndicator(data: JsonObject): StatusType(data) {
             }
             val textX: Int = posX + 14 - textRenderer.getWidth(valueText) / 2
             val textY = posY + 25
-            RenderKit.renderOutlineText(matrices, LiteralText(valueText), textX.toFloat(), textY.toFloat())
+            RenderKit.renderOutlineText(matrices, Text.literal(valueText), textX.toFloat(), textY.toFloat())
         }
         //render icon
         RenderKit.renderTexture(

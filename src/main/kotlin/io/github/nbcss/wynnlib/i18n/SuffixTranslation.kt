@@ -1,7 +1,6 @@
 package io.github.nbcss.wynnlib.i18n
 
 import io.github.nbcss.wynnlib.utils.signed
-import net.minecraft.text.LiteralText
 import net.minecraft.text.MutableText
 import net.minecraft.text.Text
 
@@ -36,7 +35,7 @@ enum class SuffixTranslation(val suffix: String): Translatable {
             if (translation != null){
                 return translation.translate(label = null, value)
             }
-            return LiteralText(value + suffix)
+            return Text.literal(value + suffix)
         }
     }
 }

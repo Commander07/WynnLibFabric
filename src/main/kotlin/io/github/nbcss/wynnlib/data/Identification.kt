@@ -13,7 +13,6 @@ import io.github.nbcss.wynnlib.utils.id.IDFormatting
 import io.github.nbcss.wynnlib.utils.id.IDRange
 import io.github.nbcss.wynnlib.utils.parseStyle
 import io.github.nbcss.wynnlib.utils.range.IRange
-import net.minecraft.text.LiteralText
 import net.minecraft.text.MutableText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
@@ -114,7 +113,7 @@ data class Identification(val id: String,               //id used in translation
             val value = item.getIdProperty(key) ?: key
             string = string.replace("\${$key}", value)
         }
-        return LiteralText(parseStyle(string, style.toString())).formatted(style)
+        return Text.literal(parseStyle(string, style.toString())).formatted(style)
     }
 
     fun formatting(item: IdentificationHolder, range: IRange): List<Text> {

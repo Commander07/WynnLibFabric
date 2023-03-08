@@ -10,7 +10,6 @@ import io.github.nbcss.wynnlib.abilities.properties.SetupProperty
 import io.github.nbcss.wynnlib.abilities.properties.ValidatorProperty
 import io.github.nbcss.wynnlib.i18n.Translations.TOOLTIP_ABILITY_WINDED_BOOSTERS
 import io.github.nbcss.wynnlib.registry.AbilityRegistry
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -30,7 +29,7 @@ class WindedBoosterProperty(ability: Ability,
 
     override fun getTooltip(provider: PropertyProvider): List<Text> {
         val tooltip: MutableList<Text> = mutableListOf()
-        tooltip.add(LiteralText.EMPTY)
+        tooltip.add(Text.empty())
         tooltip.add(TOOLTIP_ABILITY_WINDED_BOOSTERS.formatted(Formatting.AQUA))
         for (dependency in dependencies) {
             val ability = AbilityRegistry.get(dependency)
@@ -41,7 +40,7 @@ class WindedBoosterProperty(ability: Ability,
                         color = Formatting.DARK_GRAY
                     }
                 }
-                tooltip.add(LiteralText("- ").formatted(Formatting.AQUA)
+                tooltip.add(Text.literal("- ").formatted(Formatting.AQUA)
                     .append(ability.translate().formatted(color)))
             }
         }

@@ -12,7 +12,6 @@ import io.github.nbcss.wynnlib.abilities.properties.SetupProperty
 import io.github.nbcss.wynnlib.i18n.Translations
 import io.github.nbcss.wynnlib.utils.Symbol
 import io.github.nbcss.wynnlib.utils.signed
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -47,10 +46,10 @@ class MainAttackDamageProperty(ability: Ability,
 
     override fun getOverviewTip(): Text {
         val text = Symbol.DAMAGE.asText().append(" ").append(
-            LiteralText("$damage%").formatted(Formatting.WHITE)
+            Text.literal("$damage%").formatted(Formatting.WHITE)
         )
         if (hits > 1) {
-            text.append(LiteralText("x$hits").formatted(Formatting.YELLOW))
+            text.append(Text.literal("x$hits").formatted(Formatting.YELLOW))
         }
         return text
     }
@@ -59,11 +58,11 @@ class MainAttackDamageProperty(ability: Ability,
         val tooltip: MutableList<Text> = mutableListOf()
         tooltip.add(Symbol.DAMAGE.asText().append(" ")
             .append(Translations.TOOLTIP_ABILITY_MAIN_ATTACK_DAMAGE.formatted(Formatting.GRAY).append(": "))
-            .append(LiteralText("${damage}%").formatted(Formatting.WHITE)))
+            .append(Text.literal("${damage}%").formatted(Formatting.WHITE)))
         if (hits > 1) {
             tooltip.add(Symbol.HITS.asText().append(" ")
                 .append(Translations.TOOLTIP_ABILITY_HITS.formatted(Formatting.GRAY).append(": "))
-                .append(LiteralText("$hits").formatted(Formatting.WHITE)))
+                .append(Text.literal("$hits").formatted(Formatting.WHITE)))
         }
         return tooltip
     }
@@ -101,12 +100,12 @@ class MainAttackDamageProperty(ability: Ability,
             if (damageModifier != 0){
                 tooltip.add(Symbol.DAMAGE.asText().append(" ")
                     .append(Translations.TOOLTIP_ABILITY_MAIN_ATTACK_DAMAGE.formatted(Formatting.GRAY).append(": "))
-                    .append(LiteralText("${signed(damageModifier)}%").formatted(Formatting.WHITE)))
+                    .append(Text.literal("${signed(damageModifier)}%").formatted(Formatting.WHITE)))
             }
             if (hitsModifier != 0){
                 tooltip.add(Symbol.HITS.asText().append(" ")
                     .append(Translations.TOOLTIP_ABILITY_HITS.formatted(Formatting.GRAY).append(": "))
-                    .append(LiteralText(signed(hitsModifier)).formatted(Formatting.WHITE)))
+                    .append(Text.literal(signed(hitsModifier)).formatted(Formatting.WHITE)))
             }
             return tooltip
         }

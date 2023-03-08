@@ -16,7 +16,6 @@ import net.minecraft.client.MinecraftClient
 import net.minecraft.client.font.TextRenderer
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.decoration.ArmorStandEntity
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.math.MathHelper
@@ -36,7 +35,7 @@ class HoundTimerIndicator(private val entity: ArmorStandEntity,
         private val client = MinecraftClient.getInstance()
         override fun handle(event: ArmourStandUpdateEvent) {
             event.entity.customName?.let { name ->
-                val matcher = HOUND_PATTERN.matcher(name.asString())
+                val matcher = HOUND_PATTERN.matcher(name.toString())
                 if (matcher.find()) {
                     if (MinecraftClient.getInstance().player?.entityName == matcher.group(1)) {
                         val indicator = HoundTimerIndicator(event.entity, IndicatorManager.getWorldTime())
@@ -56,7 +55,7 @@ class HoundTimerIndicator(private val entity: ArmorStandEntity,
         val timer = client.world!!.getEntityById(entity.id + 1)
         if (timer != null) {
             timer.customName?.let { name ->
-                val matcher = TIMER_PATTERN.matcher(name.asString())
+                val matcher = TIMER_PATTERN.matcher(name.toString())
                 if (matcher.find()) {
                     val duration = max(0, matcher.group(1).toInt() - 1)
                     timeTracker.updateRemainTime(duration)
@@ -101,7 +100,7 @@ class HoundTimerIndicator(private val entity: ArmorStandEntity,
         }
         val textX: Int = posX + 14 - textRenderer.getWidth(time) / 2
         val textY = posY + 25
-        val text: Text = LiteralText(time).formatted(Formatting.LIGHT_PURPLE)
+        val text: Text = Text.literal(time).formatted(Formatting.LIGHT_PURPLE)
         RenderKit.renderOutlineText(matrices, text, textX.toFloat(), textY.toFloat())
         RenderKit.renderTexture(
             matrices, icon, posX + 5, posY + 2, 0, 0, 18, 18, 18, 18

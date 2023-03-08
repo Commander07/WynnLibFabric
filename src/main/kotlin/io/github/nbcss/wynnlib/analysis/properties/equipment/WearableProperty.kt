@@ -11,7 +11,6 @@ import io.github.nbcss.wynnlib.items.equipments.RolledEquipment
 import io.github.nbcss.wynnlib.items.identity.TooltipProvider
 import io.github.nbcss.wynnlib.utils.range.IRange
 import io.github.nbcss.wynnlib.utils.range.SimpleIRange
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import java.util.regex.Pattern
 
@@ -27,18 +26,18 @@ class WearableProperty(private val equipment: RolledEquipment):
     override fun getTooltip(): List<Text> {
         val tooltip: MutableList<Text> = mutableListOf()
         tooltip.add(equipment.getDisplayText())
-        tooltip.add(LiteralText.EMPTY)
+        tooltip.add(Text.empty())
         val size = tooltip.size
         tooltip.addAll(getDefenseTooltip())
         addPowderSpecial(equipment, tooltip)
         if(tooltip.size > size)
-            tooltip.add(LiteralText.EMPTY)
+            tooltip.add(Text.empty())
         addRolledRequirements(equipment, tooltip)
-        tooltip.add(LiteralText.EMPTY)
+        tooltip.add(Text.empty())
         val lastSize = tooltip.size
         val quality = addRolledIdentifications(equipment, tooltip)
         if (tooltip.size > lastSize)
-            tooltip.add(LiteralText.EMPTY)
+            tooltip.add(Text.empty())
         if (equipment is MajorIdContainer.Holder && equipment.getMajorIdContainers().isNotEmpty()) {
             if (Settings.getOption(Settings.SettingOption.MAJOR_ID_ANALYZE)) {
                 for (majorId in equipment.getMajorIdContainers()) {
@@ -49,10 +48,10 @@ class WearableProperty(private val equipment: RolledEquipment):
                     tooltip.addAll(majorId.tooltip)
                 }
             }
-            tooltip.add(LiteralText.EMPTY)
+            tooltip.add(Text.empty())
         }
         if (quality != null)
-            tooltip[0] = LiteralText("")
+            tooltip[0] = Text.literal("")
                 .append(tooltip[0]).append(" ")
                 .append(QualityCalculator.formattingQuality(quality))
         addRolledPowderSlots(equipment, tooltip)
@@ -70,10 +69,10 @@ class WearableProperty(private val equipment: RolledEquipment):
     }
 
     override fun set(tooltip: List<Text>, line: Int): Int {
-        if (tooltip[line].asString() != "" || tooltip[line].siblings.isEmpty())
+        if (tooltip[line].toString() != "" || tooltip[line].siblings.isEmpty())
             return 0
         val base = tooltip[line].siblings[0]
-        val baseString = base.asString()
+        val baseString = base.toString()
         if (baseString != ""){
             val matcher = HEALTH_PATTERN.matcher(baseString)
             if(matcher.find()){
@@ -81,8 +80,8 @@ class WearableProperty(private val equipment: RolledEquipment):
                 return 1
             }
         }else if(base.siblings.size == 2){
-            Element.fromDisplayName(base.siblings[0].asString())?.let {
-                val matcher = DEFENCE_PATTERN.matcher(base.siblings[1].asString())
+            Element.fromDisplayName(base.siblings[0].toString())?.let {
+                val matcher = DEFENCE_PATTERN.matcher(base.siblings[1].toString())
                 if (matcher.find()){
                     elemDefence[it] = matcher.group(1).toInt()
                 }

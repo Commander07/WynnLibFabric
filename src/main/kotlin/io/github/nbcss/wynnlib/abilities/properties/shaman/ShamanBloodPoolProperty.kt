@@ -13,7 +13,6 @@ import io.github.nbcss.wynnlib.i18n.Translations
 import io.github.nbcss.wynnlib.utils.Symbol
 import io.github.nbcss.wynnlib.utils.colorOf
 import io.github.nbcss.wynnlib.utils.signed
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -39,7 +38,7 @@ class ShamanBloodPoolProperty(ability: Ability,
 
     override fun getOverviewTip(): Text? {
         return Symbol.DARK_HEART.asText().append(" ").append(
-            LiteralText("$size%").formatted(Formatting.WHITE)
+            Text.literal("$size%").formatted(Formatting.WHITE)
         )
     }
 
@@ -47,7 +46,7 @@ class ShamanBloodPoolProperty(ability: Ability,
         val name = Translations.TOOLTIP_ABILITY_SHAMAN_BLOOD_POOL.translate().string
         return listOf(Symbol.DARK_HEART.asText().append(" ")
             .append(Translations.TOOLTIP_ABILITY_MAX.formatted(Formatting.GRAY).append(" (${name}): "))
-            .append(LiteralText("$size%").formatted(Formatting.WHITE)))
+            .append(Text.literal("$size%").formatted(Formatting.WHITE)))
     }
 
     class Modifier(ability: Ability, private val modifier: Int):
@@ -76,7 +75,7 @@ class ShamanBloodPoolProperty(ability: Ability,
             val name = Translations.TOOLTIP_ABILITY_SHAMAN_BLOOD_POOL.translate().string
             return listOf(Symbol.DARK_HEART.asText().append(" ")
                 .append(Translations.TOOLTIP_ABILITY_MAX.formatted(Formatting.GRAY).append(" (${name}): "))
-                .append(LiteralText("${signed(modifier)}%").formatted(colorOf(modifier))))
+                .append(Text.literal("${signed(modifier)}%").formatted(colorOf(modifier))))
         }
     }
 }

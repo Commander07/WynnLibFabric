@@ -16,7 +16,6 @@ import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -82,7 +81,7 @@ open class AbilityBuildDictionaryScreen(parent: Screen?): DictionaryScreen<TreeB
                 override fun getClickSound(): SoundEvent? = null
                 override fun drawTooltip(matrices: MatrixStack, mouseX: Int, mouseY: Int, index: Int) {
                     val name = Translations.UI_TREE_BUILDS.translate().string
-                    drawTooltip(matrices, listOf(LiteralText("[+] $name").formatted(Formatting.GREEN),
+                    drawTooltip(matrices, listOf(Text.literal("[+] $name").formatted(Formatting.GREEN),
                         UI_CLIPBOARD_IMPORT.formatted(Formatting.GRAY)), mouseX, mouseY)
                 }
             }))

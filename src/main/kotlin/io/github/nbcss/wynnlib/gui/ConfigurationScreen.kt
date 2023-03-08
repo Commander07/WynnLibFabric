@@ -15,7 +15,6 @@ import io.github.nbcss.wynnlib.utils.formattingLines
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import java.util.function.Supplier
@@ -65,7 +64,7 @@ class ConfigurationScreen(parent: Screen?) : GenericScrollScreen(parent, TITLE) 
     }
 
     override fun getTitle(): Text {
-        return super.getTitle().copy().append(LiteralText(" [").append(category.getDisplayText()).append("]"))
+        return super.getTitle().copy().append(Text.literal(" [").append(category.getDisplayText()).append("]"))
     }
 
     override fun drawBackgroundPre(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {

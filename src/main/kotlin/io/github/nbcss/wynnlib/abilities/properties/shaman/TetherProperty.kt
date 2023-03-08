@@ -9,7 +9,6 @@ import io.github.nbcss.wynnlib.abilities.properties.general.DamageModifierProper
 import io.github.nbcss.wynnlib.abilities.properties.general.DamageProperty
 import io.github.nbcss.wynnlib.data.DamageMultiplier
 import io.github.nbcss.wynnlib.utils.removeDecimal
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -48,7 +47,7 @@ class TetherProperty(ability: Ability,
 
     override fun getDamageSuffix(): Text? {
         getDamage().getDamageLabel()?.let {
-            return LiteralText(" (").formatted(Formatting.DARK_GRAY)
+            return Text.literal(" (").formatted(Formatting.DARK_GRAY)
                 .append(it.formatted(Formatting.DARK_GRAY, null, removeDecimal(healthLoss)))
                 .append(")")
         }

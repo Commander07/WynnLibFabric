@@ -27,19 +27,19 @@ class IdentificationProperty: AnalysisProperty {
             return 0
         val base = tooltip[line].siblings[0]
         //stop further read stats if it from set bonus
-        if (base.asString() == "Set Bonus:")
+        if (base.toString() == "Set Bonus:")
             terminated = true
-        if (base.asString() != "" || base.siblings.size < 2)
+        if (base.toString() != "" || base.siblings.size < 2)
             return 0
-        val matcher = ID_VALUE_PATTERN.matcher(base.siblings[0].asString().trim())
+        val matcher = ID_VALUE_PATTERN.matcher(base.siblings[0].toString().trim())
         if (matcher.find()) {
             val value = matcher.group(1).toInt()
             val suffix = matcher.group(2)
-            val idName = base.siblings.last().asString()
+            val idName = base.siblings.last().toString()
             Identification.fromSuffixName(suffix, idName)?.let { id ->
                 idMap[id] = value
                 if (base.siblings.size > 2){
-                    val stars = base.siblings[1].asString().chars().filter { it.toChar() == '*' }.count()
+                    val stars = base.siblings[1].toString().chars().filter { it.toChar() == '*' }.count()
                     starMap[id] = stars.toInt()
                 }
                 return 1

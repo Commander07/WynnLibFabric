@@ -7,7 +7,6 @@ import io.github.nbcss.wynnlib.items.identity.TooltipProvider
 import io.github.nbcss.wynnlib.registry.Registry
 import io.github.nbcss.wynnlib.utils.Keyed
 import io.github.nbcss.wynnlib.utils.wrapLines
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -54,10 +53,10 @@ data class MajorId(val id: String,
     }
 
     override fun getTooltip(): List<Text> {
-        val text = LiteralText("+")
+        val text = Text.literal("+")
             .append(formatted(Formatting.AQUA))
             .append(":ÀÀ")
             .append(formatted(Formatting.DARK_AQUA, "desc")).string
-        return wrapLines(LiteralText(text).formatted(Formatting.AQUA), 190)
+        return wrapLines(Text.literal(text).formatted(Formatting.AQUA), 190)
     }
 }

@@ -12,7 +12,7 @@ object ConsumableChargeRender {
     const val key = "consumable_charge"
     object Reader: EventHandler<ItemLoadEvent> {
         override fun handle(event: ItemLoadEvent) {
-            val matcher = pattern.matcher(event.item.name.asString())
+            val matcher = pattern.matcher(event.item.name.toString())
             if (matcher.find()) {
                 val charge = matcher.group(2).toInt()
                 ItemModifier.putInt(event.item, key, charge)

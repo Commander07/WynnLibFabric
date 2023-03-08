@@ -30,7 +30,7 @@ public class AbilityTreeEditorMixin extends Screen {
     @Inject(method = "init", at = @At("TAIL"))
     public void init(CallbackInfo ci){
         getTitle();
-        Matcher matcher = TITLE_PATTERN.matcher(getTitle().asString());
+        Matcher matcher = TITLE_PATTERN.matcher(getTitle().toString());
         if (matcher.find()) {
             CharacterClass character = CharacterClass.Companion.fromId(matcher.group(1));
             if (character != null) {

@@ -10,7 +10,6 @@ import io.github.nbcss.wynnlib.abilities.properties.ModifiableProperty
 import io.github.nbcss.wynnlib.i18n.Translations
 import io.github.nbcss.wynnlib.utils.Symbol
 import io.github.nbcss.wynnlib.utils.signed
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -45,6 +44,6 @@ class MainAttackDamageRawProperty(ability: Ability,
             return emptyList()
         return listOf(Symbol.DAMAGE.asText().append(" ")
             .append(Translations.TOOLTIP_ABILITY_MAIN_ATTACK_DAMAGE.formatted(Formatting.GRAY).append(": "))
-            .append(LiteralText(signed(damage)).formatted(Formatting.WHITE)))
+            .append(Text.literal(signed(damage)).formatted(Formatting.WHITE)))
     }
 }

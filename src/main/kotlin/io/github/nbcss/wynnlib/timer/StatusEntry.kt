@@ -13,10 +13,10 @@ data class StatusEntry(val icon: String,
         private val entries: MutableMap<String, StatusEntry> = mutableMapOf()
 
         fun updateStatus(footer: Text?) {
-            if (footer != null && footer.asString().contains("Status Effects")){
+            if (footer != null && footer.toString().contains("Status Effects")){
                 val list: MutableList<StatusEntry> = mutableListOf()
                 for (sibling in footer.siblings) {
-                    val matcher = timerPattern.matcher(sibling.asString())
+                    val matcher = timerPattern.matcher(sibling.toString())
                     while (matcher.find()) {
                         val icon = matcher.group(1)
                         val name = matcher.group(2)

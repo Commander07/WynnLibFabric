@@ -11,7 +11,6 @@ import io.github.nbcss.wynnlib.abilities.properties.SetupProperty
 import io.github.nbcss.wynnlib.data.Element
 import io.github.nbcss.wynnlib.utils.range.IRange
 import io.github.nbcss.wynnlib.utils.range.SimpleIRange
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -31,22 +30,22 @@ class ElementMasteryProperty(ability: Ability,
     fun getElementBooster(): Booster = booster
 
     override fun getOverviewTip(): Text {
-        val text = LiteralText("")
+        val text = Text.literal("")
         var space = false
         if(!booster.getRawBooster().isZero()){
-            text.append(LiteralText(booster.getElement().icon).formatted(booster.getElement().color).append(" "))
+            text.append(Text.literal(booster.getElement().icon).formatted(booster.getElement().color).append(" "))
             var value = "+${booster.getRawBooster().lower()}"
             if(!booster.getRawBooster().isConstant()){
                 value = "$value-${booster.getRawBooster().upper()}"
             }
-            text.append(LiteralText(value).formatted(Formatting.WHITE))
+            text.append(Text.literal(value).formatted(Formatting.WHITE))
             space = true
         }
         if(booster.getPctBooster() != 0){
             if (space)
                 text.append(" ")
-            text.append(LiteralText(booster.getElement().icon).formatted(booster.getElement().color).append(" "))
-            text.append(LiteralText("+${booster.getPctBooster()}%").formatted(Formatting.WHITE))
+            text.append(Text.literal(booster.getElement().icon).formatted(booster.getElement().color).append(" "))
+            text.append(Text.literal("+${booster.getPctBooster()}%").formatted(Formatting.WHITE))
         }
         return text
     }
@@ -64,11 +63,11 @@ class ElementMasteryProperty(ability: Ability,
                 value = "$value-${booster.getRawBooster().upper()}"
             }
             tooltip.add(element.formatted(Formatting.GRAY, "tooltip.damage").append(": ")
-                .append(LiteralText(value).formatted(Formatting.WHITE)))
+                .append(Text.literal(value).formatted(Formatting.WHITE)))
         }
         if(booster.getPctBooster() != 0){
             tooltip.add(element.formatted(Formatting.GRAY, "tooltip.damage").append(": ")
-                .append(LiteralText("+${booster.getPctBooster()}%").formatted(Formatting.WHITE)))
+                .append(Text.literal("+${booster.getPctBooster()}%").formatted(Formatting.WHITE)))
         }
         return tooltip
     }

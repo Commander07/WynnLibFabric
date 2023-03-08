@@ -13,7 +13,7 @@ object PouchInChest {
                 return
             if (event.screen !is GenericContainerScreen)
                 return
-            val title = event.screen.title.asString()
+            val title = event.screen.title.toString()
             if (ItemProtector.isLootInventory(title)){
                 val size = event.screen.screenHandler.slots.size
                 if (45 + event.slot.id - size == 13) {

@@ -14,7 +14,6 @@ import io.github.nbcss.wynnlib.utils.Symbol
 import io.github.nbcss.wynnlib.utils.colorOf
 import io.github.nbcss.wynnlib.utils.removeDecimal
 import io.github.nbcss.wynnlib.utils.signed
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -48,7 +47,7 @@ class MageLightweaverProperty(ability: Ability,
 
     override fun getOverviewTip(): Text {
         return Symbol.ALTER_HITS.asText().append(" ").append(
-            LiteralText("${getOrbs().maxOrbs}").formatted(Formatting.WHITE)
+            Text.literal("${getOrbs().maxOrbs}").formatted(Formatting.WHITE)
         )
     }
 
@@ -56,7 +55,7 @@ class MageLightweaverProperty(ability: Ability,
         val name = Translations.TOOLTIP_ABILITY_MAGE_LIGHTWEAVER_ORBS.translate().string
         return listOf(Symbol.ALTER_HITS.asText().append(" ")
             .append(Translations.TOOLTIP_ABILITY_MAX.formatted(Formatting.GRAY).append(" (${name}): "))
-            .append(LiteralText("${getOrbs().maxOrbs}").formatted(Formatting.WHITE)))
+            .append(Text.literal("${getOrbs().maxOrbs}").formatted(Formatting.WHITE)))
     }
 
     override fun setup(entry: PropertyEntry) {
@@ -98,7 +97,7 @@ class MageLightweaverProperty(ability: Ability,
             val name = Translations.TOOLTIP_ABILITY_MAGE_LIGHTWEAVER_ORBS.translate().string
             return listOf(Symbol.ALTER_HITS.asText().append(" ")
                 .append(Translations.TOOLTIP_ABILITY_MAX.formatted(Formatting.GRAY).append(" (${name}): "))
-                .append(LiteralText(signed(modifier.maxOrbs)).formatted(colorOf(modifier.maxOrbs))))
+                .append(Text.literal(signed(modifier.maxOrbs)).formatted(colorOf(modifier.maxOrbs))))
         }
     }
 

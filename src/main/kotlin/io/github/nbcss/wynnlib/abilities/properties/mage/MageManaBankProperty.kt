@@ -14,7 +14,6 @@ import io.github.nbcss.wynnlib.i18n.Translations
 import io.github.nbcss.wynnlib.utils.Symbol
 import io.github.nbcss.wynnlib.utils.colorOf
 import io.github.nbcss.wynnlib.utils.signed
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -32,7 +31,7 @@ class MageManaBankProperty(ability: Ability,
 
     override fun getOverviewTip(): Text? {
         return Symbol.DARK_MANA.asText().append(" ").append(
-            LiteralText("${getManaBankSize()}").formatted(Formatting.WHITE)
+            Text.literal("${getManaBankSize()}").formatted(Formatting.WHITE)
         )
     }
 
@@ -48,7 +47,7 @@ class MageManaBankProperty(ability: Ability,
         val bank = Translations.TOOLTIP_ABILITY_MAGE_MANA_BANK.translate().string
         return listOf(Symbol.DARK_MANA.asText().append(" ")
             .append(Translations.TOOLTIP_ABILITY_MAX.formatted(Formatting.GRAY).append(" (${bank}): "))
-            .append(LiteralText(getManaBankSize().toString()).formatted(Formatting.WHITE)))
+            .append(Text.literal(getManaBankSize().toString()).formatted(Formatting.WHITE)))
     }
 
     class Modifier(ability: Ability, private val modifier: Int):
@@ -77,7 +76,7 @@ class MageManaBankProperty(ability: Ability,
             val bank = Translations.TOOLTIP_ABILITY_MAGE_MANA_BANK.translate().string
             return listOf(Symbol.DARK_MANA.asText().append(" ")
                 .append(Translations.TOOLTIP_ABILITY_MAX.formatted(Formatting.GRAY).append(" (${bank}): "))
-                .append(LiteralText(signed(modifier)).formatted(colorOf(modifier))))
+                .append(Text.literal(signed(modifier)).formatted(colorOf(modifier))))
         }
     }
 }

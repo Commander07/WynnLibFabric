@@ -15,7 +15,6 @@ import io.github.nbcss.wynnlib.i18n.Translations.TOOLTIP_ABILITY_MAGE_ORBS_OF_LI
 import io.github.nbcss.wynnlib.utils.Symbol
 import io.github.nbcss.wynnlib.utils.colorOf
 import io.github.nbcss.wynnlib.utils.signed
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -52,14 +51,14 @@ class MageOphanimProperty(ability: Ability,
         val tooltip: MutableList<Text> = ArrayList()
         tooltip.add(Symbol.ALTER_HITS.asText().append(" ")
             .append(TOOLTIP_ABILITY_MAGE_ORBS_OF_LIGHT.formatted(Formatting.GRAY).append(": "))
-            .append(LiteralText(lightOfOrb.count.toString()).formatted(Formatting.WHITE)))
+            .append(Text.literal(lightOfOrb.count.toString()).formatted(Formatting.WHITE)))
         tooltip.add(Symbol.HEART.asText().append(" ")
             .append(TOOLTIP_ABILITY_MAGE_ORBS_OF_LIGHT_HP.formatted(Formatting.GRAY).append(": "))
-            .append(LiteralText(lightOfOrb.health.toString()).formatted(Formatting.WHITE)))
+            .append(Text.literal(lightOfOrb.health.toString()).formatted(Formatting.WHITE)))
         tooltip.add(Symbol.DARK_HEART.asText().append(" ")
             .append(TOOLTIP_ABILITY_MAGE_ORBS_OF_LIGHT_LOSS.formatted(Formatting.GRAY).append(": "))
-            .append(LiteralText("${lightOfOrb.healthLose}%").formatted(Formatting.WHITE))
-            .append(LiteralText(" (${DamageMultiplier.Label.ATTACK.translate().string})")
+            .append(Text.literal("${lightOfOrb.healthLose}%").formatted(Formatting.WHITE))
+            .append(Text.literal(" (${DamageMultiplier.Label.ATTACK.translate().string})")
                 .formatted(Formatting.DARK_GRAY)))
         return tooltip
     }
@@ -92,19 +91,19 @@ class MageOphanimProperty(ability: Ability,
             if (modifier.count != 0){
                 tooltip.add(Symbol.ALTER_HITS.asText().append(" ")
                     .append(TOOLTIP_ABILITY_MAGE_ORBS_OF_LIGHT.formatted(Formatting.GRAY).append(": "))
-                    .append(LiteralText(signed(modifier.count)).formatted(colorOf(modifier.count))))
+                    .append(Text.literal(signed(modifier.count)).formatted(colorOf(modifier.count))))
             }
             if (modifier.health != 0){
                 tooltip.add(Symbol.HEART.asText().append(" ")
                     .append(TOOLTIP_ABILITY_MAGE_ORBS_OF_LIGHT_HP.formatted(Formatting.GRAY).append(": "))
-                    .append(LiteralText(signed(modifier.health)).formatted(colorOf(modifier.health))))
+                    .append(Text.literal(signed(modifier.health)).formatted(colorOf(modifier.health))))
             }
             if (modifier.healthLose != 0){
                 tooltip.add(Symbol.DARK_HEART.asText().append(" ")
                     .append(TOOLTIP_ABILITY_MAGE_ORBS_OF_LIGHT_LOSS.formatted(Formatting.GRAY).append(": "))
-                    .append(LiteralText("${signed(modifier.healthLose)}%")
+                    .append(Text.literal("${signed(modifier.healthLose)}%")
                         .formatted(colorOf(-modifier.healthLose)))
-                    .append(LiteralText(" (${DamageMultiplier.Label.ATTACK.translate().string})")
+                    .append(Text.literal(" (${DamageMultiplier.Label.ATTACK.translate().string})")
                         .formatted(Formatting.DARK_GRAY)))
             }
             return tooltip

@@ -12,7 +12,6 @@ import io.github.nbcss.wynnlib.i18n.Translations
 import io.github.nbcss.wynnlib.utils.Symbol
 import io.github.nbcss.wynnlib.utils.removeDecimal
 import io.github.nbcss.wynnlib.utils.round
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -41,7 +40,7 @@ open class RangeProperty(ability: Ability,
         val text = Symbol.RANGE.asText().append(" ")
         if (variant)
             text.append("±")
-        return text.append(LiteralText(removeDecimal(getRange())).formatted(Formatting.WHITE))
+        return text.append(Text.literal(removeDecimal(getRange())).formatted(Formatting.WHITE))
     }
 
     override fun setup(entry: PropertyEntry) {
@@ -53,7 +52,7 @@ open class RangeProperty(ability: Ability,
             .formatted(Formatting.WHITE, null, removeDecimal(range))
         return listOf(Symbol.RANGE.asText().append(" ")
             .append(Translations.TOOLTIP_ABILITY_RANGE.formatted(Formatting.GRAY).append(": "))
-            .append(LiteralText(if (variant) "±" else "").formatted(Formatting.WHITE)).append(value))
+            .append(Text.literal(if (variant) "±" else "").formatted(Formatting.WHITE)).append(value))
     }
 
     class Modifier(ability: Ability,

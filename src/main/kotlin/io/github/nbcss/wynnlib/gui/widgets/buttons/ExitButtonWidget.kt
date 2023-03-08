@@ -5,16 +5,16 @@ import io.github.nbcss.wynnlib.render.RenderKit
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder
 import net.minecraft.client.gui.widget.PressableWidget
 import net.minecraft.client.util.math.MatrixStack
-import net.minecraft.text.LiteralText
+import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 
 class ExitButtonWidget(x: Int, y: Int, private val handler: ExitHandler):
-    PressableWidget(x, y, 10, 10, LiteralText.EMPTY) {
+    PressableWidget(x, y, 10, 10, Text.empty()) {
 
     private val texture: Identifier = Identifier("wynnlib", "textures/gui/exit_button.png")
-    override fun appendNarrations(builder: NarrationMessageBuilder?) {
-        appendDefaultNarrations(builder)
-    }
+    //override fun appendNarrations(builder: NarrationMessageBuilder?) {
+    //    appendDefaultNarrations(builder)
+    //}
 
     override fun onPress() {
         handler.exit()
@@ -26,6 +26,10 @@ class ExitButtonWidget(x: Int, y: Int, private val handler: ExitHandler):
         val v = if (isHovered) 10 else 0
         RenderKit.renderTexture(matrices, texture, x, y, 0, v, 10, 10, 10, 20)
         matrices.pop()
+    }
+
+    override fun appendClickableNarrations(builder: NarrationMessageBuilder?) {
+        TODO("Not yet implemented")
     }
 
     interface ExitHandler {

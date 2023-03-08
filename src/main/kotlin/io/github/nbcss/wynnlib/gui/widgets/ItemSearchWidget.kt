@@ -3,10 +3,10 @@ package io.github.nbcss.wynnlib.gui.widgets
 import io.github.nbcss.wynnlib.items.BaseItem
 import net.minecraft.client.font.TextRenderer
 import net.minecraft.client.gui.widget.TextFieldWidget
-import net.minecraft.text.LiteralText
+import net.minecraft.text.Text
 
 class ItemSearchWidget(textRenderer: TextRenderer?, x: Int, y: Int, width: Int, height: Int) :
-    TextFieldWidget(textRenderer, x, y, width, height, LiteralText.EMPTY) {
+    TextFieldWidget(textRenderer, x, y, width, height, Text.empty()) {
 
     fun validate(item: BaseItem): Boolean {
         val name = item.getDisplayName()

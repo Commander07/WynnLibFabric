@@ -16,9 +16,9 @@ class ItemSlotWidget<T: BaseItem>(x: Int, y: Int,
                                   private val screen: TooltipScreen
                                   ): PressableWidget(x, y, size, size, null) {
     private val client: MinecraftClient = MinecraftClient.getInstance()
-    override fun appendNarrations(builder: NarrationMessageBuilder?) {
-        appendDefaultNarrations(builder)
-    }
+    //override fun appendNarrations(builder: NarrationMessageBuilder?) {
+    //    appendDefaultNarrations(builder)
+    //}
 
     fun getItem(): T? = item
 
@@ -48,5 +48,9 @@ class ItemSlotWidget<T: BaseItem>(x: Int, y: Int,
             screen.drawTooltip(matrices, item!!.getTooltip(), mouseX, mouseY)
         }
         matrices.pop()
+    }
+
+    override fun appendClickableNarrations(builder: NarrationMessageBuilder?) {
+        TODO("Not yet implemented")
     }
 }

@@ -50,12 +50,12 @@ class AbilityTreeModifier(private val character: CharacterClass,
             //click slot ! check it is unlocked
             val slotId = ability.getSlot()
             val stack = lastStacks[slotId]
-            val name = clearFormatting(stack.name.asString())
+            val name = clearFormatting(stack.name.toString())
             if (removeIndex < removed.size) {
                 if (name == ability.getName() &&
-                    stack.getTooltip(MinecraftClient.getInstance().player, TooltipContext.Default.NORMAL)
-                        .filter { it.asString() == "" && it.siblings.isNotEmpty()}
-                        .map { it.siblings[0].asString() }
+                    stack.getTooltip(MinecraftClient.getInstance().player, TooltipContext.Default.BASIC)
+                        .filter { it.toString() == "" && it.siblings.isNotEmpty()}
+                        .map { it.siblings[0].toString() }
                         .any { it == "Right Click to undo" }) {
                     clickSlot(slotId, 1, SlotActionType.QUICK_MOVE)
                 }else{

@@ -1,7 +1,7 @@
 package io.github.nbcss.wynnlib.utils
 
-import net.minecraft.text.LiteralText
 import net.minecraft.text.MutableText
+import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
 enum class Symbol(val icon: String,
@@ -28,6 +28,6 @@ enum class Symbol(val icon: String,
     WARNING("⚠", Formatting.DARK_RED);
 
     fun asText(): MutableText {
-        return LiteralText(icon).formatted(formatting)
+        return Text.literal(icon).formatted(formatting)
     }
 }

@@ -12,7 +12,6 @@ import io.github.nbcss.wynnlib.i18n.Translatable
 import io.github.nbcss.wynnlib.i18n.Translations
 import io.github.nbcss.wynnlib.utils.Symbol
 import io.github.nbcss.wynnlib.utils.signed
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -83,7 +82,7 @@ open class BonusEffectProperty(ability: Ability,
             }else{
                 Formatting.RED
             }
-            text.append(LiteralText("${signed(modifier)}% ").formatted(color))
+            text.append(Text.literal("${signed(modifier)}% ").formatted(color))
                 .append(bonus.first.formatted(Formatting.GRAY))
         }else{
             text.append(bonus.first.formatted(Formatting.WHITE))

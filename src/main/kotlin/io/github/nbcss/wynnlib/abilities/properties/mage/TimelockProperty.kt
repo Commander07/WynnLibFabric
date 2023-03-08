@@ -11,7 +11,6 @@ import io.github.nbcss.wynnlib.i18n.Translations.TOOLTIP_ABILITY_MAGE_TIMELOCK_T
 import io.github.nbcss.wynnlib.i18n.Translations.TOOLTIP_SUFFIX_S
 import io.github.nbcss.wynnlib.utils.Symbol
 import io.github.nbcss.wynnlib.utils.signed
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -46,10 +45,10 @@ class TimelockProperty(ability: Ability,
         //TOOLTIP_SUFFIX_S.formatted(Formatting.WHITE, null, max)
         return listOf(Symbol.DURATION.asText().append(" ")
             .append(Translations.TOOLTIP_ABILITY_DURATION.formatted(Formatting.GRAY).append(": "))
-            .append(value).append(LiteralText(" (").formatted(Formatting.DARK_GRAY))
+            .append(value).append(Text.literal(" (").formatted(Formatting.DARK_GRAY))
             .append(TOOLTIP_ABILITY_MAGE_TIMELOCK_TIP.formatted(Formatting.DARK_GRAY, label = null, perWinded))
-            .append(LiteralText(")").formatted(Formatting.DARK_GRAY)),
-            LiteralText("   (").formatted(Formatting.DARK_GRAY)
+            .append(Text.literal(")").formatted(Formatting.DARK_GRAY)),
+            Text.literal("   (").formatted(Formatting.DARK_GRAY)
                 .append(Symbol.MAX.asText()).append(" ")
                 .append(Translations.TOOLTIP_ABILITY_MAX.formatted(Formatting.DARK_GRAY))
                 .append(": ").append(TOOLTIP_SUFFIX_S.formatted(Formatting.DARK_GRAY, null, max)).append(")"))
