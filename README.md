@@ -50,6 +50,9 @@ Code:
 - nbcss
 - FYWind
 
+Database:
+- Raw_Fish
+
 Art: 
 - Silentmaxx
 
@@ -63,3 +66,4 @@ Localization:
 
 For localization team: 
 Contact nbcss if your name is not shown here. 
+For atree or item issues, contact RawFish or nbcss
