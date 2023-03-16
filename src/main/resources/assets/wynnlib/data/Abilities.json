@@ -23,7 +23,10 @@
       "metadata": {
         "type": "MAIN_ATTACK",
         "icon": "WARRIOR_MAIN_ATTACK",
-        "overview": "[main_attack/main_attack_range]"
+        "overview": [
+          "main_attack",
+          "main_attack_range"
+        ]
       }
     },
     {
@@ -56,7 +59,10 @@
       "metadata": {
         "type": "SPELL",
         "icon": "BASH",
-        "overview": "[mana_cost/damage]"
+        "overview": [
+          "mana_cost",
+          "damage"
+        ]
       }
     },
     {
@@ -162,7 +168,9 @@
       "metadata": {
         "type": "SPELL",
         "icon": "CHARGE",
-        "overview": "[mana_cost]"
+        "overview": [
+          "mana_cost"
+        ]
       }
     },
     {
@@ -199,7 +207,9 @@
         "type": "NEW",
         "icon": "TOUGHER_SKIN",
         "upgradable": false,
-        "overview": "[id_convertor]"
+        "overview": [
+          "id_convertor"
+        ]
       }
     },
     {
@@ -271,7 +281,10 @@
       "metadata": {
         "type": "SPELL",
         "icon": "UPPERCUT",
-        "overview": "[mana_cost/damage]"
+        "overview": [
+          "mana_cost",
+          "damage"
+        ]
       }
     },
     {
@@ -335,7 +348,10 @@
       "metadata": {
         "type": "SPELL",
         "icon": "WAR_SCREAM",
-        "overview": "[mana_cost/damage]"
+        "overview": [
+          "mana_cost",
+          "damage"
+        ]
       }
     },
     {
@@ -369,7 +385,10 @@
         "type": "EXTEND",
         "icon": "HEAVY_IMPACT",
         "upgradable": false,
-        "overview": "[damage/aoe]"
+        "overview": [
+          "damage",
+          "aoe"
+        ]
       }
     },
     {
@@ -399,7 +418,9 @@
         "type": "NEW",
         "icon": "EARTH_MASTERY",
         "upgradable": false,
-        "overview": "[element_mastery]"
+        "overview": [
+          "element_mastery"
+        ]
       }
     },
     {
@@ -431,7 +452,9 @@
         "type": "NEW",
         "icon": "THUNDER_MASTERY",
         "upgradable": false,
-        "overview": "[element_mastery]"
+        "overview": [
+          "element_mastery"
+        ]
       }
     },
     {
@@ -463,7 +486,9 @@
         "type": "NEW",
         "icon": "AIR_MASTERY",
         "upgradable": false,
-        "overview": "[element_mastery]"
+        "overview": [
+          "element_mastery"
+        ]
       }
     },
     {
@@ -493,7 +518,9 @@
         "type": "NEW",
         "icon": "FIRE_MASTERY",
         "upgradable": false,
-        "overview": "[element_mastery]"
+        "overview": [
+          "element_mastery"
+        ]
       }
     },
     {
@@ -525,7 +552,9 @@
         "type": "NEW",
         "icon": "WATER_MASTERY",
         "upgradable": false,
-        "overview": "[element_mastery]"
+        "overview": [
+          "element_mastery"
+        ]
       }
     },
     {
@@ -619,7 +648,10 @@
         "type": "EXTEND",
         "icon": "FLYBY_JAB",
         "upgradable": false,
-        "overview": "[damage/aoe]"
+        "overview": [
+          "damage",
+          "aoe"
+        ]
       }
     },
     {
@@ -653,7 +685,10 @@
         "type": "EXTEND",
         "icon": "FLAMING_UPPERCUT",
         "upgradable": false,
-        "overview": "[damage/duration]"
+        "overview": [
+          "damage",
+          "duration"
+        ]
       }
     },
     {
@@ -777,7 +812,9 @@
         "type": "EXTEND",
         "icon": "AIR_SHOUT",
         "upgradable": false,
-        "overview": "[damage]"
+        "overview": [
+          "damage"
+        ]
       }
     },
     {
@@ -810,7 +847,11 @@
       "metadata": {
         "type": "EXTEND",
         "icon": "MANTLE_OF_THE_BOVEMISTS",
-        "overview": "[charges/duration/cooldown]"
+        "overview": [
+          "charges",
+          "duration",
+          "cooldown"
+        ]
       }
     },
     {
@@ -847,7 +888,10 @@
       "metadata": {
         "type": "EXTEND",
         "icon": "BAKALS_GRASP",
-        "overview": "[duration/cooldown]"
+        "overview": [
+          "duration",
+          "cooldown"
+        ]
       }
     },
     {
@@ -982,7 +1026,9 @@
         "type": "NEW",
         "icon": "CRITICAL_DAMAGE",
         "upgradable": false,
-        "overview": "[critical_damage]"
+        "overview": [
+          "critical_damage"
+        ]
       }
     },
     {
@@ -1012,7 +1058,10 @@
       "metadata": {
         "type": "NEW",
         "icon": "COUNTER",
-        "overview": "[damage/chance]"
+        "overview": [
+          "damage",
+          "chance"
+        ]
       }
     },
     {
@@ -1080,7 +1129,9 @@
         "type": "EXTEND",
         "icon": "FLYING_KICK",
         "upgradable": false,
-        "overview": "[damage]"
+        "overview": [
+          "damage"
+        ]
       }
     },
     {
@@ -1139,7 +1190,9 @@
         "type": "NEW",
         "icon": "MANACHISM",
         "upgradable": false,
-        "overview": "[cooldown]"
+        "overview": [
+          "cooldown"
+        ]
       }
     },
     {
@@ -1178,7 +1231,10 @@
         "type": "EXTEND",
         "icon": "BOILING_BLOOD",
         "upgradable": false,
-        "overview": "[damage/duration]"
+        "overview": [
+          "damage",
+          "duration"
+        ]
       }
     },
     {
@@ -1267,7 +1323,9 @@
         "type": "NEW",
         "icon": "ID_CONVERTOR",
         "upgradable": false,
-        "overview": "[id_convertor]"
+        "overview": [
+          "id_convertor"
+        ]
       }
     },
     {
@@ -1361,7 +1419,10 @@
         "type": "EXTEND",
         "icon": "COLLIDE",
         "upgradable": false,
-        "overview": "[damage/aoe]"
+        "overview": [
+          "damage",
+          "aoe"
+        ]
       }
     },
     {
@@ -1486,7 +1547,9 @@
         "type": "NEW",
         "icon": "ID_CONVERTOR",
         "upgradable": false,
-        "overview": "[id_convertor]"
+        "overview": [
+          "id_convertor"
+        ]
       }
     },
     {
@@ -1583,7 +1646,9 @@
         "type": "EXTEND",
         "icon": "ARMOUR_BREAKER",
         "upgradable": false,
-        "overview": "[duration]"
+        "overview": [
+          "duration"
+        ]
       }
     },
     {
@@ -1620,7 +1685,10 @@
         "type": "EXTEND",
         "icon": "SHIELD_STRIKE",
         "upgradable": false,
-        "overview": "[damage/aoe]"
+        "overview": [
+          "damage",
+          "aoe"
+        ]
       }
     },
     {
@@ -1656,7 +1724,10 @@
         "type": "NEW",
         "icon": "SPARKLING_HOPE",
         "upgradable": false,
-        "overview": "[damage/aoe]"
+        "overview": [
+          "damage",
+          "aoe"
+        ]
       }
     },
     {
@@ -1726,7 +1797,10 @@
         "type": "EXTEND",
         "icon": "TEMPEST",
         "upgradable": false,
-        "overview": "[damage/aoe]"
+        "overview": [
+          "damage",
+          "aoe"
+        ]
       }
     },
     {
@@ -1853,7 +1927,10 @@
         "type": "EXTEND",
         "icon": "RADIANCE",
         "upgradable": false,
-        "overview": "[duration/cooldown]"
+        "overview": [
+          "duration",
+          "cooldown"
+        ]
       }
     },
     {
@@ -1973,7 +2050,10 @@
         "type": "EXTEND",
         "icon": "CYCLONE",
         "upgradable": false,
-        "overview": "[damage/duration]"
+        "overview": [
+          "damage",
+          "duration"
+        ]
       }
     },
     {
@@ -2039,7 +2119,9 @@
         "type": "NEW",
         "icon": "SECOND_CHANCE",
         "upgradable": false,
-        "overview": "[cooldown]"
+        "overview": [
+          "cooldown"
+        ]
       }
     },
     {
@@ -2180,7 +2262,10 @@
         "type": "NEW",
         "icon": "MARTYR",
         "upgradable": false,
-        "overview": "[duration/aoe]"
+        "overview": [
+          "duration",
+          "aoe"
+        ]
       }
     },
     {
@@ -2232,7 +2317,10 @@
       "metadata": {
         "type": "MAIN_ATTACK",
         "icon": "ARCHER_MAIN_ATTACK",
-        "overview": "[main_attack/main_attack_range]"
+        "overview": [
+          "main_attack",
+          "main_attack_range"
+        ]
       }
     },
     {
@@ -2266,7 +2354,10 @@
       "metadata": {
         "type": "SPELL",
         "icon": "ARROW_BOMB",
-        "overview": "[mana_cost/damage]"
+        "overview": [
+          "mana_cost",
+          "damage"
+        ]
       }
     },
     {
@@ -2347,7 +2438,9 @@
       "metadata": {
         "type": "EXTEND",
         "icon": "HEART_SHATTER",
-        "overview": "[damage]"
+        "overview": [
+          "damage"
+        ]
       }
     },
     {
@@ -2373,7 +2466,9 @@
       "metadata": {
         "type": "SPELL",
         "icon": "ESCAPE",
-        "overview": "[mana_cost]"
+        "overview": [
+          "mana_cost"
+        ]
       }
     },
     {
@@ -2463,7 +2558,10 @@
       "metadata": {
         "type": "SPELL",
         "icon": "ARROW_STORM",
-        "overview": "[mana_cost/damage]"
+        "overview": [
+          "mana_cost",
+          "damage"
+        ]
       }
     },
     {
@@ -2525,7 +2623,10 @@
       "metadata": {
         "type": "SPELL",
         "icon": "ARROW_SHIELD",
-        "overview": "[mana_cost/damage]"
+        "overview": [
+          "mana_cost",
+          "damage"
+        ]
       }
     },
     {
@@ -2560,7 +2661,10 @@
       "metadata": {
         "type": "EXTEND",
         "icon": "WINDY_FEET",
-        "overview": "[duration/aoe]"
+        "overview": [
+          "duration",
+          "aoe"
+        ]
       }
     },
     {
@@ -2590,7 +2694,9 @@
         "type": "NEW",
         "icon": "AIR_MASTERY",
         "upgradable": false,
-        "overview": "[element_mastery]"
+        "overview": [
+          "element_mastery"
+        ]
       }
     },
     {
@@ -2621,7 +2727,9 @@
         "type": "NEW",
         "icon": "THUNDER_MASTERY",
         "upgradable": false,
-        "overview": "[element_mastery]"
+        "overview": [
+          "element_mastery"
+        ]
       }
     },
     {
@@ -2652,7 +2760,9 @@
         "type": "NEW",
         "icon": "FIRE_MASTERY",
         "upgradable": false,
-        "overview": "[element_mastery]"
+        "overview": [
+          "element_mastery"
+        ]
       }
     },
     {
@@ -2682,7 +2792,9 @@
         "type": "NEW",
         "icon": "EARTH_MASTERY",
         "upgradable": false,
-        "overview": "[element_mastery]"
+        "overview": [
+          "element_mastery"
+        ]
       }
     },
     {
@@ -2714,7 +2826,9 @@
         "type": "NEW",
         "icon": "WATER_MASTERY",
         "upgradable": false,
-        "overview": "[element_mastery]"
+        "overview": [
+          "element_mastery"
+        ]
       }
     },
     {
@@ -2749,7 +2863,9 @@
         "type": "EXTEND",
         "icon": "ARROW_RAIN",
         "upgradable": false,
-        "overview": "[damage]"
+        "overview": [
+          "damage"
+        ]
       }
     },
     {
@@ -2826,7 +2942,10 @@
       "metadata": {
         "type": "REPLACE",
         "icon": "PHANTOM_RAY",
-        "overview": "[mana_cost/damage]"
+        "overview": [
+          "mana_cost",
+          "damage"
+        ]
       }
     },
     {
@@ -2866,7 +2985,10 @@
       "metadata": {
         "type": "EXTEND",
         "icon": "FIRE_CREEP",
-        "overview": "[damage/duration]"
+        "overview": [
+          "damage",
+          "duration"
+        ]
       }
     },
     {
@@ -2911,7 +3033,10 @@
         "type": "EXTEND",
         "icon": "BRYOPHYTE_ROOTS",
         "upgradable": false,
-        "overview": "[damage/duration]"
+        "overview": [
+          "damage",
+          "duration"
+        ]
       }
     },
     {
@@ -3011,7 +3136,10 @@
       "metadata": {
         "type": "REPLACE",
         "icon": "GUARDIAN_ANGELS",
-        "overview": "[mana_cost/damage]"
+        "overview": [
+          "mana_cost",
+          "damage"
+        ]
       }
     },
     {
@@ -3042,7 +3170,10 @@
       "metadata": {
         "type": "NEW",
         "icon": "FOCUS",
-        "overview": "[focus_damage_bonus/max_focus]"
+        "overview": [
+          "focus_damage_bonus",
+          "max_focus"
+        ]
       }
     },
     {
@@ -3082,7 +3213,10 @@
       "metadata": {
         "type": "EXTEND",
         "icon": "BASALTIC_TRAP",
-        "overview": "[damage/max_trap]"
+        "overview": [
+          "damage",
+          "max_trap"
+        ]
       }
     },
     {
@@ -3177,7 +3311,10 @@
       "metadata": {
         "type": "REPLACE",
         "icon": "GRAPPLING_HOOK",
-        "overview": "[mana_cost/range]"
+        "overview": [
+          "mana_cost",
+          "range"
+        ]
       }
     },
     {
@@ -3377,7 +3514,9 @@
         "type": "NEW",
         "icon": "ID_CONVERTOR",
         "upgradable": false,
-        "overview": "[id_convertor]"
+        "overview": [
+          "id_convertor"
+        ]
       }
     },
     {
@@ -3413,7 +3552,10 @@
         "type": "NEW",
         "icon": "TWAINS_ARC",
         "upgradable": false,
-        "overview": "[damage/range]"
+        "overview": [
+          "damage",
+          "range"
+        ]
       }
     },
     {
@@ -3474,7 +3616,10 @@
       "metadata": {
         "type": "EXTEND",
         "icon": "FIERCE_STOMP",
-        "overview": "[damage/aoe]"
+        "overview": [
+          "damage",
+          "aoe"
+        ]
       }
     },
     {
@@ -3559,7 +3704,9 @@
       "metadata": {
         "type": "NEW",
         "icon": "LEAP",
-        "overview": "[cooldown]"
+        "overview": [
+          "cooldown"
+        ]
       }
     },
     {
@@ -3690,7 +3837,9 @@
         "type": "EXTEND",
         "icon": "MANA_TRAP",
         "upgradable": false,
-        "overview": "[range]"
+        "overview": [
+          "range"
+        ]
       }
     },
     {
@@ -3781,7 +3930,9 @@
         "type": "EXTEND",
         "icon": "ESCAPE_ARTIST",
         "upgradable": false,
-        "overview": "[damage]"
+        "overview": [
+          "damage"
+        ]
       }
     },
     {
@@ -3879,7 +4030,10 @@
         "type": "EXTEND",
         "icon": "CALL_OF_THE_HOUND",
         "upgradable": false,
-        "overview": "[damage/duration]"
+        "overview": [
+          "damage",
+          "duration"
+        ]
       }
     },
     {
@@ -3941,7 +4095,9 @@
         "type": "NEW",
         "icon": "CRITICAL_DAMAGE",
         "upgradable": false,
-        "overview": "[critical_damage]"
+        "overview": [
+          "critical_damage"
+        ]
       }
     },
     {
@@ -4027,7 +4183,9 @@
         "type": "EXTEND",
         "icon": "SHRAPNEL_BOMB",
         "upgradable": false,
-        "overview": "[damage]"
+        "overview": [
+          "damage"
+        ]
       }
     },
     {
@@ -4178,7 +4336,9 @@
         "type": "EXTEND",
         "icon": "CREPUSCULAR_RAY",
         "upgradable": false,
-        "overview": "[damage]"
+        "overview": [
+          "damage"
+        ]
       }
     },
     {
@@ -4211,7 +4371,9 @@
         "type": "EXTEND",
         "icon": "TANGLED_TRAPS",
         "upgradable": false,
-        "overview": "[damage]"
+        "overview": [
+          "damage"
+        ]
       }
     },
     {
@@ -4276,7 +4438,10 @@
         "type": "EXTEND",
         "icon": "GRAPE_BOMB",
         "upgradable": false,
-        "overview": "[damage/aoe]"
+        "overview": [
+          "damage",
+          "aoe"
+        ]
       }
     },
     {
@@ -4333,7 +4498,9 @@
         "type": "NEW",
         "icon": "SNOW_STORM",
         "upgradable": false,
-        "overview": "[range]"
+        "overview": [
+          "range"
+        ]
       }
     },
     {
@@ -4474,7 +4641,10 @@
       "metadata": {
         "type": "MAIN_ATTACK",
         "icon": "MAGE_MAIN_ATTACK",
-        "overview": "[main_attack/main_attack_range]"
+        "overview": [
+          "main_attack",
+          "main_attack_range"
+        ]
       }
     },
     {
@@ -4507,7 +4677,10 @@
       "metadata": {
         "type": "SPELL",
         "icon": "METEOR",
-        "overview": "[mana_cost/damage]"
+        "overview": [
+          "mana_cost",
+          "damage"
+        ]
       }
     },
     {
@@ -4637,7 +4810,10 @@
       "metadata": {
         "type": "SPELL",
         "icon": "TELEPORT",
-        "overview": "[mana_cost/range]"
+        "overview": [
+          "mana_cost",
+          "range"
+        ]
       }
     },
     {
@@ -4673,7 +4849,9 @@
         "type": "NEW",
         "icon": "ID_CONVERTOR",
         "upgradable": false,
-        "overview": "[id_convertor]"
+        "overview": [
+          "id_convertor"
+        ]
       }
     },
     {
@@ -4705,7 +4883,10 @@
       "metadata": {
         "type": "SPELL",
         "icon": "HEAL",
-        "overview": "[mana_cost/total_heal]"
+        "overview": [
+          "mana_cost",
+          "total_heal"
+        ]
       }
     },
     {
@@ -4766,7 +4947,10 @@
       "metadata": {
         "type": "SPELL",
         "icon": "ICE_SNAKE",
-        "overview": "[mana_cost/damage]"
+        "overview": [
+          "mana_cost",
+          "damage"
+        ]
       }
     },
     {
@@ -4796,7 +4980,9 @@
         "type": "NEW",
         "icon": "AIR_MASTERY",
         "upgradable": false,
-        "overview": "[element_mastery]"
+        "overview": [
+          "element_mastery"
+        ]
       }
     },
     {
@@ -4827,7 +5013,9 @@
         "type": "NEW",
         "icon": "THUNDER_MASTERY",
         "upgradable": false,
-        "overview": "[element_mastery]"
+        "overview": [
+          "element_mastery"
+        ]
       }
     },
     {
@@ -4857,7 +5045,9 @@
         "type": "NEW",
         "icon": "FIRE_MASTERY",
         "upgradable": false,
-        "overview": "[element_mastery]"
+        "overview": [
+          "element_mastery"
+        ]
       }
     },
     {
@@ -4887,7 +5077,9 @@
         "type": "NEW",
         "icon": "EARTH_MASTERY",
         "upgradable": false,
-        "overview": "[element_mastery]"
+        "overview": [
+          "element_mastery"
+        ]
       }
     },
     {
@@ -4918,7 +5110,9 @@
         "type": "NEW",
         "icon": "WATER_MASTERY",
         "upgradable": false,
-        "overview": "[element_mastery]"
+        "overview": [
+          "element_mastery"
+        ]
       }
     },
     {
@@ -4951,7 +5145,9 @@
         "type": "EXTEND",
         "icon": "WIND_SLASH",
         "upgradable": false,
-        "overview": "[damage]"
+        "overview": [
+          "damage"
+        ]
       }
     },
     {
@@ -4991,7 +5187,10 @@
         "type": "EXTEND",
         "icon": "THUNDERSTORM",
         "upgradable": false,
-        "overview": "[damage/aoe]"
+        "overview": [
+          "damage",
+          "aoe"
+        ]
       }
     },
     {
@@ -5032,7 +5231,10 @@
         "type": "EXTEND",
         "icon": "BURNING_SIGIL",
         "upgradable": false,
-        "overview": "[damage/duration]"
+        "overview": [
+          "damage",
+          "duration"
+        ]
       }
     },
     {
@@ -5071,7 +5273,10 @@
         "type": "EXTEND",
         "icon": "SUNSHOWER",
         "upgradable": false,
-        "overview": "[damage/aoe]"
+        "overview": [
+          "damage",
+          "aoe"
+        ]
       }
     },
     {
@@ -5140,7 +5345,10 @@
       "metadata": {
         "type": "EXTEND",
         "icon": "WINDSWEEPER",
-        "overview": "[damage/max_winded]"
+        "overview": [
+          "damage",
+          "max_winded"
+        ]
       }
     },
     {
@@ -5188,7 +5396,10 @@
       "metadata": {
         "type": "REPLACE",
         "icon": "OPHANIM",
-        "overview": "[mana_cost/damage]"
+        "overview": [
+          "mana_cost",
+          "damage"
+        ]
       }
     },
     {
@@ -5223,7 +5434,9 @@
       "metadata": {
         "type": "REPLACE",
         "icon": "ARCANE_TRANSFER",
-        "overview": "[mana_bank]"
+        "overview": [
+          "mana_bank"
+        ]
       }
     },
     {
@@ -5279,7 +5492,9 @@
         "type": "EXTEND",
         "icon": "PURIFICATION",
         "upgradable": false,
-        "overview": "[cooldown]"
+        "overview": [
+          "cooldown"
+        ]
       }
     },
     {
@@ -5339,7 +5554,9 @@
         "type": "EXTEND",
         "icon": "EYE_PIERCER",
         "upgradable": false,
-        "overview": "[duration]"
+        "overview": [
+          "duration"
+        ]
       }
     },
     {
@@ -5378,7 +5595,9 @@
         "type": "EXTEND",
         "icon": "BREATHLESS",
         "upgradable": false,
-        "overview": "[damage]"
+        "overview": [
+          "damage"
+        ]
       }
     },
     {
@@ -5494,7 +5713,10 @@
         "type": "EXTEND",
         "icon": "FORTITUDE",
         "upgradable": false,
-        "overview": "[duration/cooldown]"
+        "overview": [
+          "duration",
+          "cooldown"
+        ]
       }
     },
     {
@@ -5559,7 +5781,10 @@
       "metadata": {
         "type": "EXTEND",
         "icon": "PYROKINESIS",
-        "overview": "[damage/aoe]"
+        "overview": [
+          "damage",
+          "aoe"
+        ]
       }
     },
     {
@@ -5679,7 +5904,9 @@
         "type": "NEW",
         "icon": "ID_CONVERTOR",
         "upgradable": false,
-        "overview": "[id_convertor]"
+        "overview": [
+          "id_convertor"
+        ]
       }
     },
     {
@@ -5720,7 +5947,9 @@
         "type": "EXTEND",
         "icon": "TRANSONIC_WARP",
         "upgradable": false,
-        "overview": "[damage]"
+        "overview": [
+          "damage"
+        ]
       }
     },
     {
@@ -5877,7 +6106,10 @@
       "metadata": {
         "type": "EXTEND",
         "icon": "LIGHTWEAVER",
-        "overview": "[damage/lightweaver]"
+        "overview": [
+          "damage",
+          "lightweaver"
+        ]
       }
     },
     {
@@ -5911,7 +6143,10 @@
         "type": "EXTEND",
         "icon": "ARCANE_SPEED",
         "upgradable": false,
-        "overview": "[duration/cooldown]"
+        "overview": [
+          "duration",
+          "cooldown"
+        ]
       }
     },
     {
@@ -6049,7 +6284,10 @@
         "type": "EXTEND",
         "icon": "EXPLOSIVE_ENTRANCE",
         "upgradable": false,
-        "overview": "[damage/aoe]"
+        "overview": [
+          "damage",
+          "aoe"
+        ]
       }
     },
     {
@@ -6237,7 +6475,9 @@
         "type": "EXTEND",
         "icon": "ARCTIC_SNAKE",
         "upgradable": false,
-        "overview": "[duration]"
+        "overview": [
+          "duration"
+        ]
       }
     },
     {
@@ -6346,7 +6586,9 @@
         "type": "NEW",
         "icon": "ID_CONVERTOR",
         "upgradable": false,
-        "overview": "[id_convertor]"
+        "overview": [
+          "id_convertor"
+        ]
       }
     },
     {
@@ -6501,7 +6743,11 @@
         "type": "EXTEND",
         "icon": "SUNFLARE",
         "upgradable": false,
-        "overview": "[range/duration/cooldown]"
+        "overview": [
+          "range",
+          "duration",
+          "cooldown"
+        ]
       }
     },
     {
@@ -6569,7 +6815,9 @@
         "type": "EXTEND",
         "icon": "TIMELOCK",
         "upgradable": false,
-        "overview": "[range]"
+        "overview": [
+          "range"
+        ]
       }
     },
     {
@@ -6628,7 +6876,9 @@
         "type": "NEW",
         "icon": "MANASTORM",
         "upgradable": false,
-        "overview": "[duration]"
+        "overview": [
+          "duration"
+        ]
       }
     },
     {
@@ -6707,7 +6957,10 @@
       "metadata": {
         "type": "MAIN_ATTACK",
         "icon": "ASSASSIN_MAIN_ATTACK",
-        "overview": "[main_attack/main_attack_range]"
+        "overview": [
+          "main_attack",
+          "main_attack_range"
+        ]
       }
     },
     {
@@ -6739,7 +6992,10 @@
       "metadata": {
         "type": "SPELL",
         "icon": "SPIN_ATTACK",
-        "overview": "[mana_cost/damage]"
+        "overview": [
+          "mana_cost",
+          "damage"
+        ]
       }
     },
     {
@@ -6848,7 +7104,9 @@
       "metadata": {
         "type": "SPELL",
         "icon": "DASH",
-        "overview": "[mana_cost]"
+        "overview": [
+          "mana_cost"
+        ]
       }
     },
     {
@@ -6952,7 +7210,10 @@
       "metadata": {
         "type": "SPELL",
         "icon": "SMOKE_BOMB",
-        "overview": "[mana_cost/damage]"
+        "overview": [
+          "mana_cost",
+          "damage"
+        ]
       }
     },
     {
@@ -7011,7 +7272,10 @@
       "metadata": {
         "type": "SPELL",
         "icon": "MULTIHIT",
-        "overview": "[mana_cost/damage]"
+        "overview": [
+          "mana_cost",
+          "damage"
+        ]
       }
     },
     {
@@ -7042,7 +7306,9 @@
         "type": "NEW",
         "icon": "EARTH_MASTERY",
         "upgradable": false,
-        "overview": "[element_mastery]"
+        "overview": [
+          "element_mastery"
+        ]
       }
     },
     {
@@ -7073,7 +7339,9 @@
         "type": "NEW",
         "icon": "THUNDER_MASTERY",
         "upgradable": false,
-        "overview": "[element_mastery]"
+        "overview": [
+          "element_mastery"
+        ]
       }
     },
     {
@@ -7104,7 +7372,9 @@
         "type": "NEW",
         "icon": "WATER_MASTERY",
         "upgradable": false,
-        "overview": "[element_mastery]"
+        "overview": [
+          "element_mastery"
+        ]
       }
     },
     {
@@ -7135,7 +7405,9 @@
         "type": "NEW",
         "icon": "AIR_MASTERY",
         "upgradable": false,
-        "overview": "[element_mastery]"
+        "overview": [
+          "element_mastery"
+        ]
       }
     },
     {
@@ -7166,7 +7438,9 @@
         "type": "NEW",
         "icon": "FIRE_MASTERY",
         "upgradable": false,
-        "overview": "[element_mastery]"
+        "overview": [
+          "element_mastery"
+        ]
       }
     },
     {
@@ -7211,7 +7485,10 @@
       "metadata": {
         "type": "REPLACE",
         "icon": "BACKSTAB",
-        "overview": "[mana_cost/damage]"
+        "overview": [
+          "mana_cost",
+          "damage"
+        ]
       }
     },
     {
@@ -7247,7 +7524,9 @@
         "type": "EXTEND",
         "icon": "FATALITY",
         "upgradable": false,
-        "overview": "[damage]"
+        "overview": [
+          "damage"
+        ]
       }
     },
     {
@@ -7280,7 +7559,10 @@
       "metadata": {
         "type": "EXTEND",
         "icon": "VANISH",
-        "overview": "[duration/cooldown]"
+        "overview": [
+          "duration",
+          "cooldown"
+        ]
       }
     },
     {
@@ -7367,7 +7649,9 @@
       "metadata": {
         "type": "EXTEND",
         "icon": "SURPRISE_STRIKE",
-        "overview": "[ability_damage_bonus]"
+        "overview": [
+          "ability_damage_bonus"
+        ]
       }
     },
     {
@@ -7409,7 +7693,10 @@
       "metadata": {
         "type": "EXTEND",
         "icon": "MIRROR_IMAGE",
-        "overview": "[clones/cooldown]"
+        "overview": [
+          "clones",
+          "cooldown"
+        ]
       }
     },
     {
@@ -7454,7 +7741,10 @@
       "metadata": {
         "type": "REPLACE",
         "icon": "LACERATE",
-        "overview": "[mana_cost/damage]"
+        "overview": [
+          "mana_cost",
+          "damage"
+        ]
       }
     },
     {
@@ -7510,7 +7800,9 @@
         "type": "NEW",
         "icon": "ID_CONVERTOR",
         "upgradable": false,
-        "overview": "[id_convertor]"
+        "overview": [
+          "id_convertor"
+        ]
       }
     },
     {
@@ -7732,7 +8024,10 @@
         "type": "EXTEND",
         "icon": "BLAZING_POWDER",
         "upgradable": false,
-        "overview": "[damage/duration]"
+        "overview": [
+          "damage",
+          "duration"
+        ]
       }
     },
     {
@@ -7819,7 +8114,9 @@
         "type": "NEW",
         "icon": "SANDBAGGING",
         "upgradable": false,
-        "overview": "[cooldown]"
+        "overview": [
+          "cooldown"
+        ]
       }
     },
     {
@@ -7845,7 +8142,9 @@
       "metadata": {
         "type": "NEW",
         "icon": "HOP",
-        "overview": "[cooldown]"
+        "overview": [
+          "cooldown"
+        ]
       }
     },
     {
@@ -7878,7 +8177,9 @@
         "type": "EXTEND",
         "icon": "DANCING_BLADE",
         "upgradable": false,
-        "overview": "[damage]"
+        "overview": [
+          "damage"
+        ]
       }
     },
     {
@@ -7911,7 +8212,9 @@
       "metadata": {
         "type": "NEW",
         "icon": "VIOLENT_VORTEX",
-        "overview": "[aoe]"
+        "overview": [
+          "aoe"
+        ]
       }
     },
     {
@@ -7946,7 +8249,9 @@
         "type": "EXTEND",
         "icon": "DELIRIOUS_GAS",
         "upgradable": false,
-        "overview": "[duration]"
+        "overview": [
+          "duration"
+        ]
       }
     },
     {
@@ -7981,7 +8286,10 @@
       "metadata": {
         "type": "EXTEND",
         "icon": "MARKED",
-        "overview": "[marked_damage_bonus/max_marked]"
+        "overview": [
+          "marked_damage_bonus",
+          "max_marked"
+        ]
       }
     },
     {
@@ -8046,7 +8354,10 @@
       "metadata": {
         "type": "EXTEND",
         "icon": "SHURIKENS",
-        "overview": "[damage/shurikens_bounce]"
+        "overview": [
+          "damage",
+          "shurikens_bounce"
+        ]
       }
     },
     {
@@ -8212,7 +8523,9 @@
         "type": "NEW",
         "icon": "PARRY",
         "upgradable": false,
-        "overview": "[cooldown]"
+        "overview": [
+          "cooldown"
+        ]
       }
     },
     {
@@ -8356,7 +8669,9 @@
         "type": "EXTEND",
         "icon": "CHOKE_BOMB",
         "upgradable": false,
-        "overview": "[duration]"
+        "overview": [
+          "duration"
+        ]
       }
     },
     {
@@ -8675,7 +8990,9 @@
         "type": "NEW",
         "icon": "SATSUJIN",
         "upgradable": false,
-        "overview": "[cooldown]"
+        "overview": [
+          "cooldown"
+        ]
       }
     },
     {
@@ -8743,7 +9060,10 @@
         "type": "NEW",
         "icon": "JASMINE_BLOOM",
         "upgradable": false,
-        "overview": "[damage/duration]"
+        "overview": [
+          "damage",
+          "duration"
+        ]
       }
     },
     {
@@ -8778,7 +9098,9 @@
         "type": "EXTEND",
         "icon": "DIVERSION",
         "upgradable": false,
-        "overview": "[cooldown]"
+        "overview": [
+          "cooldown"
+        ]
       }
     },
     {
@@ -8945,7 +9267,9 @@
         "type": "EXTEND",
         "icon": "DANCING_BLADE",
         "upgradable": false,
-        "overview": "[damage]"
+        "overview": [
+          "damage"
+        ]
       }
     },
     {
@@ -9077,7 +9401,11 @@
       "metadata": {
         "type": "MAIN_ATTACK",
         "icon": "SHAMAN_MAIN_ATTACK",
-        "overview": "[main_attack/shaman_beams/main_attack_range]"
+        "overview": [
+          "main_attack",
+          "shaman_beams",
+          "main_attack_range"
+        ]
       }
     },
     {
@@ -9112,7 +9440,10 @@
       "metadata": {
         "type": "SPELL",
         "icon": "TOTEM",
-        "overview": "[mana_cost/damage]"
+        "overview": [
+          "mana_cost",
+          "damage"
+        ]
       }
     },
     {
@@ -9198,7 +9529,10 @@
         "type": "EXTEND",
         "icon": "TOTEMIC_SMASH",
         "upgradable": false,
-        "overview": "[damage/aoe]"
+        "overview": [
+          "damage",
+          "aoe"
+        ]
       }
     },
     {
@@ -9224,7 +9558,9 @@
       "metadata": {
         "type": "SPELL",
         "icon": "HAUL",
-        "overview": "[mana_cost]"
+        "overview": [
+          "mana_cost"
+        ]
       }
     },
     {
@@ -9318,7 +9654,10 @@
       "metadata": {
         "type": "SPELL",
         "icon": "UPROOT",
-        "overview": "[mana_cost/damage]"
+        "overview": [
+          "mana_cost",
+          "damage"
+        ]
       }
     },
     {
@@ -9375,7 +9714,10 @@
       "metadata": {
         "type": "SPELL",
         "icon": "AURA",
-        "overview": "[mana_cost/damage]"
+        "overview": [
+          "mana_cost",
+          "damage"
+        ]
       }
     },
     {
@@ -9406,7 +9748,9 @@
         "type": "NEW",
         "icon": "EARTH_MASTERY",
         "upgradable": false,
-        "overview": "[element_mastery]"
+        "overview": [
+          "element_mastery"
+        ]
       }
     },
     {
@@ -9437,7 +9781,9 @@
         "type": "NEW",
         "icon": "AIR_MASTERY",
         "upgradable": false,
-        "overview": "[element_mastery]"
+        "overview": [
+          "element_mastery"
+        ]
       }
     },
     {
@@ -9468,7 +9814,9 @@
         "type": "NEW",
         "icon": "THUNDER_MASTERY",
         "upgradable": false,
-        "overview": "[element_mastery]"
+        "overview": [
+          "element_mastery"
+        ]
       }
     },
     {
@@ -9498,7 +9846,9 @@
         "type": "NEW",
         "icon": "FIRE_MASTERY",
         "upgradable": false,
-        "overview": "[element_mastery]"
+        "overview": [
+          "element_mastery"
+        ]
       }
     },
     {
@@ -9535,7 +9885,10 @@
         "type": "EXTEND",
         "icon": "NATURES_JOLT",
         "upgradable": false,
-        "overview": "[damage/aoe]"
+        "overview": [
+          "damage",
+          "aoe"
+        ]
       }
     },
     {
@@ -9567,7 +9920,9 @@
         "type": "NEW",
         "icon": "WATER_MASTERY",
         "upgradable": false,
-        "overview": "[element_mastery]"
+        "overview": [
+          "element_mastery"
+        ]
       }
     },
     {
@@ -9692,7 +10047,10 @@
         "type": "EXTEND",
         "icon": "RAIN_DANCE",
         "upgradable": false,
-        "overview": "[damage/duration]"
+        "overview": [
+          "damage",
+          "duration"
+        ]
       }
     },
     {
@@ -9734,7 +10092,10 @@
       "metadata": {
         "type": "EXTEND",
         "icon": "PUPPET_MASTER",
-        "overview": "[damage/max_puppet]"
+        "overview": [
+          "damage",
+          "max_puppet"
+        ]
       }
     },
     {
@@ -9773,7 +10134,9 @@
       "metadata": {
         "type": "REPLACE",
         "icon": "MASK_OF_THE_LUNATIC",
-        "overview": "[mana_cost]"
+        "overview": [
+          "mana_cost"
+        ]
       }
     },
     {
@@ -9812,7 +10175,10 @@
       "metadata": {
         "type": "NEW",
         "icon": "SACRIFICIAL_SHRINE",
-        "overview": "[blood_pool/total_heal]"
+        "overview": [
+          "blood_pool",
+          "total_heal"
+        ]
       }
     },
     {
@@ -9924,7 +10290,9 @@
         "type": "EXTEND",
         "icon": "STAGNATION",
         "upgradable": false,
-        "overview": "[duration]"
+        "overview": [
+          "duration"
+        ]
       }
     },
     {
@@ -10040,7 +10408,10 @@
         "type": "EXTEND",
         "icon": "EXPLODING_PUPPETS",
         "upgradable": false,
-        "overview": "[damage/aoe]"
+        "overview": [
+          "damage",
+          "aoe"
+        ]
       }
     },
     {
@@ -10126,7 +10497,9 @@
         "type": "EXTEND",
         "icon": "BULLWHIP",
         "upgradable": false,
-        "overview": "[duration]"
+        "overview": [
+          "duration"
+        ]
       }
     },
     {
@@ -10193,7 +10566,9 @@
       "metadata": {
         "type": "REPLACE",
         "icon": "MASK_OF_THE_FANATIC",
-        "overview": "[mana_cost]"
+        "overview": [
+          "mana_cost"
+        ]
       }
     },
     {
@@ -10383,7 +10758,9 @@
         "type": "NEW",
         "icon": "ID_CONVERTOR",
         "upgradable": false,
-        "overview": "[id_convertor]"
+        "overview": [
+          "id_convertor"
+        ]
       }
     },
     {
@@ -10502,7 +10879,10 @@
       "metadata": {
         "type": "EXTEND",
         "icon": "TWISTED_TETHER",
-        "overview": "[tether/duration]"
+        "overview": [
+          "tether",
+          "duration"
+        ]
       }
     },
     {
@@ -10595,7 +10975,10 @@
       "metadata": {
         "type": "EXTEND",
         "icon": "CRIMSON_EFFIGY",
-        "overview": "[damage/max_effigy]"
+        "overview": [
+          "damage",
+          "max_effigy"
+        ]
       }
     },
     {
@@ -10636,7 +11019,9 @@
       "metadata": {
         "type": "REPLACE",
         "icon": "MASK_OF_THE_COWARD",
-        "overview": "[mana_cost]"
+        "overview": [
+          "mana_cost"
+        ]
       }
     },
     {
@@ -10718,7 +11103,9 @@
         "type": "EXTEND",
         "icon": "MADDENING_ROOTS",
         "upgradable": false,
-        "overview": "[duration]"
+        "overview": [
+          "duration"
+        ]
       }
     },
     {
@@ -10753,7 +11140,9 @@
         "type": "EXTEND",
         "icon": "REGENERATION",
         "upgradable": false,
-        "overview": "[regeneration]"
+        "overview": [
+          "regeneration"
+        ]
       }
     },
     {
@@ -10791,7 +11180,10 @@
         "type": "EXTEND",
         "icon": "CHANT_OF_THE_COWARD",
         "upgradable": false,
-        "overview": "[damage/aoe]"
+        "overview": [
+          "damage",
+          "aoe"
+        ]
       }
     },
     {
@@ -10891,7 +11283,10 @@
         "type": "EXTEND",
         "icon": "CHANT_OF_THE_FANATIC",
         "upgradable": false,
-        "overview": "[duration/cooldown]"
+        "overview": [
+          "duration",
+          "cooldown"
+        ]
       }
     },
     {
@@ -10999,7 +11394,9 @@
         "type": "EXTEND",
         "icon": "INVIGORATING_WAVE",
         "upgradable": false,
-        "overview": "[duration]"
+        "overview": [
+          "duration"
+        ]
       }
     },
     {
@@ -11033,7 +11430,9 @@
         "type": "NEW",
         "icon": "ID_CONVERTOR",
         "upgradable": false,
-        "overview": "[id_convertor]"
+        "overview": [
+          "id_convertor"
+        ]
       }
     },
     {
@@ -11070,7 +11469,10 @@
         "type": "EXTEND",
         "icon": "FROG_DANCE",
         "upgradable": false,
-        "overview": "[damage/aoe]"
+        "overview": [
+          "damage",
+          "aoe"
+        ]
       }
     },
     {
@@ -11130,7 +11532,9 @@
         "type": "EXTEND",
         "icon": "SHEPHERD",
         "upgradable": false,
-        "overview": "[duration]"
+        "overview": [
+          "duration"
+        ]
       }
     },
     {
@@ -11172,7 +11576,10 @@
         "type": "EXTEND",
         "icon": "BLOOD_SORROW",
         "upgradable": false,
-        "overview": "[damage/duration]"
+        "overview": [
+          "damage",
+          "duration"
+        ]
       }
     },
     {
@@ -11239,7 +11646,9 @@
         "type": "NEW",
         "icon": "MASK_OF_THE_AWAKENED",
         "upgradable": false,
-        "overview": "[duration]"
+        "overview": [
+          "duration"
+        ]
       }
     }
   ],

@@ -7,11 +7,10 @@
   "authors": [
     "nbcss",
     "Silentmaxx",
-    "FYWind",
-    "Commander07"
+    "FYWind"
   ],
   "contact": {
-    "sources": "https://github.com/commander07/WynnLibFabric_1.19.3"
+    "sources": "https://github.com/nbcss/WynnLibFabric"
   },
   "license": "The Unlicense",
   "icon": "assets/wynnlib/icon.png",
