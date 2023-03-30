@@ -11723,7 +11723,7 @@
         {
             "id": "STRONGER_OPHANIM",
             "name": "Stronger Ophanim",
-            "location": "",
+            "location": "0,0,0",
             "class": "MAGE",
             "height": 24,
             "position": 1,
@@ -11742,7 +11742,7 @@
         {
             "id": "STRONGER_CLONES",
             "name": "Stronger Clones",
-            "location": "",
+            "location": "0,0,0",
             "class": "ASSASSIN",
             "height": 38,
             "position": 1,
@@ -11764,7 +11764,7 @@
         {
             "id": "DISTRACTION",
             "name": "Distraction",
-            "location": "",
+            "location": "0,0,0",
             "class": "ASSASSIN",
             "height": 23,
             "position": 2,
@@ -11784,7 +11784,7 @@
         {
             "id": "DISSOLUTION",
             "name": "Dissolution",
-            "location": "",
+            "location": "0,0,0",
             "class": "ASSASSIN",
             "height": 34,
             "position": -1,
