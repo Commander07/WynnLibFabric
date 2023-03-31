@@ -5,6 +5,7 @@ import io.github.nbcss.wynnlib.gui.HandbookTabScreen
 import io.github.nbcss.wynnlib.gui.TabFactory
 import io.github.nbcss.wynnlib.gui.widgets.AdvanceSearchPaneWidget
 import io.github.nbcss.wynnlib.gui.dicts.filter.ItemTypeFilter
+import io.github.nbcss.wynnlib.gui.dicts.filter.LevelFilter
 import io.github.nbcss.wynnlib.gui.dicts.filter.RarityFilter
 import io.github.nbcss.wynnlib.items.equipments.Equipment
 import io.github.nbcss.wynnlib.i18n.Translations.UI_EQUIPMENTS
@@ -39,6 +40,7 @@ class EquipmentDictScreen(parent: Screen?) : DictionaryScreen<Equipment>(parent,
             windowX + backgroundWidth, windowY + 28)
             .filter(ItemTypeFilter(memory, this))
             .filter(RarityFilter(memory, this))
+            .filter(LevelFilter(memory, this))
             .build()
         //filter?.reload(memory)
     }

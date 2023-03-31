@@ -14,6 +14,7 @@ object Translations {
     val UI_ADVANCE_SEARCH: Translatable = from("wynnlib.ui.advance_search")
     val UI_FILTER_ITEM_TYPE: Translatable = from("wynnlib.ui.filter_condition.item_type")
     val UI_FILTER_RARITY: Translatable = from("wynnlib.ui.filter_condition.rarity")
+    val UI_FILTER_LEVEL: Translatable = from("wynnlib.ui.filter_condition.level")
     val UI_FILTER_IDENTIFICATION: Translatable = from("wynnlib.ui.filter_condition.id")
     val UI_CLIPBOARD_IMPORT: Translatable = from("wynnlib.ui.import_clipboard")
     val UI_CLIPBOARD_EXPORT: Translatable = from("wynnlib.ui.export_clipboard")
