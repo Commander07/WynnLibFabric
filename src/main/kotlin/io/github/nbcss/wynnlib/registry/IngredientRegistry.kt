@@ -3,9 +3,10 @@ package io.github.nbcss.wynnlib.registry
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import io.github.nbcss.wynnlib.items.Ingredient
+import io.github.nbcss.wynnlib.utils.FileUtils
 
 object IngredientRegistry: Registry<Ingredient>() {
-    private const val RESOURCE = "assets/wynnlib/data/Ingredients.json"
+    private const val RESOURCE = "config/WynnLib/Ingredients.json"
     private val nameMap: MutableMap<String, Ingredient> = LinkedHashMap()
 
     fun fromName(name: String): Ingredient? {
@@ -29,5 +30,9 @@ object IngredientRegistry: Registry<Ingredient>() {
     }catch (e: Exception){
         e.printStackTrace()
         null
+    }
+
+    override fun load() {
+        FileUtils.readFile(getFilename())?.let { reload(it) }
     }
 }
