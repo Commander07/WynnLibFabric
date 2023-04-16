@@ -56,33 +56,44 @@ open class SmartSliderWidget(private val posX: Int,
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, alpha)
             RenderSystem.enableBlend()
             RenderSystem.defaultBlendFunc()
-            this.drawTexture(matrices, this.x, this.y, 0, 46, this.width / 2, this.height)
+            this.drawTexture(matrices, WIDGETS_TEXTURE, this.x, this.y, 0, 46, this.width / 2, this.width, this.height, 256, 256)
             this.drawTexture(
                 matrices,
+                WIDGETS_TEXTURE,
                 this.x + this.width / 2,
                 this.y,
                 200 - this.width / 2,
                 46,
                 this.width / 2,
-                this.height
+                20,
+                this.height,
+                256,
+                256
             )
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, alpha)
             val slider = abs(pos - minValue) / gap.toFloat()
-            this.drawTexture(matrices,
+            this.drawTexture(matrices, WIDGETS_TEXTURE,
                 this.x + (slider * (this.width - 8).toFloat()).toInt(),
                 this.y,
                 0,
                 66,
                 4,
-                20
+                20,
+                this.height,
+                256,
+                256
             )
             this.drawTexture(matrices,
+                WIDGETS_TEXTURE,
                 this.x + (slider * (this.width - 8).toFloat()).toInt() + 4,
                 this.y,
                 196,
                 66,
                 4,
-                20
+                20,
+                this.height,
+                256,
+                256
             )
             val textColor = if (!this.active) {
                 10526880
@@ -92,7 +103,7 @@ open class SmartSliderWidget(private val posX: Int,
                 14737632
             }
             val s = format!!.replace("%value%", if (buffer == null) pos.toString() + "" else buffer + "_")
-            DrawableHelper.drawCenteredText(
+            DrawableHelper.drawCenteredTextWithShadow(
                 matrices,
                 MinecraftClient.getInstance().textRenderer,
                 s,

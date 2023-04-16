@@ -15,6 +15,14 @@ class LabelWidget(posX: Int, posY: Int,
         private val renderer = MinecraftClient.getInstance().textRenderer
     }
 
+    override fun setFocused(focused: Boolean) {
+        TODO("Not yet implemented")
+    }
+
+    override fun isFocused(): Boolean {
+        TODO("Not yet implemented")
+    }
+
     override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
         textProvider.get()?.let {
             val color = colorProvider?.get() ?: Color.WHITE

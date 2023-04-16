@@ -25,6 +25,14 @@ open class ListContainerScroll(background: TextureData?,
         return elements.sumOf { it.getEntryHeight() }
     }
 
+    override fun setFocused(focused: Boolean) {
+        TODO("Not yet implemented")
+    }
+
+    override fun isFocused(): Boolean {
+        TODO("Not yet implemented")
+    }
+
     override fun getElements(): List<Element> = elements
 
     override fun renderContents(

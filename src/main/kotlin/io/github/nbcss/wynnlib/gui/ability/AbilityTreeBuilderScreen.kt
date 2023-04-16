@@ -333,7 +333,7 @@ open class AbilityTreeBuilderScreen(parent: Screen?,
         }
         //render ap points
         run {
-            itemRenderer.renderInGuiWithOverrides(ICON, archetypeX, archetypeY)
+            itemRenderer.renderInGuiWithOverrides(matrices, ICON, archetypeX, archetypeY)
             textRenderer.draw(matrices, "${build.getSpareAbilityPoints()}/$maxPoints",
                 archetypeX.toFloat() + 18, archetypeY.toFloat() + 4, 0)
         }
@@ -413,7 +413,7 @@ open class AbilityTreeBuilderScreen(parent: Screen?,
                 }else{
                     it.getTier().getUnlockedTexture()
                 }
-                itemRenderer.renderInGuiWithOverrides(icon, node.x - 8, node.y - 8)
+                itemRenderer.renderInGuiWithOverrides(matrices, icon, node.x - 8, node.y - 8)
                 if (container.isAbilityDisabled(it)) {
                     matrices.push()
                     matrices.translate(0.0, 0.0, 200.0)
@@ -472,6 +472,14 @@ open class AbilityTreeBuilderScreen(parent: Screen?,
                     break
                 }
             }
+        }
+
+        override fun setFocused(focused: Boolean) {
+            TODO("Not yet implemented")
+        }
+
+        override fun isFocused(): Boolean {
+            TODO("Not yet implemented")
         }
     }
 }

@@ -52,12 +52,11 @@ public class HotbarBackgroundMixin {
             drawSlots(matrices);
         }
     }
-
-    @Redirect(method = "renderHotbarItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/item/ItemRenderer;renderGuiItemOverlay(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;II)V"))
-    public void renderHotbarItem(ItemRenderer instance, TextRenderer renderer, ItemStack stack, int x, int y) {
-        if (drawOverrides(renderer, stack, x, y))
+    @Redirect(method = "renderHotbarItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/item/ItemRenderer;renderGuiItemOverlay(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;II)V"))
+    public void renderHotbarItem(ItemRenderer instance, MatrixStack matrices, TextRenderer textRenderer, ItemStack stack, int x, int y) {
+        if (drawOverrides(textRenderer, stack, x, y))
             return;
-        instance.renderGuiItemOverlay(renderer, stack, x, y);
+        instance.renderGuiItemOverlay(matrices, textRenderer, stack, x, y);
     }
 
     private boolean drawOverrides(TextRenderer renderer, ItemStack stack, int x, int y) {

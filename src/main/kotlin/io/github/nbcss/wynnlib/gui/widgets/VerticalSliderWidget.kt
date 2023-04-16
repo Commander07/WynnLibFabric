@@ -61,6 +61,10 @@ open class VerticalSliderWidget(x: Int,
         return false
     }
 
+    override fun renderButton(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
+        TODO("Not yet implemented")
+    }
+
     override fun mouseReleased(mouseX: Double, mouseY: Double, button: Int): Boolean {
         if (button == 0 && dragging != null) {
             dragging = null

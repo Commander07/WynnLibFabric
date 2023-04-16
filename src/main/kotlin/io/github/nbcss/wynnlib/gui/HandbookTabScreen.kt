@@ -85,8 +85,8 @@ abstract class HandbookTabScreen(val parent: Screen?,
         val posX = windowX + 25 + tabIndex * 28
         val u = if (tab.isInstance(this)) 0 else 28
         RenderKit.renderTexture(matrices, background, posX, windowY, u, 182, 28, 32)
-        itemRenderer.renderInGuiWithOverrides(tab.getTabIcon(), posX + 6, windowY + 9)
-        itemRenderer.renderGuiItemOverlay(textRenderer, tab.getTabIcon(), posX + 6, windowY + 9)
+        itemRenderer.renderInGuiWithOverrides(matrices, tab.getTabIcon(), posX + 6, windowY + 9)
+        itemRenderer.renderGuiItemOverlay(matrices, textRenderer, tab.getTabIcon(), posX + 6, windowY + 9)
         if(isOverTab(tabIndex, mouseX, mouseY)){
             drawTooltip(matrices, tab.getTabTooltip(), mouseX, mouseY)
         }

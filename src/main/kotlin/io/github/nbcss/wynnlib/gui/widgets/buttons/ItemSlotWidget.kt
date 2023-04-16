@@ -42,8 +42,8 @@ class ItemSlotWidget<T: BaseItem>(x: Int, y: Int,
         val itemY: Int = y + height / 2 - 8
         val icon = item!!.getIcon()
         val text = item!!.getIconText()
-        client.itemRenderer.renderInGuiWithOverrides(icon, itemX, itemY)
-        client.itemRenderer.renderGuiItemOverlay(client.textRenderer, icon, itemX, itemY, text)
+        client.itemRenderer.renderInGuiWithOverrides(matrices, icon, itemX, itemY)
+        client.itemRenderer.renderGuiItemOverlay(matrices, client.textRenderer, icon, itemX, itemY, text)
         if(isHovered){
             screen.drawTooltip(matrices, item!!.getTooltip(), mouseX, mouseY)
         }

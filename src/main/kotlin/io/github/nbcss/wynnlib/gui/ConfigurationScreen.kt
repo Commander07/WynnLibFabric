@@ -158,6 +158,13 @@ class ConfigurationScreen(parent: Screen?) : GenericScrollScreen(parent, TITLE) 
             setContentHeight(posY + 2)
         }
         override fun getSlider(): VerticalSliderWidget? = slider
+        override fun setFocused(focused: Boolean) {
+            TODO("Not yet implemented")
+        }
+
+        override fun isFocused(): Boolean {
+            TODO("Not yet implemented")
+        }
     }
 
     inner class GeneralScroll: ElementsContainerScroll(null, this@ConfigurationScreen,
@@ -186,6 +193,13 @@ class ConfigurationScreen(parent: Screen?) : GenericScrollScreen(parent, TITLE) 
             setContentHeight(posY + 2)
         }
         override fun getSlider(): VerticalSliderWidget? = slider
+        override fun setFocused(focused: Boolean) {
+            TODO("Not yet implemented")
+        }
+
+        override fun isFocused(): Boolean {
+            TODO("Not yet implemented")
+        }
     }
 
     inner class IndicatorScroll: ElementsContainerScroll(null, this@ConfigurationScreen,
@@ -210,5 +224,12 @@ class ConfigurationScreen(parent: Screen?) : GenericScrollScreen(parent, TITLE) 
             setContentHeight(posY + 2)
         }
         override fun getSlider(): VerticalSliderWidget? = slider
+        override fun setFocused(focused: Boolean) {
+            TODO("Not yet implemented")
+        }
+
+        override fun isFocused(): Boolean {
+            TODO("Not yet implemented")
+        }
     }
 }

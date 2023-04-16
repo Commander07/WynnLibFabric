@@ -33,6 +33,13 @@ open class ElementsContainerScroll(background: TextureData?,
     override fun getElements(): List<Element> = elements
 
     override fun getContentHeight(): Int = contentHeight
+    override fun setFocused(focused: Boolean) {
+        TODO("Not yet implemented")
+    }
+
+    override fun isFocused(): Boolean {
+        TODO("Not yet implemented")
+    }
 
     override fun renderContents(
         matrices: MatrixStack,

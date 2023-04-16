@@ -103,7 +103,7 @@ abstract class AbstractAbilityTreeScreen(parent: Screen?) : HandbookTabScreen(pa
         val icon = archetype.getTexture()
         val iconText = Text.literal(archetype.getIconText())
             .formatted(Formatting.BOLD).formatted(archetype.getFormatting())
-        itemRenderer.renderInGuiWithOverrides(icon, x, y)
+        itemRenderer.renderInGuiWithOverrides(matrices, icon, x, y)
         matrices.push()
         matrices.translate(0.0, 0.0, 200.0)
         RenderKit.renderOutlineText(matrices, iconText, x.toFloat() + 10, y.toFloat() + 9)

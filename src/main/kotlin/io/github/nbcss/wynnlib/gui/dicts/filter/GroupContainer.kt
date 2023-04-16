@@ -39,6 +39,14 @@ class GroupContainer<T: BaseItem> (val group: CriteriaGroup<T>): ScrollListEntry
         return group.getElements().any { it.charTyped(chr, modifiers) }
     }
 
+    override fun setFocused(focused: Boolean) {
+        TODO("Not yet implemented")
+    }
+
+    override fun isFocused(): Boolean {
+        TODO("Not yet implemented")
+    }
+
     override fun render(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
         for (element in group.getElements()) {
             element.render(matrices, mouseX, mouseY, delta)

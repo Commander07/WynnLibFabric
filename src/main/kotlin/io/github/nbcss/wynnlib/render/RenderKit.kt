@@ -6,6 +6,7 @@ import io.github.nbcss.wynnlib.utils.AlphaColor
 import io.github.nbcss.wynnlib.utils.Color
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext
 import net.minecraft.client.MinecraftClient
+import net.minecraft.client.font.TextRenderer
 import net.minecraft.client.gui.DrawableHelper
 import net.minecraft.client.render.*
 import net.minecraft.client.render.VertexConsumerProvider.Immediate
@@ -129,7 +130,7 @@ object RenderKit {
 
     fun renderItemBar(progress: Double, color: Int, x: Int, y: Int) {
         RenderSystem.disableDepthTest()
-        RenderSystem.disableTexture()
+//        RenderSystem.disableTexture()
         RenderSystem.disableBlend()
         val tessellator = Tessellator.getInstance()
         val bufferBuilder = tessellator.buffer
@@ -137,7 +138,7 @@ object RenderKit {
         renderGuiQuad(bufferBuilder, x + 2, y + 13, 13, 2, 0)
         renderGuiQuad(bufferBuilder, x + 2, y + 13, steps, 1, color)
         RenderSystem.enableBlend()
-        RenderSystem.enableTexture()
+//        RenderSystem.enableTexture()
         RenderSystem.enableDepthTest()
     }
 
@@ -202,7 +203,7 @@ object RenderKit {
             Color.BLACK.withAlpha(backgroundAlpha).code())
         for (text in texts) {
             textRender.draw(text, textX, textY, 0xFFFFFF, false,
-                matrix4f, consumerProvider, true, 0, 255)
+                matrix4f, consumerProvider, TextRenderer.TextLayerType.NORMAL, 0, 15728880)
             textY += 10.0f
         }
         if (showDistance){
@@ -212,7 +213,7 @@ object RenderKit {
             /*textRender.drawWithOutline(distText.asOrderedText(), distX, textY, 0xFFFFFF, 0,
                     matrix4f, consumerProvider, 255)*/
             textRender.draw(distText, distX, textY, 0xFFFFFF, false,
-                matrix4f, consumerProvider, true, 0, 255)
+                matrix4f, consumerProvider, TextRenderer.TextLayerType.NORMAL, 0, 15728880)
         }
         consumerProvider.draw()
         matrices.pop()

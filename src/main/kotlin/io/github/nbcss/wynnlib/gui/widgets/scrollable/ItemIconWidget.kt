@@ -15,9 +15,17 @@ class ItemIconWidget(posX: Int, posY: Int,
         return@Supplier item
     })
 
+    override fun setFocused(focused: Boolean) {
+        TODO("Not yet implemented")
+    }
+
+    override fun isFocused(): Boolean {
+        TODO("Not yet implemented")
+    }
+
     override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
         itemProvider.get().let {
-            renderer.renderInGui(it, getX(), getY())
+            renderer.renderInGui(matrices, it, getX(), getY())
         }
     }
 }

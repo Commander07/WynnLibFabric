@@ -161,7 +161,7 @@ class AbilityTreeViewerScreen(parent: Screen?,
                 }else{
                     it.getTier().getUnlockedTexture()
                 }
-                itemRenderer.renderInGuiWithOverrides(item, node.x - 8, node.y - 8)
+                itemRenderer.renderInGuiWithOverrides(matrices, item, node.x - 8, node.y - 8)
             }
         }
 
@@ -180,6 +180,14 @@ class AbilityTreeViewerScreen(parent: Screen?,
                     break
                 }
             }
+        }
+
+        override fun setFocused(focused: Boolean) {
+            TODO("Not yet implemented")
+        }
+
+        override fun isFocused(): Boolean {
+            TODO("Not yet implemented")
         }
     }
 }

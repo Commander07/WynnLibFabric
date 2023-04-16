@@ -6,7 +6,7 @@ import io.github.nbcss.wynnlib.data.LegacyItemMap
 import io.github.nbcss.wynnlib.mixins.datafixer.ItemInstanceSpawnEggFixAccessor
 import io.github.nbcss.wynnlib.mixins.datafixer.ItemPotionFixAccessor
 import io.github.nbcss.wynnlib.mixins.datafixer.RecipeFixAccessor
-import net.minecraft.datafixer.fix.EntityTheRenameningBlock
+import net.minecraft.datafixer.fix.EntityTheRenameningBlockFix
 import net.minecraft.datafixer.fix.ItemInstanceTheFlatteningFix
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
@@ -89,7 +89,7 @@ object ItemFactory {
         var damage:Int = -1
         var potionType: String? = null
 
-        itemName = EntityTheRenameningBlock.ITEMS[itemName] ?: itemName // I don't know why mojang likes to rename items so much
+        itemName = EntityTheRenameningBlockFix.ITEMS[itemName] ?: itemName // I don't know why mojang likes to rename items so much
         val flattenedItemString = ItemInstanceTheFlatteningFix.getItem(itemName, meta)
         if (flattenedItemString != null) {
             itemName = flattenedItemString

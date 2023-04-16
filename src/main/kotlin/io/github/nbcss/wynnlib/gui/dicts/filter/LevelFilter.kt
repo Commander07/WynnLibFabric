@@ -33,7 +33,7 @@ class LevelFilter(memory: CriteriaState<Equipment>,
         levels.forEach { level ->
             val posX = range[index % range.size]
             val posY = 12 + 20 * (index / range.size)
-            val name = Text.of("%s..%s".format(level.first(), level.last()))
+            val name = Text.of("%s-%s".format(level.first(), level.last()))
             val checkbox = CheckboxWidget(posX, posY, name, screen,
                 level_ff?.containsAll(level) ?: true)
             checkbox.setCallback { updateFilter() }

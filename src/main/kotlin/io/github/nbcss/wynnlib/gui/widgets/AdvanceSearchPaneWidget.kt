@@ -92,6 +92,10 @@ class AdvanceSearchPaneWidget<T: BaseItem>(private val screen: DictionaryScreen<
         return super.charTyped(chr, modifiers)
     }
 
+    override fun renderButton(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
+        TODO("Not yet implemented")
+    }
+
     override fun render(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
         //screen.setFilterVisible(false)
         RenderKit.renderTexture(
@@ -108,6 +112,13 @@ class AdvanceSearchPaneWidget<T: BaseItem>(private val screen: DictionaryScreen<
         x + 5, y + 15, SCROLL_WIDTH, height - 24,
         elements = getCriteriaList().map { GroupContainer(it) }.toMutableList()) {
         override fun getSlider(): VerticalSliderWidget = slider
+        override fun setFocused(focused: Boolean) {
+            TODO("Not yet implemented")
+        }
+
+        override fun isFocused(): Boolean {
+            TODO("Not yet implemented")
+        }
     }
 
     class Builder<T: BaseItem>(private val screen: DictionaryScreen<T>,
