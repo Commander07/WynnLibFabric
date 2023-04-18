@@ -80,7 +80,7 @@ public class ItemBackgroundMixin extends Screen {
         MatchableItem item = ItemMatcher.Companion.toItem(stack);
         if(item != null) {
             matrixStack.push();
-            matrixStack.translate(0.0, 0.0, 200.0);
+            matrixStack.translate(0.0, 0.0, -200.0);
             Color color = item.getMatcherType().getColor();
             RenderKit.INSTANCE.renderTextureWithColor(matrixStack, TEXTURE, color.solid(),
                     x - 2, y - 2, 0, 0, 20, 20, 20, 20);
