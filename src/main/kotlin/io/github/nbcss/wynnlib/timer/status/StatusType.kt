@@ -140,7 +140,11 @@ abstract class StatusType(data: JsonObject): Keyed, Translatable {
         }
 
         fun pctToUv(pct: Double): Pair<Int, Int> {
-            val index = ((1 - pct) * UNIT_SIZE).roundToInt()
+            var dindex = ((1 - pct) * UNIT_SIZE)
+            if (dindex.isNaN()) {
+                dindex = 1.0 * UNIT_SIZE
+            }
+            val index = dindex.roundToInt()
             val u = index % 11 * 22
             val v = index / 11 * 22
             return u to v
