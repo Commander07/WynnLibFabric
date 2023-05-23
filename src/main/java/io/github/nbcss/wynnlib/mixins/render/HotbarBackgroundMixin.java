@@ -8,6 +8,7 @@ import io.github.nbcss.wynnlib.matcher.MatchableItem;
 import io.github.nbcss.wynnlib.matcher.item.ItemMatcher;
 import io.github.nbcss.wynnlib.render.RenderKit;
 import io.github.nbcss.wynnlib.utils.Color;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.hud.InGameHud;
@@ -52,6 +53,7 @@ public class HotbarBackgroundMixin {
             drawSlots(matrices);
         }
     }
+
     @Redirect(method = "renderHotbarItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/item/ItemRenderer;renderGuiItemOverlay(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;II)V"))
     public void renderHotbarItem(ItemRenderer instance, MatrixStack matrices, TextRenderer textRenderer, ItemStack stack, int x, int y) {
         if (drawOverrides(textRenderer, stack, x, y))
@@ -68,7 +70,11 @@ public class HotbarBackgroundMixin {
     private void drawSlots(MatrixStack matrices){
         PlayerEntity playerEntity = this.getCameraPlayer();
         if (playerEntity != null){
-            int y = this.scaledHeight - 19;
+            int distance = 0;
+            if (FabricLoader.getInstance().getObjectShare().get("raised:hud") instanceof Integer x) {
+                distance = x;
+            }
+            int y = this.scaledHeight - 19 - distance;
             for(int i = 0; i < 6; i++) {
                 int x = this.scaledWidth / 2 - 90 + i * 20 + 2;
                 ItemStack stack = playerEntity.getInventory().main.get(i);
