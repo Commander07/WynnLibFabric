@@ -8,6 +8,7 @@ import io.github.nbcss.wynnlib.matcher.item.ItemMatcher;
 import io.github.nbcss.wynnlib.render.RenderKit;
 import io.github.nbcss.wynnlib.utils.Color;
 import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.item.ItemRenderer;
@@ -26,50 +27,50 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(HandledScreen.class)
 public class ItemBackgroundMixin extends Screen {
     final Identifier TEXTURE = new Identifier("wynnlib", "textures/slot/circle.png");
-    MatrixStack matrixStack = null;
+    DrawContext drawContext = null;
 
     protected ItemBackgroundMixin(Text title) {
         super(title);
     }
 
     @Inject(method = "render", at = @At("HEAD"))
-    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci){
-        matrixStack = matrices;
+    public void render(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci){
+        drawContext = context;
     }
 
     @Inject(method = "drawItem", at = @At("HEAD"))
-    public void drawItem(MatrixStack matrices, ItemStack stack, int x, int y, String amountText, CallbackInfo ci) {
+    public void drawItem(DrawContext context, ItemStack stack, int x, int y, String amountText, CallbackInfo ci) {
         drawColorSlot(stack, x, y);
     }
 
     @Inject(method = "drawSlot", at = @At("HEAD"))
-    private void drawSlot(MatrixStack matrices, Slot slot, CallbackInfo ci) {
-        DrawSlotEvent event = new DrawSlotEvent((HandledScreen<?>) (Object) this, matrices, slot);
+    private void drawSlot(DrawContext context, Slot slot, CallbackInfo ci) {
+        DrawSlotEvent event = new DrawSlotEvent((HandledScreen<?>) (Object) this, context, slot);
         DrawSlotEvent.Companion.handleEvent(event);
     }
 
-    @Redirect(method = "drawItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/item/ItemRenderer;renderGuiItemOverlay(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;IILjava/lang/String;)V"))
-    public void drawItemInvoke(ItemRenderer instance, MatrixStack matrices, TextRenderer textRenderer, ItemStack stack, int x, int y, String countLabel) {
+    @Redirect(method = "drawItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawItemInSlot(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;IILjava/lang/String;)V"))
+    public void drawItemInvoke(DrawContext instance, TextRenderer textRenderer, ItemStack stack, int x, int y, String countOverride) {
         if (drawOverrides(textRenderer, stack, x, y))
             return;
-        instance.renderGuiItemOverlay(matrices, textRenderer, stack, x, y, countLabel);
+        instance.drawItemInSlot(textRenderer, stack, x, y, countOverride);
     }
 
-    @Redirect(method = "drawSlot", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/item/ItemRenderer;renderInGuiWithOverrides(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/item/ItemStack;III)V"))
-    public void redirect(ItemRenderer instance, MatrixStack matrices, LivingEntity entity, ItemStack stack, int x, int y, int seed){
+    @Redirect(method = "drawSlot", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawItem(Lnet/minecraft/item/ItemStack;III)V"))
+    public void redirect(DrawContext instance, ItemStack stack, int x, int y, int seed){
         drawColorSlot(stack, x, y);
-        instance.renderInGuiWithOverrides(matrices, entity, stack, x, y, seed);
+        instance.drawItem(stack, x, y, seed);
     }
 
-    @Redirect(method = "drawSlot", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/item/ItemRenderer;renderGuiItemOverlay(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;IILjava/lang/String;)V"))
-    public void redirect(ItemRenderer instance, MatrixStack matrices, TextRenderer textRenderer, ItemStack stack, int x, int y, String countLabel){
+    @Redirect(method = "drawSlot", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawItemInSlot(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;IILjava/lang/String;)V"))
+    public void redirect(DrawContext instance, TextRenderer textRenderer, ItemStack stack, int x, int y, String countOverride){
         if (drawOverrides(textRenderer, stack, x, y))
             return;
-        instance.renderGuiItemOverlay(matrices, textRenderer, stack, x, y, countLabel);
+        instance.drawItemInSlot(textRenderer, stack, x, y, countOverride);
     }
 
     private boolean drawOverrides(TextRenderer renderer, ItemStack stack, int x, int y) {
-        RenderItemOverrideEvent event = new RenderItemOverrideEvent(matrixStack, renderer, stack, x, y);
+        RenderItemOverrideEvent event = new RenderItemOverrideEvent(drawContext, renderer, stack, x, y);
         RenderItemOverrideEvent.Companion.handleEvent(event);
         return event.getCancelled();
     }
@@ -79,12 +80,9 @@ public class ItemBackgroundMixin extends Screen {
             return;
         MatchableItem item = ItemMatcher.Companion.toItem(stack);
         if(item != null) {
-            matrixStack.push();
-            matrixStack.translate(0.0, 0.0, -200.0);
             Color color = item.getMatcherType().getColor();
-            RenderKit.INSTANCE.renderTextureWithColor(matrixStack, TEXTURE, color.solid(),
+            RenderKit.INSTANCE.renderTextureWithColor(drawContext, TEXTURE, color.solid(),
                     x - 2, y - 2, 0, 0, 20, 20, 20, 20);
-            matrixStack.pop();
         }
     }
 }

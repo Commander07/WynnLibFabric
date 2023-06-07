@@ -3,6 +3,7 @@ package io.github.nbcss.wynnlib.timer.status
 import com.google.gson.JsonObject
 import io.github.nbcss.wynnlib.render.RenderKit
 import net.minecraft.client.font.TextRenderer
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Identifier
 
@@ -15,7 +16,7 @@ class TemporaryEffectIndicator(data: JsonObject): StatusType(data) {
     }
 
     override fun renderIcon(
-        matrices: MatrixStack,
+        context: DrawContext,
         textRenderer: TextRenderer,
         timer: TypedStatusTimer,
         icon: Identifier,
@@ -24,10 +25,10 @@ class TemporaryEffectIndicator(data: JsonObject): StatusType(data) {
         delta: Float
     ) {
         RenderKit.renderTexture(
-            matrices, ICON_BACKGROUND, posX + 3, posY, 0, 256 - 22, 22, 22
+            context, ICON_BACKGROUND, posX + 3, posY, 0, 256 - 22, 22, 22
         )
         RenderKit.renderTexture(
-            matrices, icon, posX + 5, posY + 2, 0, 0, 18, 18, 18, 18
+            context, icon, posX + 5, posY + 2, 0, 0, 18, 18, 18, 18
         )
     }
 }

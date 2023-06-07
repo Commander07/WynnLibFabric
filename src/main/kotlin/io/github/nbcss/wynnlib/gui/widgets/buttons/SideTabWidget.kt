@@ -3,7 +3,7 @@ package io.github.nbcss.wynnlib.gui.widgets.buttons
 import io.github.nbcss.wynnlib.render.RenderKit
 import io.github.nbcss.wynnlib.utils.playSound
 import net.minecraft.client.MinecraftClient
-import net.minecraft.client.gui.DrawableHelper
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.render.item.ItemRenderer
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
@@ -17,7 +17,7 @@ class SideTabWidget(private val index: Int,
                     private val icon: ItemStack,
                     private val side: Side,
                     private val handler: Handler
-): DrawableHelper() {
+) {
     private val itemRenderer: ItemRenderer = MinecraftClient.getInstance().itemRenderer
     companion object {
         private val TEXTURE = Identifier("wynnlib", "textures/gui/tab_buttons.png")
@@ -38,28 +38,29 @@ class SideTabWidget(private val index: Int,
         }
     }
 
-    fun drawBackgroundPre(matrices: MatrixStack?, mouseX: Int, mouseY: Int) {
+    fun drawBackgroundPre(context: DrawContext?, mouseX: Int, mouseY: Int) {
         if (!handler.isSelected(index)) {
             val tabY = posY + index * TAB_HEIGHT
-            RenderKit.renderTexture(matrices, TEXTURE, posX, tabY,
+            RenderKit.renderTexture(context, TEXTURE, posX, tabY,
                 side.u, 0, TAB_WIDTH, TAB_HEIGHT
             )
-            itemRenderer.renderInGuiWithOverrides(matrices, icon, posX + side.iconOffset, tabY + 6)
+            context?.drawItem(icon, posX + side.iconOffset, tabY + 6)
             if (isOverTab(mouseX, mouseY)){
-                handler.drawTooltip(matrices!!, mouseX, mouseY, index)
+                handler.drawTooltip(context!!, mouseX, mouseY, index)
             }
         }
     }
 
-    fun drawBackgroundPost(matrices: MatrixStack?, mouseX: Int, mouseY: Int) {
+    fun drawBackgroundPost(context: DrawContext?, mouseX: Int, mouseY: Int) {
         if (handler.isSelected(index)) {
             val tabY = posY + index * TAB_HEIGHT
-            RenderKit.renderTexture(matrices, TEXTURE, posX, tabY,
+            RenderKit.renderTexture(context, TEXTURE, posX, tabY,
                 side.u, 28, TAB_WIDTH, TAB_HEIGHT
             )
-            itemRenderer.renderInGuiWithOverrides(matrices, icon, posX + side.iconOffset, tabY + 6)
+
+            context?.drawItem(icon, posX + side.iconOffset, tabY + 6)
             if (isOverTab(mouseX, mouseY)){
-                handler.drawTooltip(matrices!!, mouseX, mouseY, index)
+                handler.drawTooltip(context!!, mouseX, mouseY, index)
             }
         }
     }
@@ -88,6 +89,6 @@ class SideTabWidget(private val index: Int,
         fun onClick(index: Int)
         fun isSelected(index: Int): Boolean
         fun getClickSound(): SoundEvent? = SoundEvents.ITEM_BOOK_PAGE_TURN
-        fun drawTooltip(matrices: MatrixStack, mouseX: Int, mouseY: Int, index: Int)
+        fun drawTooltip(context: DrawContext, mouseX: Int, mouseY: Int, index: Int)
     }
 }

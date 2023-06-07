@@ -6,6 +6,7 @@ import io.github.nbcss.wynnlib.items.identity.TooltipProvider
 import io.github.nbcss.wynnlib.render.RenderKit
 import io.github.nbcss.wynnlib.utils.Symbol
 import net.minecraft.client.MinecraftClient
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder
 import net.minecraft.client.gui.widget.ClickableWidget
 import net.minecraft.client.util.math.MatrixStack
@@ -67,10 +68,10 @@ class CheckboxWidget(private val posX: Int,
         TODO("Not yet implemented")
     }
 
-    override fun renderButton(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
+    override fun renderButton(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
         var v = if (isChecked()) 0 else 36
         if (isHovered) v += 18
-        RenderKit.renderTexture(matrices!!, TEXTURE, x, y, 0, v, SIZE, SIZE, SIZE, SIZE * 4)
+        RenderKit.renderTexture(context!!, TEXTURE, x, y, 0, v, SIZE, SIZE, SIZE, SIZE * 4)
         if (isHovered && screen != null) {
             val tooltip: MutableList<Text> = mutableListOf()
             tooltip.add((if (checked) Symbol.TICK.asText() else Symbol.CROSS.asText())
@@ -83,7 +84,7 @@ class CheckboxWidget(private val posX: Int,
             if (group != null) {
                 tooltip.add(RIGHT_CLICK.formatted(Formatting.LIGHT_PURPLE))
             }
-            screen.drawTooltip(matrices, tooltip, mouseX, mouseY)
+            screen.drawTooltip(context, tooltip, mouseX, mouseY)
         }
     }
 

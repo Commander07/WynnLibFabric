@@ -1,11 +1,12 @@
 package io.github.nbcss.wynnlib.events
 
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.ingame.HandledScreen
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.text.Text
 
 data class InventoryRenderEvent(val screen: HandledScreen<*>,
-                                val matrices: MatrixStack,
+                                val context: DrawContext,
                                 val screenX: Int,
                                 val screenY: Int,
                                 val mouseX: Int,

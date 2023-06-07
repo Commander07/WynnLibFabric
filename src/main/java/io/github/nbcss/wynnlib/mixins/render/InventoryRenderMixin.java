@@ -1,6 +1,7 @@
 package io.github.nbcss.wynnlib.mixins.render;
 
 import io.github.nbcss.wynnlib.events.InventoryRenderEvent;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.util.math.MatrixStack;
@@ -22,16 +23,16 @@ public class InventoryRenderMixin extends Screen {
     }
 
     @Inject(method = "render", at = @At("HEAD"))
-    public void renderPre(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci) {
+    public void renderPre(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
         InventoryRenderEvent event = new InventoryRenderEvent((HandledScreen<?>) (Object) this,
-                matrices, x, y, mouseX, mouseY, delta, InventoryRenderEvent.Phase.PRE);
+                context, x, y, mouseX, mouseY, delta, InventoryRenderEvent.Phase.PRE);
         InventoryRenderEvent.Companion.handleEvent(event);
     }
 
     @Inject(method = "render", at = @At("TAIL"))
-    public void renderPost(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci) {
+    public void renderPost(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
         InventoryRenderEvent event = new InventoryRenderEvent((HandledScreen<?>) (Object) this,
-                matrices, x, y, mouseX, mouseY, delta, InventoryRenderEvent.Phase.POST);
+                context, x, y, mouseX, mouseY, delta, InventoryRenderEvent.Phase.POST);
         InventoryRenderEvent.Companion.handleEvent(event);
     }
 }

@@ -2,6 +2,7 @@ package io.github.nbcss.wynnlib.gui.widgets.buttons
 
 import com.mojang.blaze3d.systems.RenderSystem
 import io.github.nbcss.wynnlib.render.RenderKit
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder
 import net.minecraft.client.gui.widget.PressableWidget
 import net.minecraft.client.util.math.MatrixStack
@@ -20,12 +21,10 @@ class ExitButtonWidget(x: Int, y: Int, private val handler: ExitHandler):
         handler.exit()
     }
 
-    override fun renderButton(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
-        matrices!!.push()
+    override fun renderButton(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
         RenderSystem.enableDepthTest()
         val v = if (isHovered) 10 else 0
-        RenderKit.renderTexture(matrices, texture, x, y, 0, v, 10, 10, 10, 20)
-        matrices.pop()
+        RenderKit.renderTexture(context, texture, x, y, 0, v, 10, 10, 10, 20)
     }
 
     override fun appendClickableNarrations(builder: NarrationMessageBuilder?) {

@@ -14,6 +14,7 @@ import io.github.nbcss.wynnlib.timer.status.StatusType
 import io.github.nbcss.wynnlib.utils.Color
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.font.TextRenderer
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.decoration.ArmorStandEntity
 import net.minecraft.text.Text
@@ -80,10 +81,10 @@ class HoundTimerIndicator(private val entity: ArmorStandEntity,
         return this
     }
 
-    override fun render(matrices: MatrixStack, textRenderer: TextRenderer, posX: Int, posY: Int, delta: Float) {
+    override fun render(context: DrawContext, textRenderer: TextRenderer, posX: Int, posY: Int, delta: Float) {
         val icon = IconTexture.fromName("CALL_OF_THE_HOUND").getTexture()
         RenderKit.renderTexture(
-            matrices, StatusType.ICON_BACKGROUND, posX + 3, posY, 0, 256 - 22, 22, 22
+            context, StatusType.ICON_BACKGROUND, posX + 3, posY, 0, 256 - 22, 22, 22
         )
         val duration: Double = getDuration()
         val maxDuration: Double = getFullDuration()
@@ -91,7 +92,7 @@ class HoundTimerIndicator(private val entity: ArmorStandEntity,
         val color = Color(MathHelper.hsvToRgb((pct / 3.0).toFloat(), 1.0f, 1.0f))
         val uv = StatusType.pctToUv(pct)
         RenderKit.renderTextureWithColor(
-            matrices, StatusType.ICON_BACKGROUND, color.solid(),
+            context, StatusType.ICON_BACKGROUND, color.solid(),
             posX + 3, posY, uv.first, uv.second, 22, 22, 256, 256
         )
         var time = duration.roundToInt().toString() + "s"
@@ -101,9 +102,9 @@ class HoundTimerIndicator(private val entity: ArmorStandEntity,
         val textX: Int = posX + 14 - textRenderer.getWidth(time) / 2
         val textY = posY + 25
         val text: Text = Text.literal(time).formatted(Formatting.LIGHT_PURPLE)
-        RenderKit.renderOutlineText(matrices, text, textX.toFloat(), textY.toFloat())
+        RenderKit.renderOutlineText(context.matrices, text, textX.toFloat(), textY.toFloat())
         RenderKit.renderTexture(
-            matrices, icon, posX + 5, posY + 2, 0, 0, 18, 18, 18, 18
+            context, icon, posX + 5, posY + 2, 0, 0, 18, 18, 18, 18
         )
     }
 }

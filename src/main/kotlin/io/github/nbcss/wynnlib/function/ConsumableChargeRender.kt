@@ -26,12 +26,10 @@ object ConsumableChargeRender {
                 return
             ItemModifier.readInt(event.item, key)?.let {
                 val s = "${it * event.item.count}"
-                val x = (event.x + 19 - 2 - event.renderer.getWidth(s)).toFloat()
-                val y = event.y.toFloat() + 9.0f
-                event.matrixStack.push()
-                event.matrixStack.translate(0.0, 0.0, 375.0)
-                event.renderer.drawWithShadow(event.matrixStack, s, x, y, 0xFFFFFF)
-                event.matrixStack.pop()
+                val x = (event.x + 19 - 2 - event.renderer.getWidth(s))
+                val y = event.y + 9
+//                event.matrixStack.translate(0.0, 0.0, 375.0)
+                event.context.drawTextWithShadow(event.renderer, s, x, y, 0xFFFFFF)
                 event.cancelled = true
             }
         }

@@ -3,6 +3,7 @@ package io.github.nbcss.wynnlib.gui.widgets
 import io.github.nbcss.wynnlib.gui.TooltipScreen
 import io.github.nbcss.wynnlib.gui.widgets.scrollable.ScrollElement
 import io.github.nbcss.wynnlib.render.TextureData
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.Element
 import net.minecraft.client.util.math.MatrixStack
 
@@ -42,7 +43,7 @@ open class ElementsContainerScroll(background: TextureData?,
     }
 
     override fun renderContents(
-        matrices: MatrixStack,
+        context: DrawContext,
         mouseX: Int,
         mouseY: Int,
         position: Double,
@@ -53,7 +54,7 @@ open class ElementsContainerScroll(background: TextureData?,
         val posY = (y - position).toInt()
         elements.forEach {
             it.updateState(posX, posY, mouseOver)
-            it.render(matrices, mouseX, mouseY, delta)
+            it.render(context, mouseX, mouseY, delta)
         }
     }
 }

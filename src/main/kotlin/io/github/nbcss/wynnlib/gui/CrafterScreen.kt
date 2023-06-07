@@ -3,6 +3,7 @@ package io.github.nbcss.wynnlib.gui
 import io.github.nbcss.wynnlib.Settings
 import io.github.nbcss.wynnlib.i18n.Translations
 import io.github.nbcss.wynnlib.utils.ItemFactory
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
@@ -20,7 +21,7 @@ class CrafterScreen(parent: Screen?) : HandbookTabScreen(parent, TITLE) {
             override fun shouldDisplay(): Boolean = Settings.isTester()
         }
     }
-    override fun drawContents(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
+    override fun drawContents(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
         //todo
     }
 }

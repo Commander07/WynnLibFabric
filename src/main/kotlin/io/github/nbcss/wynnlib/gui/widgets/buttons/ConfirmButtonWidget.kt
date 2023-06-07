@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem
 import io.github.nbcss.wynnlib.gui.TooltipScreen
 import io.github.nbcss.wynnlib.items.identity.TooltipProvider
 import io.github.nbcss.wynnlib.render.RenderKit
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder
 import net.minecraft.client.gui.widget.PressableWidget
 import net.minecraft.client.util.math.MatrixStack
@@ -25,15 +26,13 @@ class ConfirmButtonWidget(private val handler: Consumer<ConfirmButtonWidget>,
         handler.accept(this)
     }
 
-    override fun renderButton(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
-        matrices!!.push()
+    override fun renderButton(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
         RenderSystem.enableDepthTest()
         val v = if (isHovered) 10 else 0
-        RenderKit.renderTexture(matrices, texture, x, y, 0, v, 10, 10, 10, 20)
-        matrices.pop()
+        RenderKit.renderTexture(context, texture, x, y, 0, v, 10, 10, 10, 20)
         if(isHovered && tooltipProvider != null) {
             val tooltip = tooltipProvider.getTooltip()
-            screen.drawTooltip(matrices, tooltip, mouseX, mouseY)
+            screen.drawTooltip(context!!, tooltip, mouseX, mouseY)
         }
     }
 

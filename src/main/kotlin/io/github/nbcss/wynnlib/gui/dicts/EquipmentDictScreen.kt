@@ -13,6 +13,7 @@ import io.github.nbcss.wynnlib.registry.CharmRegistry
 import io.github.nbcss.wynnlib.registry.RegularEquipmentRegistry
 import io.github.nbcss.wynnlib.registry.TomeRegistry
 import io.github.nbcss.wynnlib.utils.ItemFactory
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.item.ItemStack
 import net.minecraft.text.Text

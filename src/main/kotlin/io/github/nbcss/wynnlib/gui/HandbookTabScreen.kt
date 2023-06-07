@@ -5,6 +5,7 @@ import io.github.nbcss.wynnlib.Settings
 import io.github.nbcss.wynnlib.gui.widgets.buttons.ExitButtonWidget
 import io.github.nbcss.wynnlib.render.RenderKit
 import io.github.nbcss.wynnlib.utils.playSound
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.sound.SoundEvents
@@ -46,49 +47,45 @@ abstract class HandbookTabScreen(val parent: Screen?,
         exitButton = addDrawableChild(ExitButtonWidget(closeX, closeY, this))
     }
 
-    open fun drawBackgroundPre(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
+    open fun drawBackgroundPre(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
         val tabIndex = tabPage * TAB_SIZE
         (0 until TAB_SIZE).filter{tabIndex + it < tabs.size}
             .filter{!tabs[tabIndex + it].isInstance(this)}
-            .forEach { drawTab(matrices!!, tabs[tabIndex + it], it, mouseX, mouseY) }
+            .forEach { drawTab(context!!, tabs[tabIndex + it], it, mouseX, mouseY) }
     }
 
-    open fun drawBackgroundPost(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
+    open fun drawBackgroundPost(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
         val tabIndex = tabPage * TAB_SIZE
         (0 until TAB_SIZE).filter{tabIndex + it < tabs.size}
             .filter{tabs[tabIndex + it].isInstance(this)}
-            .forEach { drawTab(matrices!!, tabs[tabIndex + it], it, mouseX, mouseY) }
+            .forEach { drawTab(context!!, tabs[tabIndex + it], it, mouseX, mouseY) }
     }
 
-    open fun drawBackgroundTexture(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
+    open fun drawBackgroundTexture(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
         RenderKit.renderTexture(
-            matrices, background, windowX, windowY + 28, 0, 0,
+            context, background, windowX, windowY + 28, 0, 0,
             backgroundWidth, 182
         )
     }
 
-    open fun drawBackground(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
-        renderBackground(matrices)
-        drawBackgroundPre(matrices, mouseX, mouseY, delta)
+    open fun drawBackground(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
+        renderBackground(context)
+        drawBackgroundPre(context, mouseX, mouseY, delta)
         //render background
-        drawBackgroundTexture(matrices, mouseX, mouseY, delta)
+        drawBackgroundTexture(context, mouseX, mouseY, delta)
         //render selected tab (normally should only have up to one tab)
-        drawBackgroundPost(matrices, mouseX, mouseY, delta)
-        textRenderer.draw(
-            matrices, getTitle().asOrderedText(),
-            (windowX + 6).toFloat(),
-            (windowY + 33).toFloat(), 0
-        )
+        drawBackgroundPost(context, mouseX, mouseY, delta)
+        context?.drawText(textRenderer, getTitle().asOrderedText(), windowX + 6, windowY + 33, 0xFFFFFF, false)
     }
 
-    private fun drawTab(matrices: MatrixStack, tab: TabFactory, tabIndex: Int, mouseX: Int, mouseY: Int) {
+    private fun drawTab(context: DrawContext, tab: TabFactory, tabIndex: Int, mouseX: Int, mouseY: Int) {
         val posX = windowX + 25 + tabIndex * 28
         val u = if (tab.isInstance(this)) 0 else 28
-        RenderKit.renderTexture(matrices, background, posX, windowY, u, 182, 28, 32)
-        itemRenderer.renderInGuiWithOverrides(matrices, tab.getTabIcon(), posX + 6, windowY + 9)
-        itemRenderer.renderGuiItemOverlay(matrices, textRenderer, tab.getTabIcon(), posX + 6, windowY + 9)
+        RenderKit.renderTexture(context, background, posX, windowY, u, 182, 28, 32)
+        context.drawItem(tab.getTabIcon(), posX + 6, windowY + 9)
+        context.drawItemInSlot(textRenderer, tab.getTabIcon(), posX + 6, windowY + 9)
         if(isOverTab(tabIndex, mouseX, mouseY)){
-            drawTooltip(matrices, tab.getTabTooltip(), mouseX, mouseY)
+            drawTooltip(context, tab.getTabTooltip(), mouseX, mouseY)
         }
     }
 
@@ -97,7 +94,7 @@ abstract class HandbookTabScreen(val parent: Screen?,
         return mouseX >= posX && mouseX < posX + 28 && mouseY >= windowY && mouseY <= windowY + 28
     }
 
-    abstract fun drawContents(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float)
+    abstract fun drawContents(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float)
 
     override fun keyPressed(keyCode: Int, scanCode: Int, modifiers: Int): Boolean {
         if (super.keyPressed(keyCode, scanCode, modifiers)) {
@@ -121,12 +118,12 @@ abstract class HandbookTabScreen(val parent: Screen?,
         return super.mouseClicked(mouseX, mouseY, button)
     }
 
-    override fun render(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
-        drawBackground(matrices, mouseX, mouseY, delta)
-        super.render(matrices, mouseX, mouseY, delta)
-        drawContents(matrices, mouseX, mouseY, delta)
+    override fun render(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
+        drawBackground(context, mouseX, mouseY, delta)
+        super.render(context, mouseX, mouseY, delta)
+        drawContents(context, mouseX, mouseY, delta)
         tooltip?.let { item ->
-            renderOrderedTooltip(matrices, item.tooltip.map{ it.asOrderedText()}, item.x, item.y)
+            context?.drawOrderedTooltip(this.textRenderer, item.tooltip.map{ it.asOrderedText()}, item.x, item.y)
             RenderSystem.enableDepthTest()
             tooltip = null
         }
@@ -138,7 +135,7 @@ abstract class HandbookTabScreen(val parent: Screen?,
         client!!.setScreen(parent)
     }
 
-    override fun drawTooltip(matrices: MatrixStack, tooltip: List<Text>, x: Int, y: Int) {
+    override fun drawTooltip(context: DrawContext, tooltip: List<Text>, x: Int, y: Int) {
         this.tooltip = TooltipItem(x, y, tooltip)
         /*matrices.push()
         renderOrderedTooltip(matrices, tooltip.map{it.asOrderedText()}, x, y)

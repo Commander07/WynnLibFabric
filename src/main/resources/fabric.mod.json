@@ -27,10 +27,10 @@
     "wynnlib.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.14.14",
+    "fabricloader": ">=0.14.21",
     "fabric": "*",
-    "fabric-language-kotlin": ">=1.9.1+kotlin.1.8.10",
-    "minecraft": "1.19.4",
+    "fabric-language-kotlin": ">=1.9.4+kotlin.1.8.21",
+    "minecraft": "~1.20",
     "java": ">=17"
   }
 }

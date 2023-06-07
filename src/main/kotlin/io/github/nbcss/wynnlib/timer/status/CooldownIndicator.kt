@@ -5,6 +5,7 @@ import io.github.nbcss.wynnlib.i18n.Translations
 import io.github.nbcss.wynnlib.render.RenderKit
 import io.github.nbcss.wynnlib.utils.Color
 import net.minecraft.client.font.TextRenderer
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
@@ -21,7 +22,7 @@ class CooldownIndicator(data: JsonObject): StatusType(data) {
     }
 
     override fun renderIcon(
-        matrices: MatrixStack,
+        context: DrawContext,
         textRenderer: TextRenderer,
         timer: TypedStatusTimer,
         icon: Identifier,
@@ -30,7 +31,7 @@ class CooldownIndicator(data: JsonObject): StatusType(data) {
         delta: Float
     ) {
         RenderKit.renderTexture(
-            matrices, ICON_BACKGROUND, posX + 3, posY, 0, 256 - 22, 22, 22
+            context, ICON_BACKGROUND, posX + 3, posY, 0, 256 - 22, 22, 22
         )
         val duration: Double? = timer.getDuration()
         val maxDuration: Double? = timer.getFullDuration()
@@ -39,7 +40,7 @@ class CooldownIndicator(data: JsonObject): StatusType(data) {
             val color = Color.AQUA
             val uv = pctToUv(1 - pct)
             RenderKit.renderTextureWithColor(
-                matrices, ICON_BACKGROUND, color.solid(),
+                context, ICON_BACKGROUND, color.solid(),
                 posX + 3, posY, uv.first, uv.second, 22, 22, 256, 256
             )
             var time = duration.roundToInt().toString()
@@ -49,10 +50,10 @@ class CooldownIndicator(data: JsonObject): StatusType(data) {
             val text = Translations.INDICATOR_SUFFIX_S.formatted(Formatting.AQUA, null, time)
             val textX = posX + 14 - textRenderer.getWidth(text) / 2
             val textY = posY + 25
-            RenderKit.renderOutlineText(matrices, text, textX.toFloat(), textY.toFloat())
+            RenderKit.renderOutlineText(context.matrices, text, textX.toFloat(), textY.toFloat())
         }
         RenderKit.renderTexture(
-            matrices, icon, posX + 5, posY + 2, 0, 0, 18, 18, 18, 18
+            context, icon, posX + 5, posY + 2, 0, 0, 18, 18, 18, 18
         )
     }
 }

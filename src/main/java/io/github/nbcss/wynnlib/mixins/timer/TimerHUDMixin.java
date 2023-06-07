@@ -8,6 +8,7 @@ import io.github.nbcss.wynnlib.timer.IndicatorManager;
 import io.github.nbcss.wynnlib.utils.Keyed;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -33,14 +34,14 @@ public abstract class TimerHUDMixin {
     @Shadow @Final private ItemRenderer itemRenderer;
 
     @Inject(method = "render", at = @At("HEAD"))
-    public void render(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
+    public void render(DrawContext context, float tickDelta, CallbackInfo ci) {
         if (!this.client.options.hudHidden) {
-            renderSideTimers(matrices);
-            renderIconTimers(matrices, tickDelta);
+            renderSideTimers(context);
+            renderIconTimers(context, tickDelta);
         }
     }
 
-    private void renderSideTimers(MatrixStack matrices) {
+    private void renderSideTimers(DrawContext context) {
         if (!Settings.INSTANCE.getOption(Settings.SettingOption.SIDE_INDICATOR))
             return;
         List<SideIndicator> timers = IndicatorManager.INSTANCE.getSideTimers();
@@ -48,12 +49,12 @@ public abstract class TimerHUDMixin {
         int posX = 3;
         int posY = (client.getWindow().getScaledHeight() - 11 * timers.size()) / 2;
         for (SideIndicator timer : timers) {
-            timer.render(matrices, getTextRenderer(), posX, posY);
+            timer.render(context, getTextRenderer(), posX, posY);
             posY += 11;
         }
     }
 
-    private void renderIconTimers(MatrixStack matrices, float delta) {
+    private void renderIconTimers(DrawContext context, float delta) {
         if (!Settings.INSTANCE.getOption(Settings.SettingOption.ICON_INDICATOR))
             return;
         List<IconIndicator> timers = IndicatorManager.INSTANCE.getIconTimers();
@@ -65,7 +66,7 @@ public abstract class TimerHUDMixin {
         for (IconIndicator timer : timers) {
             String key = timer.getKey();
             if (!Settings.INSTANCE.getIndicatorEnabled(key)) continue;
-            timer.render(matrices, getTextRenderer(), posX, posY, delta);
+            timer.render(context, getTextRenderer(), posX, posY, delta);
             posX += 28;
         }
     }

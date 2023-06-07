@@ -5,6 +5,7 @@ import io.github.nbcss.wynnlib.gui.widgets.VerticalSliderWidget
 import io.github.nbcss.wynnlib.render.RenderKit
 import io.github.nbcss.wynnlib.render.TextureData
 import net.minecraft.client.MinecraftClient
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.text.Text
@@ -37,9 +38,9 @@ abstract class GenericScrollScreen(parent: Screen?, title: Text) : HandbookTabSc
         }
     }
 
-    override fun drawBackgroundTexture(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
+    override fun drawBackgroundTexture(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
         RenderKit.renderTexture(
-            matrices, TEXTURE, windowX, windowY + 28, 0, 0,
+            context, TEXTURE, windowX, windowY + 28, 0, 0,
             backgroundWidth, 182
         )
     }
@@ -74,7 +75,7 @@ abstract class GenericScrollScreen(parent: Screen?, title: Text) : HandbookTabSc
         return super.mouseReleased(mouseX, mouseY, button)
     }
 
-    override fun drawContents(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
-        getScroll()?.render(matrices, mouseX, mouseY, delta)
+    override fun drawContents(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
+        getScroll()?.render(context, mouseX, mouseY, delta)
     }
 }

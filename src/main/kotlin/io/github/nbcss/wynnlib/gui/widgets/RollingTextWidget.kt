@@ -3,7 +3,7 @@ package io.github.nbcss.wynnlib.gui.widgets
 import com.mojang.blaze3d.systems.RenderSystem
 import io.github.nbcss.wynnlib.utils.Color
 import net.minecraft.client.MinecraftClient
-import net.minecraft.client.gui.DrawableHelper
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.text.Text
 import kotlin.math.min
@@ -12,7 +12,7 @@ import kotlin.math.roundToInt
 class RollingTextWidget(val x: Int,
                         val y: Int,
                         val width: Int,
-                        private var text: Text? = null): DrawableHelper() {
+                        private var text: Text? = null) {
     companion object {
         private val client: MinecraftClient = MinecraftClient.getInstance()
         private const val stayTime = 1200
@@ -23,7 +23,7 @@ class RollingTextWidget(val x: Int,
         this.text = text
     }
 
-    fun render(matrices: MatrixStack) {
+    fun render(context: DrawContext) {
         text?.let {
             val length = client.textRenderer.getWidth(text)
             val color = Color.WHITE.solid().code()
@@ -43,7 +43,7 @@ class RollingTextWidget(val x: Int,
             }
             RenderSystem.enableScissor((x * scale).toInt(), ((client.window.scaledHeight - bottom) * scale).toInt(),
                 (width * scale).toInt(), (client.textRenderer.fontHeight * scale).toInt())
-            client.textRenderer.draw(matrices, it, textX, y.toFloat(), color)
+            context.drawText(client.textRenderer, it, textX.toInt(), y, color, false)
             RenderSystem.disableScissor()
         }
     }

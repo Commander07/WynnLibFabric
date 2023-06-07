@@ -10,9 +10,8 @@ import io.github.nbcss.wynnlib.render.RenderKit;
 import io.github.nbcss.wynnlib.utils.Color;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
-import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -36,38 +35,37 @@ public class HotbarBackgroundMixin {
         return null;
     }
     private boolean flag = false;
-    MatrixStack matrixStack = null;
+    DrawContext context = null;
 
     @Inject(method = "renderHotbar", at = @At("HEAD"))
-    public void renderHotbarHead(float tickDelta, MatrixStack matrices, CallbackInfo ci){
+    public void renderHotbarHead(float tickDelta, DrawContext context, CallbackInfo ci){
         flag = true;
     }
 
-    @Inject(method = "renderHotbar", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;" +
-            "drawTexture(Lnet/minecraft/client/util/math/MatrixStack;IIIIII)V",
+    @Inject(method = "renderHotbar", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawTexture(Lnet/minecraft/util/Identifier;IIIIII)V",
             shift = At.Shift.AFTER))
-    public void renderHotbar(float tickDelta, MatrixStack matrices, CallbackInfo ci){
-        this.matrixStack = matrices;
+    public void renderHotbar(float tickDelta, DrawContext context, CallbackInfo ci){
+        this.context = context;
         if(flag){
             flag = false;
-            drawSlots(matrices);
+            drawSlots(context);
         }
     }
 
-    @Redirect(method = "renderHotbarItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/item/ItemRenderer;renderGuiItemOverlay(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;II)V"))
-    public void renderHotbarItem(ItemRenderer instance, MatrixStack matrices, TextRenderer textRenderer, ItemStack stack, int x, int y) {
+    @Redirect(method = "renderHotbarItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawItemInSlot(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;II)V"))
+    public void renderHotbarItem(DrawContext instance, TextRenderer textRenderer, ItemStack stack, int x, int y) {
         if (drawOverrides(textRenderer, stack, x, y))
             return;
-        instance.renderGuiItemOverlay(matrices, textRenderer, stack, x, y);
+        instance.drawItemInSlot(textRenderer, stack, x, y);
     }
 
     private boolean drawOverrides(TextRenderer renderer, ItemStack stack, int x, int y) {
-        RenderItemOverrideEvent event = new RenderItemOverrideEvent(matrixStack, renderer, stack, x, y);
+        RenderItemOverrideEvent event = new RenderItemOverrideEvent(context, renderer, stack, x, y);
         RenderItemOverrideEvent.Companion.handleEvent(event);
         return event.getCancelled();
     }
 
-    private void drawSlots(MatrixStack matrices){
+    private void drawSlots(DrawContext context){
         PlayerEntity playerEntity = this.getCameraPlayer();
         if (playerEntity != null){
             int distance = 0;
@@ -83,13 +81,13 @@ public class HotbarBackgroundMixin {
                     if(item != null){
                         RenderSystem.disableDepthTest();
                         Color color = item.getMatcherType().getColor();
-                        DrawableHelper.fill(matrices, x, y, x + 16, y + 16, color.withAlpha(0xCC).code());
+                        context.fill(x, y, x + 16, y + 16, color.withAlpha(0xCC).code());
                     }
                 }
                 if (playerEntity.experienceLevel > 0 && Settings.INSTANCE.isSlotLocked(36 + i)) {
                     RenderSystem.enableBlend();
                     RenderSystem.disableDepthTest();
-                    RenderKit.INSTANCE.renderTexture(matrices, texture, x - 2, y - 2,
+                    RenderKit.INSTANCE.renderTexture(context, texture, x - 2, y - 2,
                             0, 0, 20, 20, 20, 20);
                 }
             }

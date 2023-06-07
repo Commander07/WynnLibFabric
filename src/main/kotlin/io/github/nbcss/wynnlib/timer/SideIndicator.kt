@@ -1,10 +1,11 @@
 package io.github.nbcss.wynnlib.timer
 
 import net.minecraft.client.font.TextRenderer
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.util.math.MatrixStack
 
 interface SideIndicator: Comparable<SideIndicator> {
-    fun render(matrices: MatrixStack, textRenderer: TextRenderer, posX: Int, posY: Int)
+    fun render(context: DrawContext, textRenderer: TextRenderer, posX: Int, posY: Int)
     fun getDuration(): Double?
     override fun compareTo(other: SideIndicator): Int {
         val duration1 = getDuration()

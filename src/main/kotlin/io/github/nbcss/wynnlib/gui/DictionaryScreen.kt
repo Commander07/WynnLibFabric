@@ -13,6 +13,7 @@ import io.github.nbcss.wynnlib.render.RenderKit
 import io.github.nbcss.wynnlib.render.TextureData
 import io.github.nbcss.wynnlib.utils.ItemFactory
 import io.github.nbcss.wynnlib.utils.playSound
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.sound.SoundEvents
@@ -142,24 +143,24 @@ abstract class DictionaryScreen<T: BaseItem>(parent: Screen?, title: Text) : Han
         return title.copy().append(Text.literal(" [${items.size}]"))
     }
 
-    override fun drawBackgroundPre(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
-        super.drawBackgroundPre(matrices, mouseX, mouseY, delta)
+    override fun drawBackgroundPre(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
+        super.drawBackgroundPre(context, mouseX, mouseY, delta)
         if (!filterVisible){
             getSearchPane()?.let {
                 val posX = windowX + 242
                 val posY = windowY + 45
-                RenderKit.renderTexture(matrices, TEXTURE, posX, posY, 0, 182, 32, 28)
-                itemRenderer.renderInGuiWithOverrides(matrices, FILTER_ICON, posX + 7, posY + 6)
+                RenderKit.renderTexture(context, TEXTURE, posX, posY, 0, 182, 32, 28)
+                context!!.drawItem(FILTER_ICON, posX + 7, posY + 6)
                 if (inFilterTab(mouseX, mouseY)){
-                    drawTooltip(matrices!!, listOf(UI_ADVANCE_SEARCH.translate()), mouseX, mouseY)
+                    drawTooltip(context, listOf(UI_ADVANCE_SEARCH.translate()), mouseX, mouseY)
                 }
             }
         }
     }
 
-    override fun drawBackgroundTexture(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
+    override fun drawBackgroundTexture(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
         RenderKit.renderTexture(
-            matrices, TEXTURE, windowX, windowY + 28, 0, 0,
+            context, TEXTURE, windowX, windowY + 28, 0, 0,
             backgroundWidth, 182
         )
     }
@@ -227,24 +228,21 @@ abstract class DictionaryScreen<T: BaseItem>(parent: Screen?, title: Text) : Han
         searchBox!!.tick()
     }
 
-    override fun drawContents(matrices: MatrixStack?,
-                              mouseX: Int,
-                              mouseY: Int,
-                              delta: Float){
+    override fun drawContents(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
         //slide bar
         contentSlider?.visible = lineSize > 0
-        contentSlider?.render(matrices, mouseX, mouseY, delta)
+        contentSlider?.render(context, mouseX, mouseY, delta)
         //ButtonWidget
         slots.forEach{
-            it.render(matrices, mouseX, mouseY, delta)
+            it.render(context, mouseX, mouseY, delta)
             it.getItem()?.takeIf { x -> x is ConfigurableItem && ItemStarProperty.hasStar(x)}?.let { _ ->
-                RenderKit.renderOutlineText(matrices!!,
+                RenderKit.renderOutlineText(context!!.matrices,
                     Text.literal("✫").formatted(Formatting.YELLOW),
                     it.x.toFloat(), it.y.toFloat())
             }
         }
         if (filterVisible) {
-            getSearchPane()?.render(matrices, mouseX, mouseY, delta)
+            getSearchPane()?.render(context, mouseX, mouseY, delta)
         }
     }
 

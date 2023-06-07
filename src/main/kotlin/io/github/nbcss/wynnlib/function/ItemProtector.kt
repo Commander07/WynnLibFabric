@@ -108,7 +108,7 @@ object ItemProtector {
                         val y = event.slot.y - 2
                         RenderSystem.enableBlend()
                         RenderSystem.disableDepthTest()
-                        RenderKit.renderTexture(event.matrices, texture, x, y, 0, 0,
+                        RenderKit.renderTexture(event.context, texture, x, y, 0, 0,
                             20, 20, 20, 20)
 
                     }

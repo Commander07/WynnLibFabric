@@ -5,8 +5,8 @@ import io.github.nbcss.wynnlib.gui.TooltipScreen
 import io.github.nbcss.wynnlib.render.RenderKit
 import io.github.nbcss.wynnlib.render.TextureData
 import net.minecraft.client.MinecraftClient
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.Drawable
-import net.minecraft.client.gui.DrawableHelper
 import net.minecraft.client.gui.Element
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.math.MathHelper
@@ -20,14 +20,14 @@ abstract class ScrollPaneWidget(private val background: TextureData?,
                                 val height: Int,
                                 val scrollDelay: Long = 200L,
                                 private val scrollUnit: Double = 32.0):
-    DrawableHelper(), Drawable, Element{
+    Drawable, Element{
     protected val client: MinecraftClient = MinecraftClient.getInstance()
     private var position: Double = 0.0
     private var dragging: Pair<Double, Double>? = null
     private var scrolling: ScrollChange? = null
 
     abstract fun renderContents(
-        matrices: MatrixStack,
+        context: DrawContext,
         mouseX: Int,
         mouseY: Int,
         position: Double,
@@ -37,7 +37,7 @@ abstract class ScrollPaneWidget(private val background: TextureData?,
 
     abstract fun getContentHeight(): Int
 
-    open fun renderContentsPost(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float){
+    open fun renderContentsPost(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float){
 
     }
 
@@ -49,12 +49,12 @@ abstract class ScrollPaneWidget(private val background: TextureData?,
 
     open fun getSlider(): VerticalSliderWidget? = null
 
-    open fun renderBackground(matrices: MatrixStack?, position: Double) {
+    open fun renderBackground(context: DrawContext?, position: Double) {
         background?.let {
             val maxPos = getMaxPosition()
             val factor = if (maxPos == 0.0) 0.0 else MathHelper.clamp(position / maxPos, 0.0, 1.0)
             val offset = factor * max(0, (it.height - it.v) - height)
-            RenderKit.renderTexture(matrices!!,
+            RenderKit.renderTexture(context!!,
                 it.texture,
                 x.toDouble(),
                 y - offset,
@@ -96,7 +96,7 @@ abstract class ScrollPaneWidget(private val background: TextureData?,
         updateSlider()
     }
 
-    override fun render(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
+    override fun render(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
         scrolling = scrolling?.update()
         scrolling?.let {
             position = MathHelper.clamp(it.getCurrentPosition(), 0.0, getMaxPosition())
@@ -107,14 +107,12 @@ abstract class ScrollPaneWidget(private val background: TextureData?,
         val position = getScrollPosition()
         RenderSystem.enableScissor((x * scale).toInt(), (client.window.scaledHeight - bottom) * scale.toInt(),
             (width * scale).toInt(), (height * scale).toInt())
-        renderBackground(matrices, position)
-        renderContents(matrices!!, mouseX, mouseY, position, delta, isMouseOver(mouseX.toDouble(), mouseY.toDouble()))
+        renderBackground(context, position)
+        renderContents(context!!, mouseX, mouseY, position, delta, isMouseOver(mouseX.toDouble(), mouseY.toDouble()))
         RenderSystem.disableScissor()
-        matrices.push()
-        matrices.translate(0.0, 0.0, 200.0)
+//        matrices.translate(0.0, 0.0, 200.0)
         getSlider()?.visible = getMaxPosition() > 0
-        getSlider()?.render(matrices, mouseX, mouseY, delta)
-        matrices.pop()
+        getSlider()?.render(context, mouseX, mouseY, delta)
     }
 
     override fun isMouseOver(mouseX: Double, mouseY: Double): Boolean {

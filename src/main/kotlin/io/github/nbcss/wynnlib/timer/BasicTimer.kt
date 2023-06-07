@@ -3,6 +3,7 @@ package io.github.nbcss.wynnlib.timer
 import io.github.nbcss.wynnlib.render.RenderKit.renderDefaultOutlineText
 import io.github.nbcss.wynnlib.utils.formatTimer
 import net.minecraft.client.font.TextRenderer
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
@@ -37,7 +38,7 @@ open class BasicTimer(entry: StatusEntry,
 
     override fun asSideIndicator(): SideIndicator = this
 
-    override fun render(matrices: MatrixStack, textRenderer: TextRenderer, posX: Int, posY: Int) {
+    override fun render(context: DrawContext, textRenderer: TextRenderer, posX: Int, posY: Int) {
         val text = Text.literal("")
         val duration: Double? = getDuration()
         if (duration != null) {
@@ -51,6 +52,6 @@ open class BasicTimer(entry: StatusEntry,
                 .append(" ")
         }
         text.append(getDisplayText())
-        renderDefaultOutlineText(matrices, text, posX.toFloat(), posY.toFloat())
+        renderDefaultOutlineText(context.matrices, text, posX.toFloat(), posY.toFloat())
     }
 }

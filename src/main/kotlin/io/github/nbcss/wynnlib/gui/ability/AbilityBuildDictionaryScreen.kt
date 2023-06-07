@@ -11,6 +11,7 @@ import io.github.nbcss.wynnlib.registry.AbilityBuildStorage
 import io.github.nbcss.wynnlib.utils.ItemFactory
 import io.github.nbcss.wynnlib.utils.playSound
 import io.github.nbcss.wynnlib.utils.readClipboard
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
@@ -43,8 +44,8 @@ open class AbilityBuildDictionaryScreen(parent: Screen?): DictionaryScreen<TreeB
                     client!!.setScreen(AbilityTreeViewerScreen(parent, characterClass))
                 }
                 override fun isSelected(index: Int): Boolean = false
-                override fun drawTooltip(matrices: MatrixStack, mouseX: Int, mouseY: Int, index: Int) {
-                    drawTooltip(matrices, listOf(characterClass.translate()), mouseX, mouseY)
+                override fun drawTooltip(context: DrawContext, mouseX: Int, mouseY: Int, index: Int) {
+                    drawTooltip(context, listOf(characterClass.translate()), mouseX, mouseY)
                 }
             }
             buttons.add(SideTabWidget.fromWindowSide(index++, windowX, windowY, 34,
@@ -57,8 +58,8 @@ open class AbilityBuildDictionaryScreen(parent: Screen?): DictionaryScreen<TreeB
                     client!!.setScreen(screen)
                 }
                 override fun isSelected(index: Int): Boolean = true
-                override fun drawTooltip(matrices: MatrixStack, mouseX: Int, mouseY: Int, index: Int) {
-                    drawTooltip(matrices, listOf(TITLE), mouseX, mouseY)
+                override fun drawTooltip(context: DrawContext, mouseX: Int, mouseY: Int, index: Int) {
+                    drawTooltip(context, listOf(TITLE), mouseX, mouseY)
                 }
             }))
         buttons.add(SideTabWidget.fromWindowSide(0, windowX, windowY, 45,
@@ -79,9 +80,9 @@ open class AbilityBuildDictionaryScreen(parent: Screen?): DictionaryScreen<TreeB
                 }
                 override fun isSelected(index: Int): Boolean = false
                 override fun getClickSound(): SoundEvent? = null
-                override fun drawTooltip(matrices: MatrixStack, mouseX: Int, mouseY: Int, index: Int) {
+                override fun drawTooltip(context: DrawContext, mouseX: Int, mouseY: Int, index: Int) {
                     val name = Translations.UI_TREE_BUILDS.translate().string
-                    drawTooltip(matrices, listOf(Text.literal("[+] $name").formatted(Formatting.GREEN),
+                    drawTooltip(context, listOf(Text.literal("[+] $name").formatted(Formatting.GREEN),
                         UI_CLIPBOARD_IMPORT.formatted(Formatting.GRAY)), mouseX, mouseY)
                 }
             }))
@@ -98,14 +99,14 @@ open class AbilityBuildDictionaryScreen(parent: Screen?): DictionaryScreen<TreeB
         return AbilityBuildStorage.getAll()
     }
 
-    override fun drawBackgroundPre(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
-        super.drawBackgroundPre(matrices, mouseX, mouseY, delta)
-        buttons.forEach { it.drawBackgroundPre(matrices, mouseX, mouseY) }
+    override fun drawBackgroundPre(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
+        super.drawBackgroundPre(context, mouseX, mouseY, delta)
+        buttons.forEach { it.drawBackgroundPre(context, mouseX, mouseY) }
     }
 
-    override fun drawBackgroundPost(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
-        super.drawBackgroundPost(matrices, mouseX, mouseY, delta)
-        buttons.forEach { it.drawBackgroundPost(matrices, mouseX, mouseY) }
+    override fun drawBackgroundPost(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
+        super.drawBackgroundPost(context, mouseX, mouseY, delta)
+        buttons.forEach { it.drawBackgroundPost(context, mouseX, mouseY) }
     }
 
     override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean {

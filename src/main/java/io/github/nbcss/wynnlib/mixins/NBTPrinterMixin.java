@@ -1,6 +1,7 @@
 package io.github.nbcss.wynnlib.mixins;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.util.math.MatrixStack;
@@ -20,8 +21,8 @@ import java.util.List;
 public class NBTPrinterMixin {
     @Shadow
     protected Slot focusedSlot;
-    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/ingame/HandledScreen;drawForeground(Lnet/minecraft/client/util/math/MatrixStack;II)V"))
-    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci) {
+    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/ingame/HandledScreen;drawForeground(Lnet/minecraft/client/gui/DrawContext;II)V"))
+    public void render(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
         /*if (focusedSlot != null && focusedSlot.hasStack()){
             *//*ItemStack item = focusedSlot.getStack();
             List<Text> tooltip = item.getTooltip(MinecraftClient.getInstance().player, TooltipContext.Default.NORMAL);

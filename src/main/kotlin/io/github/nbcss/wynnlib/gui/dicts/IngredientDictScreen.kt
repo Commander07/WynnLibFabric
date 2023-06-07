@@ -7,6 +7,7 @@ import io.github.nbcss.wynnlib.items.Ingredient
 import io.github.nbcss.wynnlib.i18n.Translations.UI_INGREDIENTS
 import io.github.nbcss.wynnlib.registry.IngredientRegistry
 import io.github.nbcss.wynnlib.utils.ItemFactory
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.item.ItemStack
 import net.minecraft.text.Text

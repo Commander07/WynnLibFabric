@@ -2,7 +2,7 @@ package io.github.nbcss.wynnlib.gui.widgets.scrollable
 
 import com.mojang.blaze3d.systems.RenderSystem
 import net.minecraft.client.MinecraftClient
-import net.minecraft.client.gui.DrawableHelper
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.widget.ButtonWidget
 import net.minecraft.client.render.GameRenderer
 import net.minecraft.client.util.math.MatrixStack
@@ -49,16 +49,16 @@ open class SmartSliderWidget(private val posX: Int,
         visible = true
     }
 
-    override fun renderButton(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
+    override fun renderButton(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
         if (this.visible) {
             RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
             RenderSystem.setShaderTexture(0, WIDGETS_TEXTURE)
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, alpha)
             RenderSystem.enableBlend()
             RenderSystem.defaultBlendFunc()
-            this.drawTexture(matrices, WIDGETS_TEXTURE, this.x, this.y, 0, 46, this.width / 2, this.width, this.height, 256, 256)
+            this.drawTexture(context, WIDGETS_TEXTURE, this.x, this.y, 0, 46, this.width / 2, this.width, this.height, 256, 256)
             this.drawTexture(
-                matrices,
+                context,
                 WIDGETS_TEXTURE,
                 this.x + this.width / 2,
                 this.y,
@@ -72,7 +72,7 @@ open class SmartSliderWidget(private val posX: Int,
             )
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, alpha)
             val slider = abs(pos - minValue) / gap.toFloat()
-            this.drawTexture(matrices, WIDGETS_TEXTURE,
+            this.drawTexture(context, WIDGETS_TEXTURE,
                 this.x + (slider * (this.width - 8).toFloat()).toInt(),
                 this.y,
                 0,
@@ -83,7 +83,7 @@ open class SmartSliderWidget(private val posX: Int,
                 256,
                 256
             )
-            this.drawTexture(matrices,
+            this.drawTexture(context,
                 WIDGETS_TEXTURE,
                 this.x + (slider * (this.width - 8).toFloat()).toInt() + 4,
                 this.y,
@@ -103,14 +103,7 @@ open class SmartSliderWidget(private val posX: Int,
                 14737632
             }
             val s = format!!.replace("%value%", if (buffer == null) pos.toString() + "" else buffer + "_")
-            DrawableHelper.drawCenteredTextWithShadow(
-                matrices,
-                MinecraftClient.getInstance().textRenderer,
-                s,
-                this.x + this.width / 2,
-                this.y + (this.height - 8) / 2,
-                textColor
-            )
+            context!!.drawCenteredTextWithShadow(MinecraftClient.getInstance().textRenderer, s, this.x + this.width / 2, this.y + (this.height -8) / 2, textColor)
         }
     }
 

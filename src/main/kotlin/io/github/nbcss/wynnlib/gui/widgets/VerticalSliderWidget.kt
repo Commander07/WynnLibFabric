@@ -3,6 +3,7 @@ package io.github.nbcss.wynnlib.gui.widgets
 import com.mojang.blaze3d.systems.RenderSystem
 import io.github.nbcss.wynnlib.render.RenderKit
 import io.github.nbcss.wynnlib.render.TextureData
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder
 import net.minecraft.client.gui.widget.ClickableWidget
 import net.minecraft.client.util.math.MatrixStack
@@ -34,10 +35,10 @@ open class VerticalSliderWidget(x: Int,
         return y + (slider * (height - barHeight)).roundToInt()
     }
 
-    override fun render(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
+    override fun render(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
         if (this.visible) {
             RenderSystem.enableDepthTest()
-            RenderKit.renderTexture(matrices,
+            RenderKit.renderTexture(context,
                 texture.texture,
                 x, getSliderY(),
                 texture.u,
@@ -61,7 +62,7 @@ open class VerticalSliderWidget(x: Int,
         return false
     }
 
-    override fun renderButton(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
+    override fun renderButton(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
         TODO("Not yet implemented")
     }
 

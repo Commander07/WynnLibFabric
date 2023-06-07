@@ -11,6 +11,7 @@ import io.github.nbcss.wynnlib.i18n.Translations
 import io.github.nbcss.wynnlib.render.RenderKit
 import io.github.nbcss.wynnlib.render.TextureData
 import io.github.nbcss.wynnlib.utils.*
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.gui.tooltip.TooltipComponent
 import net.minecraft.client.util.math.MatrixStack
@@ -35,11 +36,11 @@ abstract class AbstractAbilityTreeScreen(parent: Screen?) : HandbookTabScreen(pa
 
     abstract fun getAbilityTree(): AbilityTree
 
-    abstract fun renderExtra(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float)
+    abstract fun renderExtra(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float)
 
     abstract fun getViewer(): ATreeScrollWidget?
 
-    fun renderAbilityTooltip(matrices: MatrixStack,
+    fun renderAbilityTooltip(context: DrawContext,
                              mouseX: Int,
                              mouseY: Int,
                              ability: Ability,
@@ -63,7 +64,7 @@ abstract class AbstractAbilityTreeScreen(parent: Screen?) : HandbookTabScreen(pa
             tooltip[0] = Text.literal("     ").append(tooltip[0])
             tooltip[1] = Text.literal("     ").append(tooltip[1])
         }
-        renderTooltip(matrices, tooltip, mouseX, mouseY + 20)
+        drawTooltip(context, tooltip, mouseX, mouseY + 20)
         if (icon != null) {
             var i = 0
             var j = if (tooltip.size == 1) -2 else 0
@@ -89,21 +90,22 @@ abstract class AbstractAbilityTreeScreen(parent: Screen?) : HandbookTabScreen(pa
             }
             RenderSystem.disableDepthTest()
             RenderSystem.enableBlend()
-            RenderKit.renderTexture(matrices, icon!!, x, y,
+            RenderKit.renderTexture(context, icon!!, x, y,
                 0, 0, 18, 18, 18, 18)
             if (upgrade) {
-                RenderKit.renderAnimatedTexture(matrices, UPGRADE_TEXTURE,
+                RenderKit.renderAnimatedTexture(context, UPGRADE_TEXTURE,
                     x, y, 18, 18, 20, 50, 300)
             }
             RenderSystem.enableDepthTest()
         }
     }
 
-    fun renderArchetypeIcon(matrices: MatrixStack, archetype: Archetype, x: Int, y: Int) {
+    fun renderArchetypeIcon(context: DrawContext, archetype: Archetype, x: Int, y: Int) {
         val icon = archetype.getTexture()
         val iconText = Text.literal(archetype.getIconText())
             .formatted(Formatting.BOLD).formatted(archetype.getFormatting())
-        itemRenderer.renderInGuiWithOverrides(matrices, icon, x, y)
+        context.drawItem(icon, x, y)
+        val matrices = context.matrices // yes this is lazy coding
         matrices.push()
         matrices.translate(0.0, 0.0, 200.0)
         RenderKit.renderOutlineText(matrices, iconText, x.toFloat() + 10, y.toFloat() + 9)
@@ -116,22 +118,22 @@ abstract class AbstractAbilityTreeScreen(parent: Screen?) : HandbookTabScreen(pa
         viewerY = windowY + 44
     }
 
-    override fun drawBackgroundPre(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
-        super.drawBackgroundPre(matrices, mouseX, mouseY, delta)
-        getViewer()?.render(matrices, mouseX, mouseY, delta)
+    override fun drawBackgroundPre(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
+        super.drawBackgroundPre(context, mouseX, mouseY, delta)
+        getViewer()?.render(context, mouseX, mouseY, delta)
     }
 
-    override fun drawBackgroundTexture(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
+    override fun drawBackgroundTexture(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
         RenderSystem.enableBlend()
         RenderKit.renderTexture(
-            matrices, TEXTURE, windowX, windowY + 28, 0, 0,
+            context, TEXTURE, windowX, windowY + 28, 0, 0,
             backgroundWidth, 182
         )
     }
 
-    override fun drawContents(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
-        renderExtra(matrices!!, mouseX, mouseY, delta)
-        getViewer()?.renderContentsPost(matrices, mouseX, mouseY, delta)
+    override fun drawContents(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
+        renderExtra(context!!, mouseX, mouseY, delta)
+        getViewer()?.renderContentsPost(context, mouseX, mouseY, delta)
     }
 
     override fun mouseScrolled(mouseX: Double, mouseY: Double, amount: Double): Boolean {

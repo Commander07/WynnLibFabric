@@ -2,6 +2,7 @@ package io.github.nbcss.wynnlib.gui.dicts.filter
 
 import io.github.nbcss.wynnlib.gui.widgets.scrollable.ScrollListEntry
 import io.github.nbcss.wynnlib.items.BaseItem
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.util.math.MatrixStack
 
 class GroupContainer<T: BaseItem> (val group: CriteriaGroup<T>): ScrollListEntry {
@@ -47,9 +48,9 @@ class GroupContainer<T: BaseItem> (val group: CriteriaGroup<T>): ScrollListEntry
         TODO("Not yet implemented")
     }
 
-    override fun render(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
+    override fun render(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
         for (element in group.getElements()) {
-            element.render(matrices, mouseX, mouseY, delta)
+            element.render(context, mouseX, mouseY, delta)
         }
     }
 

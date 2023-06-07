@@ -5,6 +5,7 @@ import net.minecraft.client.MinecraftClient
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.text.Text
 import io.github.nbcss.wynnlib.utils.Color
+import net.minecraft.client.gui.DrawContext
 import java.util.function.Supplier
 
 class LabelWidget(posX: Int, posY: Int,
@@ -23,18 +24,18 @@ class LabelWidget(posX: Int, posY: Int,
         TODO("Not yet implemented")
     }
 
-    override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
+    override fun render(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
         textProvider.get()?.let {
             val color = colorProvider?.get() ?: Color.WHITE
             when (mode) {
                 Mode.PLAIN -> {
-                    renderer.draw(matrices, it, getX().toFloat(), getY().toFloat(), color.code())
+                    context!!.drawText(renderer, it, getX(), getY(), color.code(), false)
                 }
                 Mode.SHADOW -> {
-                    renderer.drawWithShadow(matrices, it, getX().toFloat(), getY().toFloat(), color.code())
+                    context!!.drawTextWithShadow(renderer, it, getX(), getY(), color.code())
                 }
                 Mode.OUTLINE -> {
-                    RenderKit.renderOutlineText(matrices, it, getX().toFloat(), getY().toFloat(), color)
+                    RenderKit.renderOutlineText(context!!.matrices, it, getX().toFloat(), getY().toFloat(), color)
                 }
             }
         }

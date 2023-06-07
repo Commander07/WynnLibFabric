@@ -7,6 +7,7 @@ import io.github.nbcss.wynnlib.readers.AbilityTreeHandler
 import io.github.nbcss.wynnlib.readers.AbilityTreeReader
 import io.github.nbcss.wynnlib.registry.AbilityRegistry
 import net.minecraft.client.MinecraftClient
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.gui.widget.ButtonWidget
 import net.minecraft.client.util.math.MatrixStack
@@ -39,8 +40,8 @@ class ATreeEditButtonWidget(private val parent: Screen,
         active = AbilityTreeHandler.getCurrentProcessor() == null
     }
 
-    override fun render(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
-        super.render(matrices, mouseX, mouseY, delta)
+    override fun render(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
+        super.render(context, mouseX, mouseY, delta)
         updateActive()
     }
 }

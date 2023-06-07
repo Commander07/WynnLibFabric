@@ -51,13 +51,13 @@ object CharacterInfoInventoryRender: EventHandler<InventoryRenderEvent> {
         val posY = event.screenY.toFloat() + 2
         val apText = Text.literal("✦ $ap/$maxAp").formatted(Formatting.DARK_AQUA)
         val spText = Text.literal("$sp/$maxSp ✦").formatted(Formatting.GREEN)
-        event.matrices.push()
-        event.matrices.translate(0.0, 0.0, 200.0)
-        //client.textRenderer.draw(event.matrices, text, posX, posY, 0xFFFFFF)
-        //client.textRenderer.drawWithShadow(event.matrices, text, posX, posY, Color.DARK_AQUA.code())
-        RenderKit.renderOutlineText(event.matrices, apText, posX, posY, Color.WHITE)
+        val matrices = event.context.matrices // yes this is lazy coding
+        matrices.push()
+        matrices.translate(0.0, 0.0, 200.0)
+
+        RenderKit.renderOutlineText(matrices, apText, posX, posY, Color.WHITE)
         val posX2 = posX + 174 - client.textRenderer.getWidth(spText)
-        RenderKit.renderOutlineText(event.matrices, spText, posX2, posY, Color.WHITE)
-        event.matrices.pop()
+        RenderKit.renderOutlineText(matrices, spText, posX2, posY, Color.WHITE)
+        matrices.pop()
     }
 }

@@ -11,6 +11,7 @@ import io.github.nbcss.wynnlib.utils.AlphaColor
 import io.github.nbcss.wynnlib.utils.Color
 import io.github.nbcss.wynnlib.utils.IntPos
 import io.github.nbcss.wynnlib.utils.playSound
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.Identifier
@@ -81,34 +82,34 @@ abstract class ATreeScrollWidget(screen: TooltipScreen, x: Int, y: Int,
         return true
     }
 
-    fun drawOuterEdge(matrices: MatrixStack, from: IntPos, to: IntPos, color: Int, reroute: Boolean){
+    fun drawOuterEdge(context: DrawContext, from: IntPos, to: IntPos, color: Int, reroute: Boolean){
         RenderSystem.enableDepthTest()
         if (from.x != to.x){
             val posY = if (reroute) to.y else from.y
-            fill(matrices, from.x, posY - 2, to.x, posY + 2, color)
+            context.fill(from.x, posY - 2, to.x, posY + 2, color)
         }
         if (from.y != to.y){
             val fromY = from.y + if (from.x == to.x || reroute) 0 else -2
             val toY = to.y + if (from.x != to.x && reroute) 2 else 0
             val posX = if (reroute) from.x else to.x
-            fill(matrices, posX - 2, fromY, posX + 2, toY, color)
+            context.fill(posX - 2, fromY, posX + 2, toY, color)
         }
     }
 
-    fun drawInnerEdge(matrices: MatrixStack, from: IntPos, to: IntPos, color: Int, reroute: Boolean){
+    fun drawInnerEdge(context: DrawContext, from: IntPos, to: IntPos, color: Int, reroute: Boolean){
         if (from.x != to.x){
             val posY = if (reroute) to.y else from.y
-            fill(matrices, from.x, posY - 1, to.x, posY + 1, color)
+            context.fill(from.x, posY -1, to.x, posY + 1, color)
         }
         if (from.y != to.y){
             val fromY = from.y + if (from.x == to.x || reroute) 0 else -1
             val toY = to.y + if (from.x != to.x && reroute) 1 else 0
             val posX = if (reroute) from.x else to.x
-            fill(matrices, posX - 1, fromY, posX + 1, toY, color)
+            context.fill(posX - 1, fromY, posX + 1, toY, color)
         }
     }
 
-    fun renderEdges(abilities: List<Ability>, matrices: MatrixStack, color: AlphaColor, inner: Boolean){
+    fun renderEdges(abilities: List<Ability>, context: DrawContext, color: AlphaColor, inner: Boolean){
         abilities.forEach {
             val to = toScreenPosition(it.getHeight(), it.getPosition())
             it.getPredecessors().forEach { node ->
@@ -116,15 +117,15 @@ abstract class ATreeScrollWidget(screen: TooltipScreen, x: Int, y: Int,
                 val height = min(it.getHeight(), node.getHeight())
                 val reroute = getAbilityTree().getAbilityFromPosition(height, it.getPosition()) != null
                 if (inner) {
-                    drawInnerEdge(matrices, from, to, color.code(), reroute)
+                    drawInnerEdge(context, from, to, color.code(), reroute)
                 }else{
-                    drawOuterEdge(matrices, from, to, color.code(), reroute)
+                    drawOuterEdge(context, from, to, color.code(), reroute)
                 }
             }
         }
     }
 
-    fun renderArchetypeOutline(matrices: MatrixStack, ability: Ability, x: Int, y: Int) {
+    fun renderArchetypeOutline(context: DrawContext, ability: Ability, x: Int, y: Int) {
         if (ability.getTier().getLevel() != 0){
             ability.getArchetype()?.let { arch ->
                 val color = Color.fromFormatting(arch.getFormatting())
@@ -132,7 +133,7 @@ abstract class ATreeScrollWidget(screen: TooltipScreen, x: Int, y: Int,
                 val itemY = y - 15
                 val u = 64 + 30 * (ability.getTier().getLevel() - 1)
                 RenderKit.renderTextureWithColor(
-                    matrices, TEXTURE, color.withAlpha(165), itemX, itemY,
+                    context, TEXTURE, color.withAlpha(165), itemX, itemY,
                     u, 182, 30, 30, 256, 256
                 )
             }

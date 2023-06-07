@@ -7,6 +7,7 @@ import io.github.nbcss.wynnlib.render.RenderKit.renderTexture
 import io.github.nbcss.wynnlib.render.RenderKit.renderTextureWithColor
 import io.github.nbcss.wynnlib.utils.Color
 import net.minecraft.client.font.TextRenderer
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
@@ -23,7 +24,7 @@ class EffectIndicator(data: JsonObject): StatusType(data) {
     }
 
     override fun renderIcon(
-        matrices: MatrixStack,
+        context: DrawContext,
         textRenderer: TextRenderer,
         timer: TypedStatusTimer,
         icon: Identifier,
@@ -32,7 +33,7 @@ class EffectIndicator(data: JsonObject): StatusType(data) {
         delta: Float
     ) {
         renderTexture(
-            matrices, ICON_BACKGROUND, posX + 3, posY, 0, 256 - 22, 22, 22
+            context, ICON_BACKGROUND, posX + 3, posY, 0, 256 - 22, 22, 22
         )
         val duration: Double? = timer.getDuration()
         val maxDuration: Double? = timer.getFullDuration()
@@ -40,7 +41,7 @@ class EffectIndicator(data: JsonObject): StatusType(data) {
             val pct = MathHelper.clamp(duration / maxDuration, 0.0, 1.0)
             val color = Color(MathHelper.hsvToRgb((pct / 3.0).toFloat(), 1.0f, 1.0f))
             val uv = pctToUv(pct)
-            renderTextureWithColor(matrices, ICON_BACKGROUND, color.solid(),
+            renderTextureWithColor(context, ICON_BACKGROUND, color.solid(),
                 posX + 3, posY, uv.first, uv.second, 22, 22, 256, 256
             )
             var time = duration.roundToInt().toString()
@@ -50,10 +51,10 @@ class EffectIndicator(data: JsonObject): StatusType(data) {
             val text = Translations.INDICATOR_SUFFIX_S.formatted(Formatting.LIGHT_PURPLE, null, time)
             val textX = posX + 14 - textRenderer.getWidth(text) / 2
             val textY = posY + 25
-            renderOutlineText(matrices, text, textX.toFloat(), textY.toFloat())
+            renderOutlineText(context.matrices, text, textX.toFloat(), textY.toFloat())
         }
         renderTexture(
-            matrices, icon, posX + 5, posY + 2, 0, 0, 18, 18, 18, 18
+            context, icon, posX + 5, posY + 2, 0, 0, 18, 18, 18, 18
         )
     }
 }

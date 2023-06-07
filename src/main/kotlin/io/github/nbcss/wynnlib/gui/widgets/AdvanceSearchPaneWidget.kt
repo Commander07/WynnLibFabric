@@ -13,6 +13,7 @@ import io.github.nbcss.wynnlib.render.RenderKit
 import io.github.nbcss.wynnlib.render.TextureData
 import io.github.nbcss.wynnlib.utils.Color
 import net.minecraft.client.MinecraftClient
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder
 import net.minecraft.client.gui.widget.ClickableWidget
 import net.minecraft.client.util.math.MatrixStack
@@ -92,20 +93,19 @@ class AdvanceSearchPaneWidget<T: BaseItem>(private val screen: DictionaryScreen<
         return super.charTyped(chr, modifiers)
     }
 
-    override fun renderButton(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
+    override fun renderButton(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
         TODO("Not yet implemented")
     }
 
-    override fun render(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
+    override fun render(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
         //screen.setFilterVisible(false)
         RenderKit.renderTexture(
-            matrices, TEXTURE, x, y, 0, 0, width, height
+            context, TEXTURE, x, y, 0, 0, width, height
         )
-        client.textRenderer.draw(matrices, Translations.UI_ADVANCE_SEARCH.translate(),
-            x.toFloat() + 6.0f, y.toFloat() + 4.0f, Color.BLACK.code())
-        close.render(matrices, mouseX, mouseY, delta)
-        slider.render(matrices, mouseX, mouseY, delta)
-        scroll.render(matrices, mouseX, mouseY, delta)
+        context!!.drawText(client.textRenderer, Translations.UI_ADVANCE_SEARCH.translate(), x + 6, y + 4, Color.BLACK.code(), false)
+        close.render(context, mouseX, mouseY, delta)
+        slider.render(context, mouseX, mouseY, delta)
+        scroll.render(context, mouseX, mouseY, delta)
     }
 
     inner class Scroll: ListContainerScroll(null, screen,

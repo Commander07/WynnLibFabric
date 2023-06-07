@@ -1,6 +1,7 @@
 package io.github.nbcss.wynnlib.gui.widgets.scrollable
 
 import net.minecraft.client.MinecraftClient
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
 import java.util.function.Supplier
@@ -23,9 +24,9 @@ class ItemIconWidget(posX: Int, posY: Int,
         TODO("Not yet implemented")
     }
 
-    override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
+    override fun render(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
         itemProvider.get().let {
-            renderer.renderInGui(matrices, it, getX(), getY())
+            context!!.drawItem(it, getX(), getY())
         }
     }
 }

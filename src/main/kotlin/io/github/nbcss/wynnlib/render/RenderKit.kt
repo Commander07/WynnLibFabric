@@ -7,7 +7,7 @@ import io.github.nbcss.wynnlib.utils.Color
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.font.TextRenderer
-import net.minecraft.client.gui.DrawableHelper
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.render.*
 import net.minecraft.client.render.VertexConsumerProvider.Immediate
 import net.minecraft.client.util.math.MatrixStack
@@ -22,7 +22,7 @@ import kotlin.math.sqrt
 
 object RenderKit {
     private val textRender = MinecraftClient.getInstance().textRenderer
-    fun renderTexture(matrices: MatrixStack?,
+    fun renderTexture(context: DrawContext?,
                       texture: Identifier,
                       x: Int,
                       y: Int,
@@ -30,10 +30,10 @@ object RenderKit {
                       v: Int,
                       width: Int,
                       height: Int) {
-        renderTexture(matrices, texture, x, y, u, v, width, height, 256, 256)
+        renderTexture(context, texture, x, y, u, v, width, height, 256, 256)
     }
 
-    fun renderTexture(matrices: MatrixStack,
+    fun renderTexture(context: DrawContext,
                       texture: Identifier,
                       x: Double,
                       y: Double,
@@ -43,16 +43,11 @@ object RenderKit {
                       height: Int,
                       texWidth: Int,
                       texHeight: Int) {
-        RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
-        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
-        RenderSystem.setShaderTexture(0, texture)
-        matrices.push()
-        matrices.translate(x, y, 0.0)
-        DrawableHelper.drawTexture(matrices, 0, 0, u.toFloat(), v.toFloat(), width, height, texWidth, texHeight)
-        matrices.pop()
+        context.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
+        context.drawTexture(texture, x.toInt(), y.toInt(), u.toFloat(), v.toFloat(), width, height, texWidth, texHeight)
     }
 
-    fun renderTexture(matrices: MatrixStack?,
+    fun renderTexture(context: DrawContext?,
                       texture: Identifier,
                       x: Int,
                       y: Int,
@@ -62,13 +57,11 @@ object RenderKit {
                       height: Int,
                       texWidth: Int,
                       texHeight: Int) {
-        RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
-        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
-        RenderSystem.setShaderTexture(0, texture)
-        DrawableHelper.drawTexture(matrices, x, y, u.toFloat(), v.toFloat(), width, height, texWidth, texHeight)
+        context?.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
+        context?.drawTexture(texture, x, y, u.toFloat(), v.toFloat(), width, height, texWidth, texHeight)
     }
 
-    fun renderAnimatedTexture(matrices: MatrixStack,
+    fun renderAnimatedTexture(context: DrawContext,
                               texture: Identifier,
                               x: Int,
                               y: Int,
@@ -81,13 +74,11 @@ object RenderKit {
         val time = System.currentTimeMillis() % duration
         val index = min((time / intervalTime).toInt(), frames - 1)
         val v = (index * height).toFloat()
-        RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
-        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
-        RenderSystem.setShaderTexture(0, texture)
-        DrawableHelper.drawTexture(matrices, x, y, 0.0f, v, width, height, width, frames * height)
+        context.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
+        context.drawTexture(texture, x, y, 0.0f, v, width, height, width, frames * height)
     }
 
-    fun renderTextureWithColor(matrices: MatrixStack,
+    fun renderTextureWithColor(context: DrawContext,
                                texture: Identifier,
                                color: AlphaColor,
                                x: Int,
@@ -98,14 +89,10 @@ object RenderKit {
                                height: Int,
                                texWidth: Int,
                                texHeight: Int) {
-        //RenderSystem.setShader { GameRenderer.getPositionTexColorShader() }
-        //println(texture)
         RenderSystem.enableBlend()
-        RenderSystem.setShaderColor(color.floatRed(), color.floatGreen(), color.floatBlue(), color.floatAlpha())
-        RenderSystem.setShaderTexture(0, texture)
-        RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
-        DrawableHelper.drawTexture(matrices, x, y, u.toFloat(), v.toFloat(), width, height, texWidth, texHeight)
-        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
+        context.setShaderColor(color.floatRed(), color.floatGreen(), color.floatBlue(), color.floatAlpha())
+        context.drawTexture(texture, x, y, u.toFloat(), v.toFloat(), width, height, texWidth, texHeight)
+        context.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
     }
 
     fun renderOutlineText(matrices: MatrixStack, text: String, x: Float, y: Float,
@@ -130,7 +117,6 @@ object RenderKit {
 
     fun renderItemBar(progress: Double, color: Int, x: Int, y: Int) {
         RenderSystem.disableDepthTest()
-//        RenderSystem.disableTexture()
         RenderSystem.disableBlend()
         val tessellator = Tessellator.getInstance()
         val bufferBuilder = tessellator.buffer
@@ -138,7 +124,6 @@ object RenderKit {
         renderGuiQuad(bufferBuilder, x + 2, y + 13, 13, 2, 0)
         renderGuiQuad(bufferBuilder, x + 2, y + 13, steps, 1, color)
         RenderSystem.enableBlend()
-//        RenderSystem.enableTexture()
         RenderSystem.enableDepthTest()
     }
 
@@ -160,12 +145,11 @@ object RenderKit {
         buffer.vertex((x + 0).toDouble(), (y + height).toDouble(), 0.0).color(red, green, blue, alpha).next()
         buffer.vertex((x + width).toDouble(), (y + height).toDouble(), 0.0).color(red, green, blue, alpha).next()
         buffer.vertex((x + width).toDouble(), (y + 0).toDouble(), 0.0).color(red, green, blue, alpha).next()
-        // buffer.end()
         BufferRenderer.draw(buffer.end())
     }
 
     fun renderWayPointText(
-        matrices: MatrixStack,
+        context: DrawContext,
         texts: List<Text>,
         worldX: Double,
         worldY: Double,
@@ -184,6 +168,7 @@ object RenderKit {
             zoom = distance / radius
         }
         RenderSystem.disableDepthTest()
+        val matrices = context.matrices
         matrices.push()
         matrices.loadIdentity()
         matrices.translate(dx, dy, dz)
@@ -195,8 +180,7 @@ object RenderKit {
         var textY = -(texts.size + if (showDistance) 1 else 0) * 10 / 2.0f
         val consumerProvider = VertexConsumerProvider.immediate(Tessellator.getInstance().buffer)
         val matrix4f = matrices.peek().positionMatrix
-        DrawableHelper.fill(matrices,
-            textX.toInt() - 2,
+        context.fill(textX.toInt() - 2,
             textY.toInt() - 1,
             textX.toInt() + width + 2,
             textY.toInt() + texts.size * 10 - 1,

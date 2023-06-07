@@ -10,6 +10,7 @@ import io.github.nbcss.wynnlib.gui.widgets.buttons.*
 import io.github.nbcss.wynnlib.i18n.Translations
 import io.github.nbcss.wynnlib.registry.AbilityRegistry
 import io.github.nbcss.wynnlib.utils.ItemFactory
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
@@ -50,8 +51,8 @@ class AbilityTreeViewerScreen(parent: Screen?,
                 override fun isSelected(index: Int): Boolean {
                     return tree.character.ordinal == index
                 }
-                override fun drawTooltip(matrices: MatrixStack, mouseX: Int, mouseY: Int, index: Int) {
-                    drawTooltip(matrices, listOf(characterClass.translate()), mouseX, mouseY)
+                override fun drawTooltip(context: DrawContext, mouseX: Int, mouseY: Int, index: Int) {
+                    drawTooltip(context, listOf(characterClass.translate()), mouseX, mouseY)
                 }
             }
             buttons.add(SideTabWidget.fromWindowSide(index++, windowX, windowY, 34,
@@ -64,8 +65,8 @@ class AbilityTreeViewerScreen(parent: Screen?,
                     client!!.setScreen(screen)
                 }
                 override fun isSelected(index: Int): Boolean = false
-                override fun drawTooltip(matrices: MatrixStack, mouseX: Int, mouseY: Int, index: Int) {
-                    drawTooltip(matrices, listOf(AbilityBuildDictionaryScreen.TITLE), mouseX, mouseY)
+                override fun drawTooltip(context: DrawContext, mouseX: Int, mouseY: Int, index: Int) {
+                    drawTooltip(context, listOf(AbilityBuildDictionaryScreen.TITLE), mouseX, mouseY)
                 }
             }))
         buttons.add(SideTabWidget.fromWindowSide(0, windowX, windowY, 45,
@@ -75,9 +76,9 @@ class AbilityTreeViewerScreen(parent: Screen?,
                 }
                 override fun isSelected(index: Int): Boolean = false
                 override fun getClickSound(): SoundEvent? = SoundEvents.ENTITY_ITEM_PICKUP
-                override fun drawTooltip(matrices: MatrixStack, mouseX: Int, mouseY: Int, index: Int) {
+                override fun drawTooltip(context: DrawContext, mouseX: Int, mouseY: Int, index: Int) {
                     val name = Translations.UI_TREE_BUILDS.translate().string
-                    drawTooltip(matrices, listOf(Text.literal("[+] $name").formatted(Formatting.GREEN),
+                    drawTooltip(context, listOf(Text.literal("[+] $name").formatted(Formatting.GREEN),
                         tree.character.formatted(Formatting.GRAY)), mouseX, mouseY)
                 }
             }))
@@ -91,14 +92,14 @@ class AbilityTreeViewerScreen(parent: Screen?,
         return title.copy().append(" [").append(tree.character.translate()).append("]")
     }
 
-    override fun drawBackgroundPre(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
-        super.drawBackgroundPre(matrices, mouseX, mouseY, delta)
-        buttons.forEach { it.drawBackgroundPre(matrices, mouseX, mouseY) }
+    override fun drawBackgroundPre(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
+        super.drawBackgroundPre(context, mouseX, mouseY, delta)
+        buttons.forEach { it.drawBackgroundPre(context, mouseX, mouseY) }
     }
 
-    override fun drawBackgroundPost(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
-        super.drawBackgroundPost(matrices, mouseX, mouseY, delta)
-        buttons.forEach { it.drawBackgroundPost(matrices, mouseX, mouseY) }
+    override fun drawBackgroundPost(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
+        super.drawBackgroundPost(context, mouseX, mouseY, delta)
+        buttons.forEach { it.drawBackgroundPost(context, mouseX, mouseY) }
     }
 
     override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean {
@@ -107,16 +108,16 @@ class AbilityTreeViewerScreen(parent: Screen?,
         return super.mouseClicked(mouseX, mouseY, button)
     }
 
-    override fun renderExtra(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
+    override fun renderExtra(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {
         var archetypeX = viewerX + 2
         val archetypeY = viewerY + 144
         //render archetype values
         tree.getArchetypes().forEach {
-            renderArchetypeIcon(matrices, it, archetypeX, archetypeY)
+            renderArchetypeIcon(context, it, archetypeX, archetypeY)
             val points = tree.getArchetypePoint(it).toString()
-            textRenderer.draw(matrices, points, archetypeX.toFloat() + 20, archetypeY.toFloat() + 4, 0)
+            context.drawText(textRenderer, points, archetypeX + 20, archetypeY + 4, 0xFFFFFF, false)
             if (mouseX >= archetypeX && mouseY >= archetypeY && mouseX <= archetypeX + 16 && mouseY <= archetypeY + 16){
-                drawTooltip(matrices, it.getTooltip(), mouseX, mouseY)
+                drawTooltip(context, it.getTooltip(), mouseX, mouseY)
             }
             archetypeX += 60
         }
@@ -127,7 +128,7 @@ class AbilityTreeViewerScreen(parent: Screen?,
         override fun getAbilityTree(): AbilityTree = tree
 
         override fun renderContents(
-            matrices: MatrixStack,
+            context: DrawContext,
             mouseX: Int,
             mouseY: Int,
             position: Double,
@@ -140,20 +141,20 @@ class AbilityTreeViewerScreen(parent: Screen?,
                 !isMouseOver(mouseX.toDouble(), mouseY.toDouble()) || !isOverNode(
                     toScreenPosition(it.getHeight(), it.getPosition()), mouseX, mouseY)
             }
-            renderEdges(inactive, matrices, LOCKED_OUTER_COLOR, false)
-            renderEdges(inactive, matrices, LOCKED_INNER_COLOR, true)
+            renderEdges(inactive, context, LOCKED_OUTER_COLOR, false)
+            renderEdges(inactive, context, LOCKED_INNER_COLOR, true)
             //render active edges
             val active = tree.getAbilities().filter {
                 isMouseOver(mouseX.toDouble(), mouseY.toDouble()) &&
                         isOverNode(toScreenPosition(it.getHeight(), it.getPosition()), mouseX, mouseY)
             }
-            renderEdges(active, matrices, ACTIVE_OUTER_COLOR, false)
-            renderEdges(active, matrices, ACTIVE_INNER_COLOR, true)
+            renderEdges(active, context, ACTIVE_OUTER_COLOR, false)
+            renderEdges(active, context, ACTIVE_INNER_COLOR, true)
             //render icons
             val locked = HashSet(active.map { it.getBlockAbilities() }.flatten())
             tree.getAbilities().forEach {
                 val node = toScreenPosition(it.getHeight(), it.getPosition())
-                renderArchetypeOutline(matrices, it, node.x, node.y)
+                renderArchetypeOutline(context, it, node.x, node.y)
                 val item = if (it in locked){
                     it.getTier().getLockedTexture()
                 }else if (isMouseOver(mouseX.toDouble(), mouseY.toDouble()) && isOverNode(node, mouseX, mouseY)){
@@ -161,7 +162,7 @@ class AbilityTreeViewerScreen(parent: Screen?,
                 }else{
                     it.getTier().getUnlockedTexture()
                 }
-                itemRenderer.renderInGuiWithOverrides(matrices, item, node.x - 8, node.y - 8)
+                context.drawItem(item, node.x - 8, node.y - 8)
             }
         }
 
@@ -169,14 +170,14 @@ class AbilityTreeViewerScreen(parent: Screen?,
             return super.onClickNode(ability, 1)
         }
 
-        override fun renderContentsPost(matrices: MatrixStack, mouseX: Int, mouseY: Int, delta: Float) {
+        override fun renderContentsPost(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {
             if (!isMouseOver(mouseX.toDouble(), mouseY.toDouble()))
                 return
             //render ability tooltip
             for (ability in tree.getAbilities()) {
                 val node = toScreenPosition(ability.getHeight(), ability.getPosition())
                 if (isOverNode(node, mouseX, mouseY)){
-                    renderAbilityTooltip(matrices, mouseX, mouseY, ability)
+                    renderAbilityTooltip(context, mouseX, mouseY, ability)
                     break
                 }
             }

@@ -6,6 +6,7 @@ import io.github.nbcss.wynnlib.utils.Color
 import io.github.nbcss.wynnlib.utils.parseStyle
 import io.github.nbcss.wynnlib.utils.removeDecimal
 import net.minecraft.client.font.TextRenderer
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
@@ -56,7 +57,7 @@ class ValuesIndicator(data: JsonObject): StatusType(data) {
     }
 
     override fun renderIcon(
-        matrices: MatrixStack,
+        context: DrawContext,
         textRenderer: TextRenderer,
         timer: TypedStatusTimer,
         icon: Identifier,
@@ -65,7 +66,7 @@ class ValuesIndicator(data: JsonObject): StatusType(data) {
         delta: Float
     ) {
         RenderKit.renderTexture(
-            matrices, ICON_BACKGROUND, posX + 3, posY, 0, 256 - 22, 22, 22
+            context, ICON_BACKGROUND, posX + 3, posY, 0, 256 - 22, 22, 22
         )
         //render value text
         val values = timer.getValues()
@@ -77,7 +78,7 @@ class ValuesIndicator(data: JsonObject): StatusType(data) {
             val color = Color(MathHelper.hsvToRgb((pct / 3.0).toFloat(), 1.0f, 1.0f))
             val uv = pctToUv(pct)
             RenderKit.renderTextureWithColor(
-                matrices, ICON_BACKGROUND, color.solid(),
+                context, ICON_BACKGROUND, color.solid(),
                 posX + 3, posY, uv.first, uv.second, 22, 22, 256, 256
             )
             val formattedValue = formatValue(values[0])
@@ -88,11 +89,11 @@ class ValuesIndicator(data: JsonObject): StatusType(data) {
             }
             val textX: Int = posX + 14 - textRenderer.getWidth(valueText) / 2
             val textY = posY + 25
-            RenderKit.renderOutlineText(matrices, Text.literal(valueText), textX.toFloat(), textY.toFloat())
+            RenderKit.renderOutlineText(context.matrices, Text.literal(valueText), textX.toFloat(), textY.toFloat())
         }
         //render icon
         RenderKit.renderTexture(
-            matrices, icon, posX + 5, posY + 2, 0, 0, 18, 18, 18, 18
+            context, icon, posX + 5, posY + 2, 0, 0, 18, 18, 18, 18
         )
     }
 }

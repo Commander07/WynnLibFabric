@@ -12,6 +12,7 @@ import io.github.nbcss.wynnlib.matcher.ProtectableType
 import io.github.nbcss.wynnlib.timer.status.StatusType
 import io.github.nbcss.wynnlib.utils.ItemFactory
 import io.github.nbcss.wynnlib.utils.formattingLines
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
@@ -56,8 +57,8 @@ class ConfigurationScreen(parent: Screen?) : GenericScrollScreen(parent, TITLE) 
                         return this@ConfigurationScreen.category == categories[index]
                     }
 
-                    override fun drawTooltip(matrices: MatrixStack, mouseX: Int, mouseY: Int, index: Int) {
-                        drawTooltip(matrices, listOf(categories[index].getDisplayText()), mouseX, mouseY)
+                    override fun drawTooltip(context: DrawContext, mouseX: Int, mouseY: Int, index: Int) {
+                        drawTooltip(context, listOf(categories[index].getDisplayText()), mouseX, mouseY)
                     }
                 }))
         }
@@ -67,14 +68,14 @@ class ConfigurationScreen(parent: Screen?) : GenericScrollScreen(parent, TITLE) 
         return super.getTitle().copy().append(Text.literal(" [").append(category.getDisplayText()).append("]"))
     }
 
-    override fun drawBackgroundPre(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
-        super.drawBackgroundPre(matrices, mouseX, mouseY, delta)
-        sideTabs.forEach { it.drawBackgroundPre(matrices, mouseX, mouseY) }
+    override fun drawBackgroundPre(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
+        super.drawBackgroundPre(context, mouseX, mouseY, delta)
+        sideTabs.forEach { it.drawBackgroundPre(context, mouseX, mouseY) }
     }
 
-    override fun drawBackgroundPost(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
-        super.drawBackgroundPost(matrices, mouseX, mouseY, delta)
-        sideTabs.forEach { it.drawBackgroundPost(matrices, mouseX, mouseY) }
+    override fun drawBackgroundPost(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
+        super.drawBackgroundPost(context, mouseX, mouseY, delta)
+        sideTabs.forEach { it.drawBackgroundPost(context, mouseX, mouseY) }
     }
 
     override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean {
@@ -158,6 +159,7 @@ class ConfigurationScreen(parent: Screen?) : GenericScrollScreen(parent, TITLE) 
             setContentHeight(posY + 2)
         }
         override fun getSlider(): VerticalSliderWidget? = slider
+
         override fun setFocused(focused: Boolean) {
             TODO("Not yet implemented")
         }
@@ -193,6 +195,7 @@ class ConfigurationScreen(parent: Screen?) : GenericScrollScreen(parent, TITLE) 
             setContentHeight(posY + 2)
         }
         override fun getSlider(): VerticalSliderWidget? = slider
+
         override fun setFocused(focused: Boolean) {
             TODO("Not yet implemented")
         }
@@ -224,6 +227,7 @@ class ConfigurationScreen(parent: Screen?) : GenericScrollScreen(parent, TITLE) 
             setContentHeight(posY + 2)
         }
         override fun getSlider(): VerticalSliderWidget? = slider
+
         override fun setFocused(focused: Boolean) {
             TODO("Not yet implemented")
         }

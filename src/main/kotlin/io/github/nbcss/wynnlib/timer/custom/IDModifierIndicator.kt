@@ -5,6 +5,8 @@ import io.github.nbcss.wynnlib.i18n.SuffixTranslation
 import io.github.nbcss.wynnlib.timer.BasicTimer
 import io.github.nbcss.wynnlib.timer.StatusEntry
 import io.github.nbcss.wynnlib.utils.colorOf
+import net.minecraft.client.font.TextRenderer
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import java.util.regex.Pattern

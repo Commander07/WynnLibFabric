@@ -13,6 +13,7 @@ import io.github.nbcss.wynnlib.utils.Keyed
 import io.github.nbcss.wynnlib.utils.formatTimer
 import io.github.nbcss.wynnlib.utils.removeDecimal
 import net.minecraft.client.font.TextRenderer
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
@@ -35,14 +36,14 @@ abstract class StatusType(data: JsonObject): Keyed, Translatable {
     }
 
     abstract fun renderIcon(
-        matrices: MatrixStack,
+        context: DrawContext,
         textRenderer: TextRenderer,
         timer: TypedStatusTimer,
         icon: Identifier,
         posX: Int, posY: Int, delta: Float
     )
 
-    fun renderText(matrices: MatrixStack,
+    fun renderText(context: DrawContext,
                    timer: TypedStatusTimer,
                    displayText: Text,
                    posX: Int, posY: Int) {
@@ -59,7 +60,7 @@ abstract class StatusType(data: JsonObject): Keyed, Translatable {
                 .append(" ")
         }
         text.append(displayText)
-        RenderKit.renderDefaultOutlineText(matrices, text, posX.toFloat(), posY.toFloat())
+        RenderKit.renderDefaultOutlineText(context.matrices, text, posX.toFloat(), posY.toFloat())
     }
 
     open fun createTimer(entry: StatusEntry, values: List<Double>, worldTime: Long): TypedStatusTimer {
@@ -68,10 +69,10 @@ abstract class StatusType(data: JsonObject): Keyed, Translatable {
 
     fun asSideIndicator(timer: TypedStatusTimer): SideIndicator? {
         return if (text != null) object : SideIndicator {
-            override fun render(matrices: MatrixStack, textRenderer: TextRenderer, posX: Int, posY: Int) {
+            override fun render(context: DrawContext, textRenderer: TextRenderer, posX: Int, posY: Int) {
                 val args: Array<Any> = timer.getValues().map { removeDecimal(it) }.toTypedArray()
                 val displayText = text.formatted(Formatting.GRAY, label = null, args = args)
-                renderText(matrices, timer, displayText, posX, posY)
+                renderText(context, timer, displayText, posX, posY)
             }
             override fun getDuration(): Double? {
                 return timer.getDuration()
@@ -84,8 +85,8 @@ abstract class StatusType(data: JsonObject): Keyed, Translatable {
             override fun getKey(): String {
                 return id
             }
-            override fun render(matrices: MatrixStack, textRenderer: TextRenderer, posX: Int, posY: Int, delta: Float) {
-                renderIcon(matrices, textRenderer, timer, texture, posX, posY, delta)
+            override fun render(context: DrawContext, textRenderer: TextRenderer, posX: Int, posY: Int, delta: Float) {
+                renderIcon(context, textRenderer, timer, texture, posX, posY, delta)
             }
         } else null
     }

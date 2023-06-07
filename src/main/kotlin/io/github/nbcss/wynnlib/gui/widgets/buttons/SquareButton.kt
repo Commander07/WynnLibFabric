@@ -3,6 +3,7 @@ package io.github.nbcss.wynnlib.gui.widgets.buttons
 import io.github.nbcss.wynnlib.gui.TooltipScreen
 import io.github.nbcss.wynnlib.items.identity.TooltipProvider
 import io.github.nbcss.wynnlib.render.RenderKit
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.widget.ButtonWidget
 import net.minecraft.client.sound.PositionedSoundInstance
 import net.minecraft.client.sound.SoundManager
@@ -29,11 +30,11 @@ class SquareButton(private val texture: Identifier,
         }
     }
 
-    override fun renderButton(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
+    override fun renderButton(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
         val v = if (this.isHovered) size else 0
-        RenderKit.renderTexture(matrices, texture, x, y, 0, v, size, size, size, size * 2)
+        RenderKit.renderTexture(context, texture, x, y, 0, v, size, size, size, size * 2)
         if (this.isHovered && screen != null && tooltipProvider != null) {
-            screen.drawTooltip(matrices!!, tooltipProvider.getTooltip(), mouseX, mouseY)
+            screen.drawTooltip(context!!, tooltipProvider.getTooltip(), mouseX, mouseY)
         }
     }
 }
