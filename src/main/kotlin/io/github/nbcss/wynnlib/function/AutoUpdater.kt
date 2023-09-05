@@ -4,7 +4,6 @@ import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import io.github.nbcss.wynnlib.utils.FileUtils
-import java.io.IOException
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
@@ -100,7 +99,7 @@ object AutoUpdater {
 
                 FileUtils.writeFile("config/WynnLib/Ingredients.json", ingsJson)
             }
-        } catch (e: IOException) {
+        } catch (e: Exception) {
             // Recover
             val gear = FileUtils.readFile("config/WynnLib/Equipments.json")
             val ings = FileUtils.readFile("config/WynnLib/Ingredients.json")
