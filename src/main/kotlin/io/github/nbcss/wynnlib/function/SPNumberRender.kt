@@ -14,19 +14,17 @@ import java.util.regex.Pattern
 object SPNumberRender {
     private val client = MinecraftClient.getInstance()
     private val pattern = Pattern.compile("§dUpgrade your §.. (.+)§d skill")
-    private val pointPattern = Pattern.compile("^(-?\\d+) point")
+    private val pointPattern = Pattern.compile("(-?\\d+) point")
     const val key = "skill_point"
     object Reader: EventHandler<ItemLoadEvent> {
         override fun handle(event: ItemLoadEvent) {
-            val matcher = pattern.matcher(event.item.name.toString())
+            val matcher = pattern.matcher(event.item.name.string)
             if (matcher.find()) {
                 Skill.fromDisplayName(matcher.group(1))?.let {
                     val tooltip = event.item.getTooltip(client.player, TooltipContext.Default.BASIC)
                     val point = tooltip.asSequence()
-                        .filter { it.toString() == "" && it.siblings.isNotEmpty() }
-                        .map { it.siblings[0] }
-                        .filter { it.siblings.size >= 2 }
-                        .map { pointPattern.matcher(it.siblings[1].toString()) }
+                        .filter { it.string != "" }
+                        .map { pointPattern.matcher(it.string) }
                         .filter { it.find() }.toList()
                         .firstNotNullOfOrNull { it.group(1).toInt() }
                     if (point != null) {
@@ -43,10 +41,9 @@ object SPNumberRender {
                 return
             ItemModifier.readInt(event.item, key)?.let {
                 val point = "${MathHelper.clamp(it, -99, 999)}"
-                //println(point)
                 val x = (event.x + 19 - 2 - event.renderer.getWidth(point))
                 val y = event.y + 9
-//                event.matrixStack.translate(0.0, 0.0, 375.0)
+                event.context.matrices.translate(0.0, 0.0, 200.0)
                 event.context.drawTextWithShadow(event.renderer, point, x, y, 0xFFFFFF)
                 event.cancelled = true
             }
