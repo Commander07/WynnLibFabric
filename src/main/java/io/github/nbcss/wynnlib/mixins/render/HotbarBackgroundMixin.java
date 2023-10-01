@@ -12,10 +12,10 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -23,7 +23,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static net.minecraft.client.gui.widget.ClickableWidget.WIDGETS_TEXTURE;
 
 @Mixin(InGameHud.class)
 public class HotbarBackgroundMixin {
@@ -34,6 +33,8 @@ public class HotbarBackgroundMixin {
     private PlayerEntity getCameraPlayer() {
         return null;
     }
+
+    @Shadow @Final private static Identifier HOTBAR_TEXTURE;
     private boolean flag = false;
     DrawContext context = null;
 
@@ -42,7 +43,7 @@ public class HotbarBackgroundMixin {
         flag = true;
     }
 
-    @Inject(method = "renderHotbar", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawTexture(Lnet/minecraft/util/Identifier;IIIIII)V",
+    @Inject(method = "renderHotbar", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawGuiTexture(Lnet/minecraft/util/Identifier;IIII)V",
             shift = At.Shift.AFTER))
     public void renderHotbar(float tickDelta, DrawContext context, CallbackInfo ci){
         this.context = context;
@@ -54,6 +55,8 @@ public class HotbarBackgroundMixin {
 
     @Redirect(method = "renderHotbarItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawItemInSlot(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;II)V"))
     public void renderHotbarItem(DrawContext instance, TextRenderer textRenderer, ItemStack stack, int x, int y) {
+        if (context == null)
+            this.context = instance;
         if (drawOverrides(textRenderer, stack, x, y))
             return;
         instance.drawItemInSlot(textRenderer, stack, x, y);
@@ -91,8 +94,6 @@ public class HotbarBackgroundMixin {
                             0, 0, 20, 20, 20, 20);
                 }
             }
-            //bind back origin texture
-            RenderSystem.setShaderTexture(0, WIDGETS_TEXTURE);
         }
     }
 }

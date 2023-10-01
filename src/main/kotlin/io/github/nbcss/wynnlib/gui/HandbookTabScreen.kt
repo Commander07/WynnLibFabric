@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem
 import io.github.nbcss.wynnlib.Settings
 import io.github.nbcss.wynnlib.gui.widgets.buttons.ExitButtonWidget
 import io.github.nbcss.wynnlib.render.RenderKit
+import io.github.nbcss.wynnlib.render.TextureData
 import io.github.nbcss.wynnlib.utils.playSound
 import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.Screen
@@ -69,12 +70,13 @@ abstract class HandbookTabScreen(val parent: Screen?,
     }
 
     open fun drawBackground(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
-        renderBackground(context)
+        renderBackground(context, mouseX, mouseY, delta)
         drawBackgroundPre(context, mouseX, mouseY, delta)
         //render background
         drawBackgroundTexture(context, mouseX, mouseY, delta)
         //render selected tab (normally should only have up to one tab)
         drawBackgroundPost(context, mouseX, mouseY, delta)
+        context?.setShaderColor(1f, 1f, 1f, 0f)
         context?.drawText(textRenderer, getTitle().asOrderedText(), windowX + 6, windowY + 33, 0xFFFFFF, false)
     }
 

@@ -81,10 +81,10 @@ class AdvanceSearchPaneWidget<T: BaseItem>(private val screen: DictionaryScreen<
         return super.mouseReleased(mouseX, mouseY, button)
     }
 
-    override fun mouseScrolled(mouseX: Double, mouseY: Double, amount: Double): Boolean {
-        if (scroll.mouseScrolled(mouseX, mouseY, amount))
+    override fun mouseScrolled(mouseX: Double, mouseY: Double, amount: Double, verticalAmount: Double): Boolean {
+        if (scroll.mouseScrolled(mouseX, mouseY, amount, verticalAmount))
             return true
-        return super.mouseScrolled(mouseX, mouseY, amount)
+        return super.mouseScrolled(mouseX, mouseY, amount, verticalAmount)
     }
 
     override fun charTyped(chr: Char, modifiers: Int): Boolean {

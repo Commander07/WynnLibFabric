@@ -1,5 +1,6 @@
 package io.github.nbcss.wynnlib.gui
 
+import com.mojang.blaze3d.systems.RenderSystem
 import io.github.nbcss.wynnlib.gui.widgets.AdvanceSearchPaneWidget
 import io.github.nbcss.wynnlib.gui.widgets.ItemSearchWidget
 import io.github.nbcss.wynnlib.gui.widgets.buttons.ItemSlotWidget
@@ -185,18 +186,18 @@ abstract class DictionaryScreen<T: BaseItem>(parent: Screen?, title: Text) : Han
         updateSlots()
     }
 
-    override fun mouseScrolled(mouseX: Double, mouseY: Double, amount: Double): Boolean {
+    override fun mouseScrolled(mouseX: Double, mouseY: Double, amount: Double, verticalAmount: Double): Boolean {
         //println("${mouseX}, ${mouseY}, $amount")
         if(contentSlider?.isDragging() != true && isInPage(mouseX, mouseY)){
-            setLineIndex(lineIndex - amount.toInt())
+            setLineIndex(lineIndex - verticalAmount.toInt())
             updateContentSlider()
             return true
         }
-        if (filterVisible && getSearchPane()?.mouseScrolled(mouseX, mouseY, amount) == true)
+        if (filterVisible && getSearchPane()?.mouseScrolled(mouseX, mouseY, amount, verticalAmount) == true)
             return true
         //if (contentSlider?.mouseScrolled(mouseX, mouseY, amount) == true)
         //    return true
-        return super.mouseScrolled(mouseX, mouseY, amount)
+        return super.mouseScrolled(mouseX, mouseY, amount, verticalAmount)
     }
 
     override fun mouseReleased(mouseX: Double, mouseY: Double, button: Int): Boolean {
@@ -221,11 +222,6 @@ abstract class DictionaryScreen<T: BaseItem>(parent: Screen?, title: Text) : Han
             onClickItem(it, button)
         }
         return super.mouseClicked(mouseX, mouseY, button)
-    }
-
-    override fun tick() {
-        super.tick()
-        searchBox!!.tick()
     }
 
     override fun drawContents(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {

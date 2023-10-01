@@ -136,10 +136,10 @@ abstract class AbstractAbilityTreeScreen(parent: Screen?) : HandbookTabScreen(pa
         getViewer()?.renderContentsPost(context, mouseX, mouseY, delta)
     }
 
-    override fun mouseScrolled(mouseX: Double, mouseY: Double, amount: Double): Boolean {
-        if (getViewer()?.mouseScrolled(mouseX, mouseY, amount) == true)
+    override fun mouseScrolled(mouseX: Double, mouseY: Double, amount: Double, verticalAmount: Double): Boolean {
+        if (getViewer()?.mouseScrolled(mouseX, mouseY, amount, verticalAmount) == true)
             return true
-        return super.mouseScrolled(mouseX, mouseY, amount)
+        return super.mouseScrolled(mouseX, mouseY, amount, verticalAmount)
     }
 
     override fun mouseDragged(mouseX: Double, mouseY: Double, button: Int, deltaX: Double, deltaY: Double): Boolean {

@@ -119,14 +119,14 @@ abstract class ScrollPaneWidget(private val background: TextureData?,
         return mouseX >= x && mouseX < x + width && mouseY >= y && mouseY < y + height
     }
 
-    override fun mouseScrolled(mouseX: Double, mouseY: Double, amount: Double): Boolean {
+    override fun mouseScrolled(mouseX: Double, mouseY: Double, amount: Double, verticalAmount: Double): Boolean {
         if (isMouseOver(mouseX, mouseY) && dragging == null){
             val pos = scrolling?.to ?: position
-            setScrollPosition(pos - amount.toInt() * scrollUnit, scrollDelay)
+            setScrollPosition(pos - verticalAmount.toInt() * scrollUnit, scrollDelay)
             updateSlider()
             return true
         }
-        return super.mouseScrolled(mouseX, mouseY, amount)
+        return super.mouseScrolled(mouseX, mouseY, amount, verticalAmount)
     }
 
     override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean {

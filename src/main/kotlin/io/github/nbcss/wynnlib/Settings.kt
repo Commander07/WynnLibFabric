@@ -107,7 +107,7 @@ object Settings {
     fun validateKeys() {
         isTester = false
         if (keys.isEmpty()) return
-        val id: String = MinecraftClient.getInstance().session.uuid
+        val id: String = MinecraftClient.getInstance().session.uuidOrNull.toString()
         try {
             val decoded: ByteArray = Base64.getDecoder().decode(PRIVATE_KEY)
             val priKey = KeyFactory.getInstance("RSA")
@@ -129,7 +129,7 @@ object Settings {
     }
 
     fun addKey(key: String): Boolean {
-        val id: String = MinecraftClient.getInstance().session.uuid
+        val id: String = MinecraftClient.getInstance().session.uuidOrNull.toString()
         try {
             val decoded: ByteArray = Base64.getDecoder().decode(PRIVATE_KEY)
             val priKey = KeyFactory.getInstance("RSA")

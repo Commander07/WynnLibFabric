@@ -3,10 +3,12 @@ package io.github.nbcss.wynnlib.gui.widgets.scrollable
 import com.mojang.blaze3d.systems.RenderSystem
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.DrawContext
+import net.minecraft.client.gui.screen.ButtonTextures
 import net.minecraft.client.gui.widget.ButtonWidget
+import net.minecraft.client.gui.widget.ButtonWidget.NarrationSupplier
 import net.minecraft.client.render.GameRenderer
-import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.text.Text
+import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
 import java.util.function.Consumer
 import kotlin.math.abs
@@ -51,50 +53,66 @@ open class SmartSliderWidget(private val posX: Int,
 
     override fun renderButton(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
         if (this.visible) {
+            val textures  = ButtonTextures(
+                Identifier("widget/button"),
+                Identifier("widget/button_disabled"),
+                Identifier("widget/button_highlighted")
+            )
             RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
-            RenderSystem.setShaderTexture(0, WIDGETS_TEXTURE)
+            RenderSystem.setShaderTexture(0, textures.get(this.active, this.isSelected))
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, alpha)
             RenderSystem.enableBlend()
             RenderSystem.defaultBlendFunc()
-            this.drawTexture(context, WIDGETS_TEXTURE, this.x, this.y, 0, 46, this.width / 2, this.width, this.height, 256, 256)
-            this.drawTexture(
-                context,
-                WIDGETS_TEXTURE,
-                this.x + this.width / 2,
-                this.y,
-                200 - this.width / 2,
-                46,
-                this.width / 2,
-                20,
-                this.height,
-                256,
-                256
-            )
+            context?.drawGuiTexture(textures.get(this.active, this.isSelected), this.x, this.y, 0, this.width, this.height)
+//            context?.drawTexture(WIDGETS_TEXTURE, this.x, this.y, 0, 46F,
+//                (this.width / 2).toFloat(), this.width, this.height, 256, 256)
+            context?.drawGuiTexture(textures.get(this.active, this.isSelected), this.x + this.width / 2, this.y, 0, 20, this.height)
+//            context?.drawTexture(
+//                WIDGETS_TEXTURE,
+//                this.x + this.width / 2,
+//                this.y,
+//                200 - this.width / 2,
+//                46F,
+//                (this.width / 2).toFloat(),
+//                20,
+//                this.height,
+//                256,
+//                256
+//            )
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, alpha)
             val slider = abs(pos - minValue) / gap.toFloat()
-            this.drawTexture(context, WIDGETS_TEXTURE,
-                this.x + (slider * (this.width - 8).toFloat()).toInt(),
-                this.y,
-                0,
-                66,
-                4,
-                20,
-                this.height,
-                256,
-                256
-            )
-            this.drawTexture(context,
-                WIDGETS_TEXTURE,
+            context?.drawGuiTexture(textures.get(this.active, this.isSelected), this.x + (slider * (this.width - 8).toFloat()).toInt(), this.y, 0, 20, this.height)
+//            context?.drawTexture(WIDGETS_TEXTURE,
+//                this.x + (slider * (this.width - 8).toFloat()).toInt(),
+//                this.y,
+//                0,
+//                66F,
+//                4F,
+//                20,
+//                this.height,
+//                256,
+//                256
+//            )
+            context?.drawGuiTexture(
+                textures.get(this.active, this.isSelected),
                 this.x + (slider * (this.width - 8).toFloat()).toInt() + 4,
                 this.y,
                 196,
-                66,
-                4,
                 20,
-                this.height,
-                256,
-                256
+                this.height
             )
+//            context?.drawTexture(
+//                WIDGETS_TEXTURE,
+//                this.x + (slider * (this.width - 8).toFloat()).toInt() + 4,
+//                this.y,
+//                196,
+//                66F,
+//                4F,
+//                20,
+//                this.height,
+//                256,
+//                256
+//            )
             val textColor = if (!this.active) {
                 10526880
             } else if (this.hovered) {

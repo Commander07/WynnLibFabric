@@ -169,11 +169,6 @@ open class AbilityTreeBuilderScreen(parent: Screen?,
         return title.copy().append(" [${build.getSpareAbilityPoints()}/$maxPoints]")
     }
 
-    override fun tick() {
-        super.tick()
-        nameField?.tick()
-    }
-
     override fun init() {
         super.init()
         windowX = 148 + (width - windowWidth - 148) / 2
@@ -289,14 +284,14 @@ open class AbilityTreeBuilderScreen(parent: Screen?,
         return super.mouseClicked(mouseX, mouseY, button)
     }
 
-    override fun mouseScrolled(mouseX: Double, mouseY: Double, amount: Double): Boolean {
+    override fun mouseScrolled(mouseX: Double, mouseY: Double, amount: Double, verticalAmount: Double): Boolean {
         //println("${mouseX}, ${mouseY}, $amount")
         if(overviewSlider?.isDragging() != true && isInEntries(mouseX, mouseY)){
             setEntryIndex(entryIndex - amount.toInt())
             updateEntrySlider()
             return true
         }
-        return super.mouseScrolled(mouseX, mouseY, amount)
+        return super.mouseScrolled(mouseX, mouseY, amount, verticalAmount)
     }
 
     override fun renderExtra(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {

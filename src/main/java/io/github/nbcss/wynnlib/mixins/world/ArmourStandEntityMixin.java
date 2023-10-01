@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ArmourStandEntityMixin {
 
     @Inject(method = "addEntity", at = @At("TAIL"))
-    public void addEntity(int id, Entity entity, CallbackInfo ci){
+    public void addEntity(Entity entity, CallbackInfo ci){
         if (entity instanceof ArmorStandEntity) {
             /*System.out.println(id + ": " + entity.getCustomName());
             NbtCompound nbt = new NbtCompound();
