@@ -12,7 +12,7 @@ object ConsumableChargeRender {
     const val key = "consumable_charge"
     object Reader: EventHandler<ItemLoadEvent> {
         override fun handle(event: ItemLoadEvent) {
-            val matcher = pattern.matcher(event.item.name.toString())
+            val matcher = pattern.matcher(event.item.name.string)
             if (matcher.find()) {
                 val charge = matcher.group(2).toInt()
                 ItemModifier.putInt(event.item, key, charge)
@@ -28,8 +28,9 @@ object ConsumableChargeRender {
                 val s = "${it * event.item.count}"
                 val x = (event.x + 19 - 2 - event.renderer.getWidth(s))
                 val y = event.y + 9
-//                event.matrixStack.translate(0.0, 0.0, 375.0)
+                event.context.matrices.translate(0.0, 0.0, 200.0)
                 event.context.drawTextWithShadow(event.renderer, s, x, y, 0xFFFFFF)
+                event.context.matrices.translate(0.0, 0.0, -200.0)
                 event.cancelled = true
             }
         }
