@@ -76,8 +76,8 @@ abstract class HandbookTabScreen(val parent: Screen?,
         drawBackgroundTexture(context, mouseX, mouseY, delta)
         //render selected tab (normally should only have up to one tab)
         drawBackgroundPost(context, mouseX, mouseY, delta)
+        context?.drawText(textRenderer, getTitle().asOrderedText(), windowX + 6, windowY + 33, 0x000000, false)
         context?.setShaderColor(1f, 1f, 1f, 0f)
-        context?.drawText(textRenderer, getTitle().asOrderedText(), windowX + 6, windowY + 33, 0xFFFFFF, false)
     }
 
     private fun drawTab(context: DrawContext, tab: TabFactory, tabIndex: Int, mouseX: Int, mouseY: Int) {
