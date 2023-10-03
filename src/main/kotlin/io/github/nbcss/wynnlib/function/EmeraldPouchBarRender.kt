@@ -16,8 +16,8 @@ import java.util.regex.Pattern
 
 object EmeraldPouchBarRender: EventHandler<RenderItemOverrideEvent> {
     private val client = MinecraftClient.getInstance()
-    private val contentPattern = Pattern.compile("^(\\d{1,3}( \\d{3})*)² $")
-    private val capacityPattern = Pattern.compile("^\\((\\d+)(stx|²|²½|¼²) Total\\)$")
+    private val contentPattern = Pattern.compile("^(\\d{1,3}( \\d{3})*)² ")
+    private val capacityPattern = Pattern.compile("\\((\\d+)(stx|²|²½|¼²) Total\\)$")
     private const val key = "pouch_bar"
     object LoadListener: EventHandler<ItemLoadEvent> {
         override fun handle(event: ItemLoadEvent) {
@@ -27,15 +27,15 @@ object EmeraldPouchBarRender: EventHandler<RenderItemOverrideEvent> {
             var capacity = 0
             val tooltip = event.item.getTooltip(client.player, TooltipContext.Default.BASIC)
             for (text in tooltip) {
-                if (text.toString() == "" && text.siblings.isNotEmpty() && text.siblings[0].siblings.isNotEmpty()){
+                if (text.string != "" && text.siblings.isNotEmpty() && text.siblings[0].siblings.isNotEmpty()){
                     val head = text.siblings[0].siblings[0]
                     if (head.style.color == TextColor.fromFormatting(Formatting.GOLD) && head.style.isBold){
-                        val matcher = contentPattern.matcher(head.toString())
+                        val matcher = contentPattern.matcher(head.string)
                         if (matcher.find()) {
                             emeralds = matcher.group(1).replace(" ", "").toInt()
                         }
                     }else if(text.siblings[0].siblings.size > 1){
-                        val matcher = capacityPattern.matcher(text.siblings[0].siblings[1].toString())
+                        val matcher = capacityPattern.matcher(text.siblings[0].siblings[1].string)
                         if (matcher.find()) {
                             capacity = when (matcher.group(2)) {
                                 "stx" -> matcher.group(1).toInt() * 262144
@@ -47,6 +47,7 @@ object EmeraldPouchBarRender: EventHandler<RenderItemOverrideEvent> {
                     }
                 }
             }
+            println("$capacity, $emeralds")
             if (capacity > 0) {
                 val bar = MathHelper.clamp(emeralds / capacity.toDouble(), 0.0, 1.0)
                 ItemModifier.putDouble(event.item, key, bar)
@@ -58,7 +59,7 @@ object EmeraldPouchBarRender: EventHandler<RenderItemOverrideEvent> {
             return
         ItemModifier.readDouble(event.item, key)?.let {
             val color: Int = Color.GREEN.code()
-            RenderKit.renderItemBar(it, color, event.x, event.y)
+            RenderKit.renderItemBar(event.context, it, color, event.x, event.y, 200)
         }
     }
 }

@@ -1,22 +1,16 @@
 package io.github.nbcss.wynnlib.render
 
 import com.mojang.blaze3d.systems.RenderSystem
-import io.github.nbcss.wynnlib.function.DurabilityRender
 import io.github.nbcss.wynnlib.utils.AlphaColor
 import io.github.nbcss.wynnlib.utils.Color
-import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.font.TextRenderer
 import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.render.*
-import net.minecraft.client.render.VertexConsumerProvider.Immediate
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.text.Text
-import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
-import net.minecraft.util.math.MathHelper
 import kotlin.math.min
-import kotlin.math.round
 import kotlin.math.roundToInt
 import kotlin.math.sqrt
 
@@ -115,37 +109,11 @@ object RenderKit {
         immediate.draw()
     }
 
-    fun renderItemBar(progress: Double, color: Int, x: Int, y: Int) {
-        RenderSystem.disableDepthTest()
-        RenderSystem.disableBlend()
-        val tessellator = Tessellator.getInstance()
-        val bufferBuilder = tessellator.buffer
-        val steps: Int = (progress * 13.0f).roundToInt()
-        renderGuiQuad(bufferBuilder, x + 2, y + 13, 13, 2, 0)
-        renderGuiQuad(bufferBuilder, x + 2, y + 13, steps, 1, color)
-        RenderSystem.enableBlend()
-        RenderSystem.enableDepthTest()
-    }
-
-    private fun renderGuiQuad(
-        buffer: BufferBuilder,
-        x: Int,
-        y: Int,
-        width: Int,
-        height: Int,
-        color: Int
-    ) {
-        val red = color shr 16 and 255
-        val green = color shr 8 and 255
-        val blue = color and 255
-        val alpha = 255
-        RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
-        buffer.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR)
-        buffer.vertex((x + 0).toDouble(), (y + 0).toDouble(), 0.0).color(red, green, blue, alpha).next()
-        buffer.vertex((x + 0).toDouble(), (y + height).toDouble(), 0.0).color(red, green, blue, alpha).next()
-        buffer.vertex((x + width).toDouble(), (y + height).toDouble(), 0.0).color(red, green, blue, alpha).next()
-        buffer.vertex((x + width).toDouble(), (y + 0).toDouble(), 0.0).color(red, green, blue, alpha).next()
-        BufferRenderer.draw(buffer.end())
+    fun renderItemBar(context: DrawContext, progress: Double, color: Int, x: Int, y: Int, z: Int) {
+        val k = x + 2
+        val l = y + 13
+        context.fill(RenderLayer.getGuiOverlay(), k, l, k + 13, l + 2, z, -16777216)
+        context.fill(RenderLayer.getGuiOverlay(), k, l, k + (progress * 13).toInt(), l + 1, z, color or -16777216)
     }
 
     fun renderWayPointText(
