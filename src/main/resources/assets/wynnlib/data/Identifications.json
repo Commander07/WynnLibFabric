@@ -653,6 +653,14 @@
       "group": "SURVIVABILITY"
     },
     {
+      "id": "bonus_rainbow_defense",
+      "apiId": "bonusElementalDefense",
+      "name": "ELEMENTALDEFENSE",
+      "displayName": "Elemental Defence",
+      "suffix": "%",
+      "group": "SURVIVABILITY"
+    },
+    {
       "id": "speed",
       "apiId": "speed",
       "name": "SPEED",

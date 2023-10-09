@@ -508,6 +508,7 @@
     "wynnlib.id.bonus_air_defense": "f{\u274b Air} Defence",
     "wynnlib.id.bonus_thunder_defense": "e{\u2726 Thunder} Defence",
     "wynnlib.id.bonus_earth_defense": "2{\u2724 Earth} Defence",
+    "wynnlib.id.bonus_rainbow_defense": "Elemental Defence",
     "wynnlib.id.speed": "Walk Speed",
     "wynnlib.id.jump_height": "Jump Height",
     "wynnlib.id.sprint": "Sprint",

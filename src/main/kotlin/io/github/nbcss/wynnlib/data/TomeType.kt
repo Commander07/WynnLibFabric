@@ -11,7 +11,8 @@ enum class TomeType(
     DUNGEONEERING("dungeoneering", "Dungeoneering"),
     WEAPON("weapon", "Weapon"),
     ARMOUR("armour", "Armour"),
-    GUILD("guild", "Guild");
+    GUILD("guild", "Guild"),
+    LOOTRUNNING("lootrunning", "Lootrunning");
 
     override fun getKey(): String = id
 

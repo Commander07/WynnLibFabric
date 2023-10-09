@@ -780,6 +780,76 @@
       "defensePoints": 1,
       "agilityPoints": 1,
       "restriction": "UNTRADABLE"
+    },
+    {
+      "name": "Thief's Tome of Lootrun Mastery",
+      "tier": "Fabled",
+      "type": "LOOTRUNNING",
+      "level": 75,
+      "neutralDamageBonusRaw": 40,
+      "healthBonus": 40,
+      "lootBonus": 15,
+      "restriction": "SOULBOUND"
+    },
+    {
+      "name": "Spelunker's Tome of Lootrun Mastery",
+      "tier": "Fabled",
+      "type": "LOOTRUNNING",
+      "level": 75,
+      "earthDamageBonusRaw": 40,
+      "bonusEarthDefense": 8,
+      "lootBonus": 15,
+      "restriction": "SOULBOUND"
+    },
+    {
+      "name": "Pickpocket's Tome of Lootrun Mastery",
+      "tier": "Fabled",
+      "type": "LOOTRUNNING",
+      "level": 75,
+      "thunderDamageBonusRaw": 40,
+      "bonusThunderDefense": 8,
+      "lootBonus": 15,
+      "restriction": "SOULBOUND"
+    },
+    {
+      "name": "Manipulator's Tome of Lootrun Mastery",
+      "tier": "Fabled",
+      "type": "LOOTRUNNING",
+      "level": 75,
+      "waterDamageBonusRaw": 40,
+      "bonusWaterDefense": 8,
+      "lootBonus": 15,
+      "restriction": "SOULBOUND"
+    },
+    {
+      "name": "Plunderer's Tome of Lootrun Mastery",
+      "tier": "Fabled",
+      "type": "LOOTRUNNING",
+      "level": 75,
+      "fireDamageBonusRaw": 40,
+      "bonusFireDefense": 8,
+      "lootBonus": 15,
+      "restriction": "SOULBOUND"
+    },
+    {
+      "name": "Scoundrel's Tome of Lootrun Mastery",
+      "tier": "Fabled",
+      "type": "LOOTRUNNING",
+      "level": 75,
+      "airDamageBonusRaw": 40,
+      "bonusAirDefense": 8,
+      "lootBonus": 15,
+      "restriction": "SOULBOUND"
+    },
+    {
+      "name": "Mastermind's Tome of Lootrun Mastery",
+      "tier": "Fabled",
+      "type": "LOOTRUNNING",
+      "level": 75,
+      "elementalDamageBonusRaw": 40,
+      "bonusElementalDefense": 8,
+      "lootBonus": 15,
+      "restriction": "SOULBOUND"
     }
   ],
   "version": "2.0.0"
