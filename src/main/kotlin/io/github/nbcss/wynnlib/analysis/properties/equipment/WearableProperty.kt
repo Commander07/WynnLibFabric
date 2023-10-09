@@ -69,21 +69,21 @@ class WearableProperty(private val equipment: RolledEquipment):
     }
 
     override fun set(tooltip: List<Text>, line: Int): Int {
-        if (tooltip[line].toString() != "" || tooltip[line].siblings.isEmpty())
+        if (tooltip[line].string == "" || tooltip[line].siblings.isEmpty())
             return 0
         val base = tooltip[line].siblings[0]
-        val baseString = base.toString()
+        val baseString = base.string
         if (baseString != ""){
             val matcher = HEALTH_PATTERN.matcher(baseString)
             if(matcher.find()){
                 health = matcher.group(1).toInt()
                 return 1
-            }
-        }else if(base.siblings.size == 2){
-            Element.fromDisplayName(base.siblings[0].toString())?.let {
-                val matcher = DEFENCE_PATTERN.matcher(base.siblings[1].toString())
-                if (matcher.find()){
-                    elemDefence[it] = matcher.group(1).toInt()
+            } else if(base.siblings.size == 2){
+                Element.fromDisplayName(base.siblings[0].string)?.let {
+                    val matcher = DEFENCE_PATTERN.matcher(base.siblings[1].string)
+                    if (matcher.find()){
+                        elemDefence[it] = matcher.group(1).toInt()
+                    }
                 }
             }
         }

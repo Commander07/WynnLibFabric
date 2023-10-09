@@ -27,13 +27,13 @@ class MajorIdProperty: AnalysisProperty {
         if (base.siblings.isEmpty())
             return 0
         if (base.siblings[0].style.color == TextColor.fromFormatting(Formatting.AQUA)) {
-            val matcher = MAJOR_ID_PATTERN.matcher(base.siblings[0].toString())
+            val matcher = MAJOR_ID_PATTERN.matcher(base.siblings[0].string)
             if (matcher.find()) {
                 MajorId.fromDisplayName(matcher.group(1))?.let {
                     majorIds.add(it)
                     val majorIdTooltip = mutableListOf(tooltip[line])
                     for(i in (line + 1 until tooltip.size)) {
-                        if (tooltip[i].toString() == ""
+                        if (tooltip[i].string == ""
                             && tooltip[i].siblings.isNotEmpty()
                             && tooltip[i].siblings[0].style.color == TextColor.fromFormatting(Formatting.DARK_AQUA)){
                             majorIdTooltip.add(tooltip[i])

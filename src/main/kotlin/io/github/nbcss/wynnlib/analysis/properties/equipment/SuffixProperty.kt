@@ -21,9 +21,9 @@ class SuffixProperty: AnalysisProperty {
         if (tier != null || tooltip[line].siblings.isEmpty())
             return 0
         val base = tooltip[line].siblings[0]
-        if(base.toString() == "")
+        if(base.string == "")
             return 0
-        val matcher = PATTERN.matcher(base.toString())
+        val matcher = PATTERN.matcher(base.string)
         if (matcher.find()){
             Tier.fromId(matcher.group(1))?.let {
                 tier = it

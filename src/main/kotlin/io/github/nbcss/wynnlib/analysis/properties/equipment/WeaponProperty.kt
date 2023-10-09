@@ -75,13 +75,13 @@ class WeaponProperty(private val equipment: RolledEquipment):
             return 0
         val base = tooltip[line].siblings[0]
         if (attackSpeed == null && base.siblings.isEmpty()) {
-            AttackSpeed.fromDisplayName(base.toString())?.let {
+            AttackSpeed.fromDisplayName(base.string)?.let {
                 attackSpeed = it
                 return 1
             }
         }
         run {
-            val matcher = DAMAGE_PATTERN.matcher(base.toString())
+            val matcher = DAMAGE_PATTERN.matcher(base.string)
             if (matcher.find()) {
                 val lower = matcher.group(1).toInt()
                 val upper = matcher.group(2).toInt()
@@ -91,8 +91,8 @@ class WeaponProperty(private val equipment: RolledEquipment):
         }
         if (base.siblings.size == 2){
             //matches elem damage
-            Element.fromDisplayName(base.siblings[0].toString())?.let { elem ->
-                val matcher = ELEM_DAMAGE_PATTERN.matcher(base.siblings[1].toString())
+            Element.fromDisplayName(base.siblings[0].string)?.let { elem ->
+                val matcher = ELEM_DAMAGE_PATTERN.matcher(base.siblings[1].string)
                 if (matcher.find()) {
                     val lower = matcher.group(1).toInt()
                     val upper = matcher.group(2).toInt()

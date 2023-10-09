@@ -23,12 +23,12 @@ public class NBTPrinterMixin {
     protected Slot focusedSlot;
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/ingame/HandledScreen;drawForeground(Lnet/minecraft/client/gui/DrawContext;II)V"))
     public void render(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
-        /*if (focusedSlot != null && focusedSlot.hasStack()){
-            *//*ItemStack item = focusedSlot.getStack();
-            List<Text> tooltip = item.getTooltip(MinecraftClient.getInstance().player, TooltipContext.Default.NORMAL);
-            for (Text text : tooltip) {
-                System.out.println(text.getString());
-            }*//*
-        }*/
+//        if (focusedSlot != null && focusedSlot.hasStack()){
+//            ItemStack item = focusedSlot.getStack();
+//            List<Text> tooltip = item.getTooltip(MinecraftClient.getInstance().player, TooltipContext.Default.BASIC);
+//            for (Text text : tooltip) {
+//                System.out.println(text.getString());
+//            }
+//        }
     }
 }

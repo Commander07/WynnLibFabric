@@ -34,7 +34,7 @@ interface ItemMatcher {
             }
             val tooltip = item.getTooltip(MinecraftClient.getInstance().player, TooltipContext.Default.BASIC)
             //market item
-            var name = item.name.toString()
+            var name = item.name.string
             var inMarket = false
             if (name.endsWith("\u00C0")) {
                 name = name.substring(0, name.length - 1)

@@ -44,10 +44,10 @@ class RequirementProperty: AnalysisProperty {
         if (tooltip[line].siblings.isEmpty())
             return 0
         val base = tooltip[line].siblings[0]
-        if (base.toString() != "" || base.siblings.size != 2)
+        if (base.siblings.size != 2)
             return 0
-        val text = base.siblings[1].toString()
-        val flag = base.siblings[0].toString() == Symbol.TICK.icon
+        val text = base.siblings[1].string
+        val flag = base.siblings[0].string == Symbol.TICK.icon
         run {
             val matcher = LEVEL_PATTERN.matcher(text)
             if (matcher.find()) {

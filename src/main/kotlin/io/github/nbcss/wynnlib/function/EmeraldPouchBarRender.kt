@@ -47,7 +47,6 @@ object EmeraldPouchBarRender: EventHandler<RenderItemOverrideEvent> {
                     }
                 }
             }
-            println("$capacity, $emeralds")
             if (capacity > 0) {
                 val bar = MathHelper.clamp(emeralds / capacity.toDouble(), 0.0, 1.0)
                 ItemModifier.putDouble(event.item, key, bar)
