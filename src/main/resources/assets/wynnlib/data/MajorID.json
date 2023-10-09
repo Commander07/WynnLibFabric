@@ -1,11 +1,6 @@
 {
   "data": [
     {
-      "id": "MAGNET",
-      "displayName": "Magnet",
-      "properties": {}
-    },
-    {
       "id": "PLAGUE",
       "displayName": "Plague",
       "properties": {}
@@ -31,13 +26,13 @@
       "properties": {}
     },
     {
-      "id": "HERO",
-      "displayName": "Saviour\u2019s Sacrifice",
+      "id": "ALTRUISM",
+      "displayName": "Heart of the Pack",
       "properties": {}
     },
     {
-      "id": "ALTRUISM",
-      "displayName": "Heart of the Pack",
+      "id": "HERO",
+      "displayName": "Saviour's Sacrifice",
       "properties": {}
     },
     {
@@ -53,6 +48,11 @@
     {
       "id": "ROVINGASSASSIN",
       "displayName": "Roving Assassin",
+      "properties": {}
+    },
+    {
+      "id": "MAGNET",
+      "displayName": "Magnet",
       "properties": {}
     },
     {
@@ -76,6 +76,11 @@
       "properties": {}
     },
     {
+      "id": "FREERUNNER",
+      "displayName": "Freerunner",
+      "properties": {}
+    },
+    {
       "id": "RALLY",
       "displayName": "Rally",
       "properties": {}
@@ -83,11 +88,6 @@
     {
       "id": "CHERRY_BOMBS",
       "displayName": "Cherry Bombs",
-      "properties": {}
-    },
-    {
-      "id": "FREERUNNER",
-      "displayName": "Freerunner",
       "properties": {}
     },
     {
@@ -102,7 +102,7 @@
     },
     {
       "id": "FLASHFREEZE",
-      "displayName": "Flashfreeze",
+      "displayName": "Flash Freeze",
       "properties": {}
     },
     {
@@ -116,13 +116,113 @@
       "properties": {}
     },
     {
+      "id": "GRAVITYWELL",
+      "displayName": "Gravity Well",
+      "properties": {}
+    },
+    {
+      "id": "ALTEREGO",
+      "displayName": "Alter Ego",
+      "properties": {}
+    },
+    {
+      "id": "DIVINE_HONOR",
+      "displayName": "Divine Honor",
+      "properties": {}
+    },
+    {
+      "id": "ESCAPE_ROUTE",
+      "displayName": "Escape Route",
+      "properties": {}
+    },
+    {
+      "id": "FOREST_BLESSING",
+      "displayName": "Forest's Blessing",
+      "properties": {}
+    },
+    {
+      "id": "GENTLE_GLOW",
+      "displayName": "Gentle Glow",
+      "properties": {}
+    },
+    {
       "id": "GEOCENTRISM",
       "displayName": "Geocentrism",
       "properties": {}
     },
     {
-      "id": "GRAVITYWELL",
-      "displayName": "Gravity Well",
+      "id": "JUGGLE",
+      "displayName": "Juggle",
+      "properties": {}
+    },
+    {
+      "id": "OVERWHELM",
+      "displayName": "Overwhelm",
+      "properties": {}
+    },
+    {
+      "id": "PERFECT_RECALL",
+      "displayName": "Perfect Recall",
+      "properties": {}
+    },
+    {
+      "id": "RECKLESS_ABANDON",
+      "displayName": "Reckless Abandon",
+      "properties": {}
+    },
+    {
+      "id": "SOUL_EATER",
+      "displayName": "Soul Eater",
+      "properties": {}
+    },
+    {
+      "id": "STRINGS_OF_FATE",
+      "displayName": "Strings of Fate",
+      "properties": {}
+    },
+    {
+      "id": "TEMBLOR",
+      "displayName": "Temblor",
+      "properties": {}
+    },
+    {
+      "id": "DESC_SNOWYSTEPS",
+      "displayName": "Snowy Steps",
+      "properties": {}
+    },
+    {
+      "id": "DESC_FESTIVESPIRIT",
+      "displayName": "Festive Spirit",
+      "properties": {}
+    },
+    {
+      "id": "DEADWEIGHT",
+      "displayName": "Dead Weight",
+      "properties": {}
+    },
+    {
+      "id": "WINDSURF",
+      "displayName": "Windsurf",
+      "properties": {}
+    },
+    {
+      "id": "COAGULATE",
+      "displayName": "Coagulate",
+      "properties": {}
+    },
+    {
+      "id": "LUNGE",
+      "displayName": "lunge",
+      "properties": {}
+    },
+    {
+      "id": "GRUESOME_KNOTS",
+      "displayName": "Gruesome Knots",
+      "properties": {}
+    },
+    {
+      "id": "EXPUNGE",
+      "displayName": "Expunge",
       "properties": {}
     }
   ],
