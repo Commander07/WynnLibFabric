@@ -4,6 +4,7 @@ import io.github.nbcss.wynnlib.gui.TooltipScreen
 import io.github.nbcss.wynnlib.gui.widgets.scrollable.ScrollElement
 import io.github.nbcss.wynnlib.render.TextureData
 import net.minecraft.client.gui.DrawContext
+import net.minecraft.client.gui.Drawable
 import net.minecraft.client.gui.Element
 import net.minecraft.client.util.math.MatrixStack
 

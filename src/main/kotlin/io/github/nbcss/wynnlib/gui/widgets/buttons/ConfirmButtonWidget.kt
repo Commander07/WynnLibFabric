@@ -37,6 +37,6 @@ class ConfirmButtonWidget(private val handler: Consumer<ConfirmButtonWidget>,
     }
 
     override fun appendClickableNarrations(builder: NarrationMessageBuilder?) {
-        TODO("Not yet implemented")
+        // todo
     }
 }

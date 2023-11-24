@@ -48,6 +48,6 @@ class ItemSlotWidget<T: BaseItem>(x: Int, y: Int,
     }
 
     override fun appendClickableNarrations(builder: NarrationMessageBuilder?) {
-        TODO("Not yet implemented")
+        // todo
     }
 }

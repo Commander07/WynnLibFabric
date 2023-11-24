@@ -28,7 +28,7 @@ class ExitButtonWidget(x: Int, y: Int, private val handler: ExitHandler):
     }
 
     override fun appendClickableNarrations(builder: NarrationMessageBuilder?) {
-        TODO("Not yet implemented")
+        // todo
     }
 
     interface ExitHandler {

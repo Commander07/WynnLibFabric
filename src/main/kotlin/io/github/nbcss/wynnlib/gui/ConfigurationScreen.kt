@@ -5,6 +5,7 @@ import io.github.nbcss.wynnlib.gui.widgets.*
 import io.github.nbcss.wynnlib.gui.widgets.buttons.*
 import io.github.nbcss.wynnlib.gui.widgets.scrollable.CheckboxWidget
 import io.github.nbcss.wynnlib.gui.widgets.scrollable.LabelWidget
+import io.github.nbcss.wynnlib.gui.widgets.scrollable.TextFieldWidget
 import io.github.nbcss.wynnlib.i18n.Translations
 import io.github.nbcss.wynnlib.items.identity.TooltipProvider
 import io.github.nbcss.wynnlib.matcher.MatcherType
@@ -13,13 +14,12 @@ import io.github.nbcss.wynnlib.timer.status.StatusType
 import io.github.nbcss.wynnlib.utils.ItemFactory
 import io.github.nbcss.wynnlib.utils.formattingLines
 import net.minecraft.client.gui.DrawContext
+import net.minecraft.client.gui.Element
 import net.minecraft.client.gui.screen.Screen
-import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import java.util.function.Supplier
-import javax.swing.text.Element
 
 class ConfigurationScreen(parent: Screen?) : GenericScrollScreen(parent, TITLE) {
     companion object {
@@ -35,6 +35,7 @@ class ConfigurationScreen(parent: Screen?) : GenericScrollScreen(parent, TITLE) 
     }
     private val categories: MutableList<SettingCategory> = CategoryEnum.values().toMutableList()
     private val sideTabs: MutableList<SideTabWidget> = mutableListOf()
+    private val sideTabChildren: MutableList<Element> = mutableListOf()
     private var category: SettingCategory = CategoryEnum.GENERAL
     private var scroll: ScrollPaneWidget? = null
 
@@ -49,6 +50,7 @@ class ConfigurationScreen(parent: Screen?) : GenericScrollScreen(parent, TITLE) 
                 SideTabWidget.Side.LEFT, category.getIcon(), object : SideTabWidget.Handler {
                     override fun onClick(index: Int) {
                         this@ConfigurationScreen.category = categories[index]
+                        sideTabChildren.forEach { remove(it) }
                         scroll = this@ConfigurationScreen.category.createScroll(this@ConfigurationScreen)
                         slider?.setSlider(0.0)
                     }
@@ -120,6 +122,18 @@ class ConfigurationScreen(parent: Screen?) : GenericScrollScreen(parent, TITLE) 
             }
 
             override fun getIcon(): ItemStack = icon
+        },
+        OFFSETS{
+            private val icon: ItemStack = ItemFactory.fromEncoding("minecraft:compass")
+            override fun createScroll(screen: ConfigurationScreen): ScrollPaneWidget {
+                return screen.OffsetScroll()
+            }
+
+            override fun getDisplayText(): Text {
+                return Translations.SETTINGS_OFFSETS.translate()
+            }
+
+            override fun getIcon(): ItemStack = icon
         }
     }
 
@@ -159,14 +173,6 @@ class ConfigurationScreen(parent: Screen?) : GenericScrollScreen(parent, TITLE) 
             setContentHeight(posY + 2)
         }
         override fun getSlider(): VerticalSliderWidget? = slider
-
-        override fun setFocused(focused: Boolean) {
-            TODO("Not yet implemented")
-        }
-
-        override fun isFocused(): Boolean {
-            TODO("Not yet implemented")
-        }
     }
 
     inner class GeneralScroll: ElementsContainerScroll(null, this@ConfigurationScreen,
@@ -195,14 +201,6 @@ class ConfigurationScreen(parent: Screen?) : GenericScrollScreen(parent, TITLE) 
             setContentHeight(posY + 2)
         }
         override fun getSlider(): VerticalSliderWidget? = slider
-
-        override fun setFocused(focused: Boolean) {
-            TODO("Not yet implemented")
-        }
-
-        override fun isFocused(): Boolean {
-            TODO("Not yet implemented")
-        }
     }
 
     inner class IndicatorScroll: ElementsContainerScroll(null, this@ConfigurationScreen,
@@ -227,13 +225,26 @@ class ConfigurationScreen(parent: Screen?) : GenericScrollScreen(parent, TITLE) 
             setContentHeight(posY + 2)
         }
         override fun getSlider(): VerticalSliderWidget? = slider
+    }
 
-        override fun setFocused(focused: Boolean) {
-            TODO("Not yet implemented")
+    inner class OffsetScroll: ElementsContainerScroll(null, this@ConfigurationScreen,
+        scrollX, scrollY, SCROLL_WIDTH, SCROLL_HEIGHT) {
+        init {
+            val posX = 2
+            var posY = 2
+            for (offset in Settings.SettingOffset.values()) {
+                val textField = TextFieldWidget(textRenderer, scrollX + posX, scrollY + posY, 40, 12)
+                textField.text = Settings.getOffset(offset).toString()
+                textField.setChangedListener { it.toIntOrNull()?.let { x -> Settings.setOffset(offset, x) } }
+                sideTabChildren.add(addDrawableChild(textField))
+                addElement(LabelWidget(posX + 42, posY, Supplier {
+                    return@Supplier offset.formatted(Formatting.GRAY)
+                }))
+                posY += 20
+            }
+            setContentHeight(posY + 2)
         }
 
-        override fun isFocused(): Boolean {
-            TODO("Not yet implemented")
-        }
+        override fun getSlider(): VerticalSliderWidget? = slider
     }
 }

@@ -38,6 +38,7 @@ object Settings {
     private val lockedSlots: MutableSet<Int> = mutableSetOf()
     private val indicators: MutableMap<String, Boolean> = mutableMapOf()
     private val options: MutableMap<SettingOption, Boolean> = mutableMapOf()
+    private val offsets: MutableMap<SettingOffset, Int> = mutableMapOf()
     private var isTester: Boolean = false
     private var dirty: Boolean = false
     private var saving: Boolean = false
@@ -63,6 +64,10 @@ object Settings {
             for (option in SettingOption.values()) {
                 options[option] = getOr(it, option.id, option.defaultValue)
             }
+            offsets.clear()
+            for (offset in SettingOffset.values()) {
+                offsets[offset] = getOr(it, offset.id, offset.defaultValue)
+            }
             MatcherType.reload(getOr(it, "matchers", JsonObject()) { x -> x.asJsonObject })
             indicators.clear()
             for (entry in (getOr(it, "indicators", JsonObject()) { x -> x.asJsonObject }).entrySet()) {
@@ -86,6 +91,9 @@ object Settings {
                 val data = JsonObject()
                 for (option in SettingOption.values()) {
                     data.addProperty(option.id, getOption(option))
+                }
+                for (offset in SettingOffset.values()) {
+                    data.addProperty(offset.id, getOffset(offset))
                 }
                 data.add("matchers", MatcherType.getData())
                 val indicatorsJson = JsonObject()
@@ -172,6 +180,15 @@ object Settings {
         return options.getOrDefault(option, option.defaultValue)
     }
 
+    fun setOffset(offset: SettingOffset, value: Int) {
+        offsets[offset] = value
+        markDirty()
+    }
+
+    fun getOffset(offset: SettingOffset): Int {
+        return offsets.getOrDefault(offset, offset.defaultValue)
+    }
+
     fun setIndicatorEnabled(key: String, enabled: Boolean) {
         indicators[key] = enabled
         markDirty()
@@ -208,6 +225,22 @@ object Settings {
                 return "wynnlib.setting_option.desc.$key"
             }
             return "wynnlib.setting_option.name.$key"
+        }
+    }
+
+    enum class SettingOffset(val id: String,
+                             val defaultValue: Int): Keyed, Translatable {
+        ICON_INDICATOR_X("icon_indicator_x", 0),
+        ICON_INDICATOR_Y("icon_indicator_y", 0),
+        SIDE_INDICATOR_X("side_indicator_x", 0),
+        SIDE_INDICATOR_Y("side_indicator_y", 0),
+        ;
+
+        override fun getKey(): String = id
+
+        override fun getTranslationKey(label: String?): String {
+            val key = id.lowercase()
+            return "wynnlib.setting_offset.name.$key"
         }
     }
 }

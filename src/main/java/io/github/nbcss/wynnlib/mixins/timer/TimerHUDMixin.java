@@ -46,8 +46,8 @@ public abstract class TimerHUDMixin {
             return;
         List<SideIndicator> timers = IndicatorManager.INSTANCE.getSideTimers();
         Collections.sort(timers);
-        int posX = 3;
-        int posY = (client.getWindow().getScaledHeight() - 11 * timers.size()) / 2;
+        int posX = 3 + Settings.INSTANCE.getOffset(Settings.SettingOffset.SIDE_INDICATOR_X);
+        int posY = (client.getWindow().getScaledHeight() - 11 * timers.size()) / 2 + Settings.INSTANCE.getOffset(Settings.SettingOffset.SIDE_INDICATOR_Y);
         for (SideIndicator timer : timers) {
             timer.render(context, getTextRenderer(), posX, posY);
             posY += 11;
@@ -59,8 +59,8 @@ public abstract class TimerHUDMixin {
             return;
         List<IconIndicator> timers = IndicatorManager.INSTANCE.getIconTimers();
         //unit = 28 per timer
-        int posX = client.getWindow().getScaledWidth() / 2 - timers.size() * 14;
-        int posY = client.getWindow().getScaledHeight() - 108;
+        int posX = client.getWindow().getScaledWidth() / 2 - timers.size() * 14 + Settings.INSTANCE.getOffset(Settings.SettingOffset.ICON_INDICATOR_X);
+        int posY = client.getWindow().getScaledHeight() - 108 + Settings.INSTANCE.getOffset(Settings.SettingOffset.ICON_INDICATOR_Y);
         RenderSystem.texParameter(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
         RenderSystem.texParameter(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST);
         for (IconIndicator timer : timers) {

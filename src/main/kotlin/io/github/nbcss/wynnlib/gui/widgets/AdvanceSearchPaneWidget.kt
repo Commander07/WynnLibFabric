@@ -58,7 +58,7 @@ class AdvanceSearchPaneWidget<T: BaseItem>(private val screen: DictionaryScreen<
     //}
 
     override fun appendClickableNarrations(builder: NarrationMessageBuilder?) {
-        TODO("Not yet implemented")
+        // todo
     }
 
     override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean {

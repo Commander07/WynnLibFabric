@@ -24,6 +24,7 @@ object Translations {
     val SETTINGS_GENERAL: Translatable = from("wynnlib.setting_category.general")
     val SETTINGS_MATCHERS: Translatable = from("wynnlib.setting_category.matchers")
     val SETTINGS_INDICATORS: Translatable = from("wynnlib.setting_category.indicators")
+    val SETTINGS_OFFSETS: Translatable = from("wynnlib.setting_category.offsets")
     val MATCHER_ITEM_PROTECTION: Translatable = from("wynnlib.matcher_settings.item_protection")
     val TOOLTIP_CLASS_REQ: Translatable = from("wynnlib.tooltip.class_req")
     val TOOLTIP_QUEST_REQ: Translatable = from("wynnlib.tooltip.quest_req")
