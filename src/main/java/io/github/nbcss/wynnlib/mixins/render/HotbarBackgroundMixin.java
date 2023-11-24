@@ -71,11 +71,7 @@ public class HotbarBackgroundMixin {
     private void drawSlots(DrawContext context){
         PlayerEntity playerEntity = this.getCameraPlayer();
         if (playerEntity != null){
-            int distance = 0;
-            if (FabricLoader.getInstance().getObjectShare().get("raised:hud") instanceof Integer x) {
-                distance = x;
-            }
-            int y = this.scaledHeight - 19 - distance;
+            int y = this.scaledHeight - 19;
             for(int i = 0; i < 6; i++) {
                 int x = this.scaledWidth / 2 - 90 + i * 20 + 2;
                 ItemStack stack = playerEntity.getInventory().main.get(i);
