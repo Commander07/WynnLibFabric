@@ -80,8 +80,9 @@ class EquipmentTransformer(private val parent: RegularEquipment,
             stack.getTooltip(MinecraftClient.getInstance().player, TooltipContext.Default.BASIC)
         getPriceTooltip()?.let {
             val mutableTooltip = tooltip.toMutableList()
-            mutableTooltip.add(Text.empty())
-            mutableTooltip.addAll(it)
+            mutableTooltip.add(1, Text.empty())
+            mutableTooltip.addAll(2, it)
+            mutableTooltip.add(2 + it.size, Text.empty())
             return mutableTooltip
         }
         return tooltip
