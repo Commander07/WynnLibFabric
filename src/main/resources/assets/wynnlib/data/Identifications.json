@@ -221,9 +221,9 @@
       "group": "OVERALL_DAMAGE_BONUS"
     },
     {
-      "id": "bonus_fire_damage_raw",
-      "apiId": "fireDamageBonusRaw",
-      "name": "FIREDAMAGEBONUSRAW",
+      "id": "FIRE_DAMAGE_BONUS_RAW",
+      "apiId": "rawFireDamage",
+      "name": "FIRE_DAMAGE_BONUS_RAW",
       "displayName": "Fire Damage",
       "suffix": "",
       "group": "OVERALL_DAMAGE_BONUS"
@@ -237,9 +237,9 @@
       "group": "OVERALL_DAMAGE_BONUS"
     },
     {
-      "id": "bonus_water_damage_raw",
-      "apiId": "waterDamageBonusRaw",
-      "name": "WATERDAMAGEBONUSRAW",
+      "id": "WATER_DAMAGE_BONUS_RAW",
+      "apiId": "rawWaterDamage",
+      "name": "WATER_DAMAGE_BONUS_RAW",
       "displayName": "Water Damage",
       "suffix": "",
       "group": "OVERALL_DAMAGE_BONUS"
@@ -253,9 +253,9 @@
       "group": "OVERALL_DAMAGE_BONUS"
     },
     {
-      "id": "bonus_air_damage_raw",
-      "apiId": "airDamageBonusRaw",
-      "name": "AIRDAMAGEBONUSRAW",
+      "id": "AIR_DAMAGE_BONUS_RAW",
+      "apiId": "rawAirDamage",
+      "name": "AIR_DAMAGE_BONUS_RAW",
       "displayName": "Air Damage",
       "suffix": "",
       "group": "OVERALL_DAMAGE_BONUS"
@@ -269,9 +269,9 @@
       "group": "OVERALL_DAMAGE_BONUS"
     },
     {
-      "id": "bonus_thunder_damage_raw",
-      "apiId": "thunderDamageBonusRaw",
-      "name": "THUNDERDAMAGEBONUSRAW",
+      "id": "THUNDER_DAMAGE_BONUS_RAW",
+      "apiId": "rawThunderDamage",
+      "name": "THUNDER_DAMAGE_BONUS_RAW",
       "displayName": "Thunder Damage",
       "suffix": "",
       "group": "OVERALL_DAMAGE_BONUS"
@@ -819,6 +819,14 @@
       "suffix": "%",
       "group": "SPELL_COST",
       "inverted": true
+    },
+    {
+      "id": "HEALING_EFFICIENCY",
+      "apiId": "healingEfficiency",
+      "name": "HEALING_EFFICIENCY",
+      "displayName": "Healing Efficiency",
+      "suffix": "%",
+      "group": "SURVIVABILITY"
     }
   ],
   "version": "1.0.1"

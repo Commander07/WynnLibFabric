@@ -1862,7 +1862,7 @@
                     "attack_speed": "SLOW",
                     "rate": 4
                 },
-                " cooldown": 2
+                "cooldown": 2
             },
             "metadata": null
         },
@@ -3920,7 +3920,7 @@
                 "damage_modifier": {
                     "hits": 4
                 },
-                " range_modifier": 2
+                "range_modifier": 2
             },
             "metadata": null
         },
