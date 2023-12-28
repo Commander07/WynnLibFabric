@@ -1,6 +1,5 @@
 package io.github.nbcss.wynnlib.analysis.transformers
 
-import io.github.nbcss.wynnlib.Settings
 import io.github.nbcss.wynnlib.analysis.TooltipTransformer
 import io.github.nbcss.wynnlib.analysis.TransformableItem
 import io.github.nbcss.wynnlib.analysis.properties.AnalysisProperty

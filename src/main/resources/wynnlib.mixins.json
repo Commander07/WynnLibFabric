@@ -33,6 +33,8 @@
     "world.PlayerSendChatMixin"
   ],
   "client": [
-    "render.ItemGuiLightingFixMixin"
+    "render.ItemGuiLightingFixMixin",
+    "world.PlayerReceiveChatMixin",
+    "world.PlayerListHeaderUpdateMixin"
   ]
 }

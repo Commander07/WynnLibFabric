@@ -8,16 +8,15 @@ import io.github.nbcss.wynnlib.matcher.MatchableItem;
 import io.github.nbcss.wynnlib.matcher.item.ItemMatcher;
 import io.github.nbcss.wynnlib.render.RenderKit;
 import io.github.nbcss.wynnlib.utils.Color;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -26,6 +25,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(InGameHud.class)
 public class HotbarBackgroundMixin {
+    @Unique
     private final Identifier texture = new Identifier("wynnlib", "textures/legacy/lock.png");
     @Shadow private int scaledWidth;
     @Shadow private int scaledHeight;
@@ -34,8 +34,9 @@ public class HotbarBackgroundMixin {
         return null;
     }
 
-    @Shadow @Final private static Identifier HOTBAR_TEXTURE;
+    @Unique
     private boolean flag = false;
+    @Unique
     DrawContext context = null;
 
     @Inject(method = "renderHotbar", at = @At("HEAD"))
@@ -62,12 +63,14 @@ public class HotbarBackgroundMixin {
         instance.drawItemInSlot(textRenderer, stack, x, y);
     }
 
+    @Unique
     private boolean drawOverrides(TextRenderer renderer, ItemStack stack, int x, int y) {
         RenderItemOverrideEvent event = new RenderItemOverrideEvent(context, renderer, stack, x, y);
         RenderItemOverrideEvent.Companion.handleEvent(event);
         return event.getCancelled();
     }
 
+    @Unique
     private void drawSlots(DrawContext context){
         PlayerEntity playerEntity = this.getCameraPlayer();
         if (playerEntity != null){

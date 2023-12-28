@@ -3,6 +3,7 @@ package io.github.nbcss.wynnlib
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.JsonPrimitive
+import io.github.nbcss.wynnlib.data.CharacterProfile
 import io.github.nbcss.wynnlib.gui.ConfigurationScreen
 import io.github.nbcss.wynnlib.gui.CrafterScreen
 import io.github.nbcss.wynnlib.gui.TabFactory
@@ -35,7 +36,7 @@ object Settings {
             "xRHwJAaDvcqfBrFCo4fcmWjhr33lPMgXycVUnD1D3YjTJDKD+C9jlqbp/c9MJFtqfdZGJnXTUyr0RoyQ+tLclBugOgJwJAaGl6+V" +
             "Un+CEuE3wLbXVoAabgi8orOwtHxh6T0jNxNm0Ji/ICdPplt6Rx+DLO89tpDnd11/PbLYYFpkLNRXd/Fg=="
     private val keys: MutableSet<String> = mutableSetOf()
-    private val lockedSlots: MutableSet<Int> = mutableSetOf()
+    private val lockedSlots: MutableMap<String, Set<Int>> = mutableMapOf()
     private val indicators: MutableMap<String, Boolean> = mutableMapOf()
     private val options: MutableMap<SettingOption, Boolean> = mutableMapOf()
     private val offsets: MutableMap<SettingOffset, Int> = mutableMapOf()
@@ -64,17 +65,22 @@ object Settings {
             for (option in SettingOption.values()) {
                 options[option] = getOr(it, option.id, option.defaultValue)
             }
+
             offsets.clear()
             for (offset in SettingOffset.values()) {
                 offsets[offset] = getOr(it, offset.id, offset.defaultValue)
             }
+
             MatcherType.reload(getOr(it, "matchers", JsonObject()) { x -> x.asJsonObject })
+
             indicators.clear()
             for (entry in (getOr(it, "indicators", JsonObject()) { x -> x.asJsonObject }).entrySet()) {
                 indicators[entry.key] = entry.value.asBoolean
             }
+
             lockedSlots.clear()
-            lockedSlots.addAll(getOr(it, "locked", emptyList()){ i -> i.asInt })
+            lockedSlots.putAll(getOr(it, "locked", emptyMap()){it1: JsonObject -> it1.asMap().mapValues { entry -> entry.value.asJsonArray.asList().map { i -> i.asInt }.toSet() }})
+
             keys.clear()
             keys.addAll(getOr(it, "keys", emptyList()){ i -> i.asString })
             validateKeys()
@@ -99,8 +105,12 @@ object Settings {
                 val indicatorsJson = JsonObject()
                 indicators.forEach { (k, v) -> indicatorsJson.add(k, JsonPrimitive(v)) }
                 data.add("indicators", indicatorsJson)
-                val locked = JsonArray()
-                lockedSlots.forEach { locked.add(it) }
+                val locked = JsonObject()
+                lockedSlots.forEach {
+                    val slots = JsonArray()
+                    it.value.forEach {slots.add(it)}
+                    locked.add(it.key, slots)
+                }
                 data.add("locked", locked)
                 val keys = JsonArray()
                 this.keys.forEach { keys.add(it) }
@@ -159,16 +169,21 @@ object Settings {
     fun isTester(): Boolean = isTester
 
     fun setSlotLocked(id: Int, locked: Boolean) {
+        val characterId = CharacterProfile.id ?: return
         if (locked) {
-            lockedSlots.add(id)
+            lockedSlots.compute(characterId) {_, value ->
+                value?.plus(id) ?: setOf(id)
+            }
         }else{
-            lockedSlots.remove(id)
+            lockedSlots.compute(characterId) {_, value ->
+                value?.minus(id) ?: emptySet()
+            }
         }
         markDirty()
     }
 
     fun isSlotLocked(id: Int): Boolean {
-        return id in lockedSlots
+        return id in lockedSlots.getOrDefault(CharacterProfile.id, emptySet())
     }
 
     fun setOption(option: SettingOption, value: Boolean) {

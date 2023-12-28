@@ -28,4 +28,8 @@ object JsonGetter {
     fun <T> getOr(data: JsonObject, key: String, value: T, f: Function<JsonElement, T>): T {
         return if(data.has(key)) f.apply(data[key]) else value
     }
+
+    fun <K, V> getOr(data: JsonObject, key: String, value: Map<K, V>, f: Function<JsonObject, Map<K, V>>): Map<K, V> {
+        return if(data.has(key) && data.get(key).isJsonObject) f.apply(data.getAsJsonObject(key)) else value
+    }
 }

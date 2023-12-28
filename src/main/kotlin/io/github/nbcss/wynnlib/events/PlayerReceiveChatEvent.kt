@@ -1,8 +1,7 @@
 package io.github.nbcss.wynnlib.events
 
-import  net.minecraft.network.message.MessageType
 import net.minecraft.text.Text
 
-class PlayerReceiveChatEvent(val type: MessageType, val message: Text): CancellableEvent() {
+class PlayerReceiveChatEvent(val message: Text): CancellableEvent() {
     companion object: EventHandler.HandlerList<PlayerReceiveChatEvent>()
 }

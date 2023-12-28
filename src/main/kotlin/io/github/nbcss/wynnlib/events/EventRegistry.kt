@@ -1,8 +1,10 @@
 package io.github.nbcss.wynnlib.events
 
+import io.github.nbcss.wynnlib.data.CharacterProfile
 import io.github.nbcss.wynnlib.function.*
 import io.github.nbcss.wynnlib.readers.AbilityTreeHandler
 import io.github.nbcss.wynnlib.timer.custom.HoundTimerIndicator
+import io.github.nbcss.wynnlib.utils.WorldState
 
 object EventRegistry {
     /**
@@ -29,6 +31,9 @@ object EventRegistry {
         SlotClickEvent.registerListener(PouchInChest.ClickListener)
         RenderItemOverrideEvent.registerListener(EmeraldPouchBarRender)
         ItemLoadEvent.registerListener(EmeraldPouchBarRender.LoadListener)
+        PlayerReceiveChatEvent.registerListener(WorldState.ChatListener)
+        PlayerListHeaderUpdateEvent.registerListener(WorldState.PlayerListHeaderListener)
+        WorldStateChangeEvent.registerListener(CharacterProfile.WorldStateListener)
         //It does not work
         //SpellCastEvent.registerListener(ShieldIndicator.SpellTrigger)
         //ArmourStandUpdateEvent.registerListener(ShieldIndicator.EntitySpawn)
