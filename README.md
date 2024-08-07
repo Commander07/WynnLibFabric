@@ -1,3 +1,6 @@
+> [!WARNING]  
+> I am no longer going to continue to update this fork of Wynnlib as Wynntils has most if not all of the same features. Send me a dm on discord (stupid_change) if there is a specific feature you can't find a replacement for and i'll see if i can port that feature to a newer version.
+
 # WynnLibFabric
 WynnLib is a Fabric mod that aims to provide data-related functionalities for the server Wynncraft.
 The mod inherits from the mod WynnInvManager (WIM), 
